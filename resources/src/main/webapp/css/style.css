@@ -1,0 +1,34 @@
+#top{
+    width: 100%;
+    height: 150px;
+    background-color: gainsboro;
+}
+#logo{
+    width: 80%;
+    height: 150px;
+    float: left;
+}
+#login{
+    width:20%;
+    height: 150px;
+    text-align: center;
+    vertical-align: bottom;
+    float: left;
+}
+#top:after{
+    content: "";
+    clear:both;
+    zoom:1;
+}
+#loginArea{
+    display: none;
+}
+#menu{
+    width: 100%;
+    height:30px;
+    background-color: azure;
+}
+#contenter{
+    width: 100%;
+    height: 500px;
+}
