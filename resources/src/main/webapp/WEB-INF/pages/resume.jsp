@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/4/20 0020
-  Time: 下午 5:27
+  Date: 2018/4/23 0023
+  Time: 上午 10:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,7 +13,7 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>游客注册</title>
+    <title>个人简历</title>
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
@@ -21,10 +21,15 @@
     </script>
 </head>
 <body>
-<form action="register" method="post">
-    账号：<input name="name"><br>
-    密码：<input name="pass"><br>
-    <input type="submit" value="注册">
-</form>
+<div>
+    <div id="user_menu">
+        <a href="">账户信息</a><br>
+        <a href="">个人简历信息</a><br>
+        <a href="">编辑简历</a><br>
+    </div>
+    <div id="user_content">
+
+    </div>
+</div>
 </body>
 </html>

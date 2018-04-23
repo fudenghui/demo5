@@ -5,6 +5,7 @@ package com.fdh.model;
  */
 public class Resume {
     private int id;
+    private int userId;
     private String userName;
     private String sex;
     private int age;
@@ -14,6 +15,7 @@ public class Resume {
     private String state;
     private double expSal;
     private String edu;
+    private String school;
     private String major;
     private String workOld;
     private String rate;
@@ -21,21 +23,6 @@ public class Resume {
     public Resume() {
     }
 
-    public Resume(int id, String userName, String sex, int age, String cardId, String phone, String email, String state, double expSal, String edu, String major, String workOld, String rate) {
-        this.id = id;
-        this.userName = userName;
-        this.sex = sex;
-        this.age = age;
-        this.cardId = cardId;
-        this.phone = phone;
-        this.email = email;
-        this.state = state;
-        this.expSal = expSal;
-        this.edu = edu;
-        this.major = major;
-        this.workOld = workOld;
-        this.rate = rate;
-    }
 
     public int getId() {
         return id;
@@ -117,6 +104,14 @@ public class Resume {
         this.edu = edu;
     }
 
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
     public String getMajor() {
         return major;
     }
@@ -139,5 +134,13 @@ public class Resume {
 
     public void setRate(String rate) {
         this.rate = rate;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

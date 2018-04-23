@@ -8,13 +8,9 @@
         INSERT into t_user(t_user_name,t_user_pass,t_user_level) VALUES
         (#{name},#{pass},#{level})
     </insert>
-    <insert id="addResume">
-        INSERT INTO t_resume VALUES (t_resume_seq.nextval,#{userName},#{sex},#{age},#{cardId},#{phone},#{email},#{state},#{expSal},
-        #{edu},#{major},#{workOld},,#{rate})
-    </insert>
-    <insert id="addDeliverResume">
-        insert into t_deliver_resume VALUES (T_DELIVER_RESUME_SEQ.nextval,#{resumeId},#{recruitId},#{userId})
-    </insert>
+    <update id="updateUser">
+        UPDATE t_user SET T_USER_PASS=#{pass} where t_user_name=#{name}
+</update>
     <select id="userLogin" resultMap="user">
         select * from t_user where T_USER_NAME=#{name}
     </select>

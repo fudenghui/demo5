@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdh.dao.ResumeMapper">
+    <insert id="addResume">
+        INSERT INTO t_resume VALUES (t_resume_seq.nextval,#{userName},#{sex},#{age},#{cardId},#{phone},#{email},#{state},#{expSal},
+        #{edu},#{major},#{workOld},,#{rate})
+    </insert>
+    <insert id="addDeliverResume">
+        insert into t_deliver_resume VALUES (T_DELIVER_RESUME_SEQ.nextval,
+        #{recruitId},#{userId},#{userName},#{sex},#{age},#{cardId},#{phone},#{email},#{state},
+        #{expSal},#{edu},#{school},#{major},#{workOld},#{rate})
+    </insert>
+    <select id="seeResumeById" resultMap="resume">
+        SELECT * from t_resume where T_RESUME_ID=#{id}
+    </select>
+    <resultMap id="resume" type="Resume">
+        <id property="id" column="t_resume_id"/>
+        <result property="userName" column="t_resume_name"/>
+        <result property="sex" column="t_resume_sex"/>
+        <result property="age" column="t_resume_age"/>
+        <result property="cardId" column="t_resume_cardId"/>
+        <result property="phone" column="t_resume_phone"/>
+        <result property="email" column="t_resume_email"/>
+        <result property="state" column="t_resume_state"/>
+        <result property="expSal" column="t_resume_expSal"/>
+        <result property="edu" column="t_resume_edu"/>
+        <result property="major" column="t_resume_major"/>
+        <result property="workOld" column="t_resume_work"/>
+        <result property="rate" column="t_resume_rate"/>
+        <result property="school" column="t_resume_school"/>
+    </resultMap>
+</mapper>

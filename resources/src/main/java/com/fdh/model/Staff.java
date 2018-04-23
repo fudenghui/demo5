@@ -8,6 +8,7 @@ public class Staff {
     private String staffName;
     private String staffPass;
     private int staffLevel;
+    private String staffRealName;
     private String cardId;
     private String sex;
     private int age;
@@ -22,11 +23,12 @@ public class Staff {
     public Staff() {
     }
 
-    public Staff(int id, String staffName, String staffPass, int staffLevel, String cardId, String sex, int age, double salary, int departId, int positionId, String hireTime, String staffState, String reson, String outTime) {
+    public Staff(int id, String staffName, String staffPass, int staffLevel, String staffRealName, String cardId, String sex, int age, double salary, int departId, int positionId, String hireTime, String staffState, String reson, String outTime) {
         this.id = id;
         this.staffName = staffName;
         this.staffPass = staffPass;
         this.staffLevel = staffLevel;
+        this.staffRealName = staffRealName;
         this.cardId = cardId;
         this.sex = sex;
         this.age = age;
@@ -69,6 +71,14 @@ public class Staff {
 
     public void setStaffLevel(int staffLevel) {
         this.staffLevel = staffLevel;
+    }
+
+    public String getStaffRealName() {
+        return staffRealName;
+    }
+
+    public void setStaffRealName(String staffRealName) {
+        this.staffRealName = staffRealName;
     }
 
     public String getCardId() {

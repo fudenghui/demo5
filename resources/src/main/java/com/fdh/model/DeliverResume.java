@@ -1,22 +1,29 @@
 package com.fdh.model;
 
+import javax.naming.ldap.PagedResultsControl;
+
 /**
  * Created by Administrator on 2018/4/22 0022.
  */
 public class DeliverResume {
     private int id;
-    private int resumeId;
+    private String userName;
+    private String sex;
+    private int age;
+    private String cardId;
+    private String phone;
+    private String email;
+    private String state;
+    private double expSal;
+    private String edu;
+    private String school;
+    private String major;
+    private String workOld;
+    private String rate;
     private int recruitId;
     private int userId;
 
     public DeliverResume() {
-    }
-
-    public DeliverResume(int id, int resumeId, int recruitId, int userId) {
-        this.id = id;
-        this.resumeId = resumeId;
-        this.recruitId = recruitId;
-        this.userId = userId;
     }
 
     public int getId() {
@@ -25,14 +32,6 @@ public class DeliverResume {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getResumeId() {
-        return resumeId;
-    }
-
-    public void setResumeId(int resumeId) {
-        this.resumeId = resumeId;
     }
 
     public int getRecruitId() {
@@ -49,5 +48,109 @@ public class DeliverResume {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public double getExpSal() {
+        return expSal;
+    }
+
+    public void setExpSal(double expSal) {
+        this.expSal = expSal;
+    }
+
+    public String getEdu() {
+        return edu;
+    }
+
+    public void setEdu(String edu) {
+        this.edu = edu;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getWorkOld() {
+        return workOld;
+    }
+
+    public void setWorkOld(String workOld) {
+        this.workOld = workOld;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 }

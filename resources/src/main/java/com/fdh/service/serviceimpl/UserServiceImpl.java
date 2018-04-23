@@ -45,14 +45,9 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
-    //添加简历
+    //修改密码
     @Override
-    public boolean addResume(Resume resume){
-        return userMapper.addResume(resume);
-    }
-    //投递简历
-    @Override
-    public boolean addDeliverResume(DeliverResume deliverResume){
-        return userMapper.addDeliverResume(deliverResume);
+    public boolean updateUser(User user){
+        return userMapper.updateUser(user);
     }
 }

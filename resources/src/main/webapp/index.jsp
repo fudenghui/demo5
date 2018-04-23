@@ -31,51 +31,36 @@
     </script>
 </head>
 <body>
-<div>
-    <div id="top">
-        <div id="logo">
-            欢迎来到XXXXX公司
-        </div>
-        <div id="login">
-            <div id="loginArea">
-                <form action="userLogin" method="post">
-                    账号：<input name="name"><br>
-                    密码：<input name="pass"><br>
-                    <select name="cl">
-                        <option>游客</option>
-                        <option>员工</option>
-                    </select>
-                    <input type="submit" value="登录" id="log2">
-                </form>
+    <div>
+        <div id="top">
+            <div id="logo">
+                欢迎来到XXXXX公司
             </div>
-            <input type="button" value="登录" id="log1">
-            <input type="button" value="注册" id="reg">
+            <div id="login">
+                <div id="loginArea">
+                    <form action="login" method="post">
+                        账号：<input name="name"><br>
+                        密码：<input name="pass"><br>
+                        <select name="cl">
+                            <option>游客</option>
+                            <option>员工</option>
+                        </select>
+                        <input type="submit" value="登录" id="log2">
+                    </form>
+                </div>
+                <input type="button" value="登录" id="log1">
+                <input type="button" value="注册" id="reg">
+            </div>
+        </div>
+        <div id="menu">
+            <a href="">首页</a>
+            <a href="">招聘</a>
+            <a href="">个人中心</a>
+        </div>
+        <div id="contenter">
+
         </div>
     </div>
-    <div id="menu">
-        <a href="">首页</a>
-        <a href="">招聘</a>
-        <a href="">编辑简历</a>
-    </div>
-    <div id="contenter">
-
-    </div>
-</div>
-<%--<fieldset>
-    <legend>游客区</legend>
-    <form action="userLogin" method="post">
-        账号：<input name="name"><br>
-        密码：<input name="pass"><br>
-        <input type="submit" value="登录">
-        <input type="button" value="注册" id="reg1">
-    </form>
-    <form action="staffLogin" method="post">
-        账号：<input name="staffName"><br>
-        密码：<input name="staffPass"><br>
-        <input type="submit" value="登录">
-    </form>
-    <h4 style="color: red">${error}</h4>
-</fieldset>--%>
 </body>
 </html>
 

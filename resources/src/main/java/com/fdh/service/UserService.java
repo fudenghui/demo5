@@ -15,8 +15,6 @@ public interface UserService {
     User userLogin(User user);
     //登录
     Staff staffLogin(Staff staff);
-    //添加简历
-    boolean addResume(Resume resume);
-    //投递简历
-    boolean addDeliverResume(DeliverResume deliverResume);
+    //修改密码
+    boolean updateUser(User user);
 }
