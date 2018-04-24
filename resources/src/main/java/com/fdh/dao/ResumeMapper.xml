@@ -10,8 +10,19 @@
         #{recruitId},#{userId},#{userName},#{sex},#{age},#{cardId},#{phone},#{email},#{state},
         #{expSal},#{edu},#{school},#{major},#{workOld},#{rate})
     </insert>
+    <update id="updateResume">
+        UPDATE T_RESUME SET T_RESUME_NAME=#{userName},t_resume_sex=#{sex},
+        t_resume_age=#{age},t_resume_cardId=#{cardId},t_resume_phone=#{phone},t_resume_sex=#{sex},
+        t_resume_email=#{email},t_resume_state=#{state},t_resume_expSal=#{expSal},
+        t_resume_edu=#{edu},t_resume_major=#{major},t_resume_work=#{workOld},
+        t_resume_rate=#{rate},t_resume_school=#{school},t_user_id=#{userId}
+        where t_resume_id=#{id}
+    </update>
     <select id="seeResumeById" resultMap="resume">
         SELECT * from t_resume where T_RESUME_ID=#{id}
+    </select>
+    <select id="seeResumeByUserId" resultMap="resume">
+        SELECT * from t_resume where T_USER_ID=#{0}
     </select>
     <resultMap id="resume" type="Resume">
         <id property="id" column="t_resume_id"/>
@@ -28,5 +39,6 @@
         <result property="workOld" column="t_resume_work"/>
         <result property="rate" column="t_resume_rate"/>
         <result property="school" column="t_resume_school"/>
+        <result property="userId" column="t_user_id"/>
     </resultMap>
 </mapper>

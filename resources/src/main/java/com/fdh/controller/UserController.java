@@ -1,6 +1,7 @@
 package com.fdh.controller;
 
 import com.fdh.model.*;
+import com.fdh.service.InterviewService;
 import com.fdh.service.RecruitService;
 import com.fdh.service.ResumeService;
 import com.fdh.service.UserService;
@@ -23,10 +24,14 @@ public class UserController {
     private ResumeService resumeService;
     @Autowired
     private RecruitService recruitService;
+    @Autowired
+    private InterviewService interviewService;
+    //跳转到注册页
     @RequestMapping("goRegister")
     public String goRegister(){
         return "register";
     }
+    //注册
     @RequestMapping("register")
     public String register(User user, Model model){
         user.setLevel(1);
@@ -37,6 +42,7 @@ public class UserController {
             return "register";
         }
     }
+    //登录
     @RequestMapping("login")
     public String userLogin(String name,String pass,String cl, HttpSession session){
         if (cl.equals("游客")){
@@ -52,16 +58,28 @@ public class UserController {
             }
         }else {
             Staff staff=new Staff();
-            staff.setStaffName(name);
+            staff.setName(name);
             staff.setStaffPass(pass);
             Staff staff1=userService.staffLogin(staff);
             if (staff1!=null){
-                session.setAttribute("staff",staff1);
+                session.setAttribute("user",staff1);
                 return "success";
             }else {
                 return "../../index";
             }
         }
+    }
+    //跳转到首页
+    @RequestMapping("goFirst")
+    public  String goFirst(){
+        return "../../index";
+    }
+    //游客账户信息
+    @RequestMapping("goUserInfo")
+    public String goUserInfo(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        session.setAttribute("user",user);
+        return "userinfo";
     }
     //修改密码
     @RequestMapping("updateUser")
@@ -138,5 +156,56 @@ public class UserController {
         session.setAttribute("recruitList",recruitList);
         session.setAttribute("allPages",allPages);
         return "recruit";
+    }
+    //查看面试邀请
+    @RequestMapping("seeInterview")
+    public String seeInterview(String curentPage,HttpSession session){
+        List<Interview> interviews=interviewService.seeInterview(0);
+        int totalRows=interviews.size();
+        int curentPage1=Integer.parseInt(curentPage);
+        int PAGESIZE=5;
+        int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
+        List<Interview> interviewList=interviewService.seeInterviewCur(0,curentPage1,PAGESIZE);
+        session.setAttribute("interviewList",interviewList);
+        session.setAttribute("allPages",allPages);
+        return "seeinterview";
+    }
+    //确认面试
+    @RequestMapping("updateInterview")
+    public String updateInterviewById(String id,HttpSession session){
+        int state=1;
+        int interviewId=Integer.parseInt(id);
+        boolean flag=interviewService.updateInterviewById(interviewId,state);
+        if (flag){
+            String curentPage="1";
+            return seeInterview(curentPage,session);
+        }
+        String curentPage="1";
+        return seeInterview(curentPage,session);
+    }
+    //查看简历信息
+    @RequestMapping("seeResume")
+    public String seeResume(HttpSession session){
+        User user= (User) session.getAttribute("user");
+        List<Resume> resumes=resumeService.seeResumeByUserId(user.getId());
+        session.setAttribute("resumes",resumes);
+        return "resume";
+    }
+    //查看简历详情
+    @RequestMapping("seeResumeInfo")
+    public String seeResumeInfo(Resume resume,HttpSession session){
+        Resume resume1=resumeService.seeResumeById(resume.getId());
+        session.setAttribute("resumeInfo",resume);
+        return "resumeinfo";
+    }
+    //修改简历
+    @RequestMapping("updateResume")
+    public String updateResume(Resume resume,HttpSession session){
+        boolean flag=resumeService.updateResume(resume);
+        if (flag){
+            return seeResume(session);
+        }else {
+            return seeResumeInfo(resume,session);
+        }
     }
 }

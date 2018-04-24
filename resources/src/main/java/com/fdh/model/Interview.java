@@ -6,12 +6,16 @@ package com.fdh.model;
 public class Interview {
     private int id;
     private int staffId;
+    private int userId;
     private int departId;
     private int positionId;
     private String interviewTime;
     private String location;
     private String phone;
     private int deliverRecruitId;
+    private int interviewState;
+    private Depart depart;
+    private Position position;
 
     public Interview() {
     }
@@ -79,5 +83,37 @@ public class Interview {
 
     public void setDeliverRecruitId(int deliverRecruitId) {
         this.deliverRecruitId = deliverRecruitId;
+    }
+
+    public int getInterviewState() {
+        return interviewState;
+    }
+
+    public void setInterviewState(int interviewState) {
+        this.interviewState = interviewState;
+    }
+
+    public Depart getDepart() {
+        return depart;
+    }
+
+    public void setDepart(Depart depart) {
+        this.depart = depart;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

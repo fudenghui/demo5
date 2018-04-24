@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdh.dao.StaffMapper">
+
+    <update id="updateStaff">
+        update t_staff
+        <set>
+            <if test="pass!='' and pass!=null">
+                t_staff_pass=#{staffPass},
+            </if>
+            <if test="staffLevel!='' and staff!=null">
+                t_staff_level=#{staffLevel},
+            </if>
+            <if test="cardId!='' and cardId!=null">
+                t_staff_cardId=#{cardId},
+            </if>
+            <if test="sex!='' and sex!=null">
+                t_staff_level=#{staffLevel},
+            </if>
+            <if test="age!='' and age!=null">
+                t_staff_age=#{age},
+            </if>
+            <if test="salary!='' and salary!=null">
+                t_staff_sal=#{salary},
+            </if>
+            <if test="departId!='' and departId!=null">
+                t_staff_depart_id=#{departId},
+            </if>
+            <if test="positionId!='' and positionId!=null">
+                t_staff_position_id=#{positionId},
+            </if>
+            <if test="staffRealName!='' and staffRealName!=null">
+                t_staff_realName=#{staffRealName},
+            </if>
+            <if test="staffState=='离职'">
+                <if test="reson!='' and reson!=null">
+                    t_staff_reson=#{reson}
+                </if>
+                <if test="outTime!='' and outTime!=null">
+                    t_staff_outtime=#{outTime},
+                </if>
+            </if>
+        </set>
+        where t_staff_id=#{id}
+    </update>
+    <select id="getStaffByName" resultType="staff">
+        select * from t_staff where t_staff_name=#{name}
+    </select>
+    <resultMap id="staff" type="Staff">
+        <id property="id" column="t_staff_id"/>
+        <result property="name" column="t_staff_name"/>
+        <result property="staffPass" column="t_staff_pass"/>
+        <result property="staffLevel" column="t_staff_level"/>
+        <result property="cardId" column="t_staff_cardId"/>
+        <result property="sex" column="t_staff_sex"/>
+        <result property="age" column="t_staff_age"/>
+        <result property="salary" column="t_staff_sal"/>
+        <result property="departId" column="t_staff_depart_id"/>
+        <result property="positionId" column="t_staff_position_id"/>
+        <result property="hireTime" column="t_staff_hireTime"/>
+        <result property="staffState" column="t_staff_state"/>
+        <result property="reson" column="t_staff_reson"/>
+        <result property="outTime" column="t_staff_outTime"/>
+    </resultMap>
+</mapper>

@@ -5,7 +5,7 @@ package com.fdh.model;
  */
 public class Staff {
     private int id;
-    private String staffName;
+    private String name;
     private String staffPass;
     private int staffLevel;
     private String staffRealName;
@@ -23,24 +23,6 @@ public class Staff {
     public Staff() {
     }
 
-    public Staff(int id, String staffName, String staffPass, int staffLevel, String staffRealName, String cardId, String sex, int age, double salary, int departId, int positionId, String hireTime, String staffState, String reson, String outTime) {
-        this.id = id;
-        this.staffName = staffName;
-        this.staffPass = staffPass;
-        this.staffLevel = staffLevel;
-        this.staffRealName = staffRealName;
-        this.cardId = cardId;
-        this.sex = sex;
-        this.age = age;
-        this.salary = salary;
-        this.departId = departId;
-        this.positionId = positionId;
-        this.hireTime = hireTime;
-        this.staffState = staffState;
-        this.reson = reson;
-        this.outTime = outTime;
-    }
-
     public int getId() {
         return id;
     }
@@ -49,12 +31,12 @@ public class Staff {
         this.id = id;
     }
 
-    public String getStaffName() {
-        return staffName;
+    public String getName() {
+        return name;
     }
 
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
+    public void setName(String staffName) {
+        this.name = staffName;
     }
 
     public String getStaffPass() {

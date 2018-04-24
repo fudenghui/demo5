@@ -11,7 +11,7 @@ public interface RecruitService {
     //查看招聘信息
     List<Recruit> seeRecruit();
     //查看招聘信息当前页
-    List<Recruit> seeRecruitCur(int firstRow,int PAGESIZE);
+    List<Recruit> seeRecruitCur(int curentPage,int PAGESIZE);
     //通过id查看招聘信息
     Recruit seeRecruitById(int id);
     //添加招聘信息

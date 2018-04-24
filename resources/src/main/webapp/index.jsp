@@ -18,14 +18,41 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            if($("#user").val()!=""){
+                $("#user").attr("type","text");
+            }
             $("#log1").click(function () {
                 $("#loginArea").css("display","block");
             });
             $("#log2").click(function () {
-                $("#loginArea").css("display","none");
+                $.ajax({
+                    type:"post",
+                    url:"login",
+                    data:{"name":$("#name").val(),"pass":$("#pass").val(),"cl":$("#cl option:selected").val()},
+                    success:function (obj) {
+                        $("#loginArea").css("display","none");
+                        $("#user").val(${sessionScope.user.name});
+                        $("#user").attr("type","text");
+                    }
+                })
             });
             $("#reg").click(function () {
                 location.href="goRegister";
+            });
+
+            $("#deliver").click(function () {
+                if($("#user").val()==""){
+                    alert("请先登录");
+                }else {
+                    $.ajax({
+                        type:"post",
+                        url:"addDeliverResume",
+                        data:{"recruitId":$("#recruitId").val(),"resumeId":$("#resumeId option:selected").val()},
+                        success:function (obj) {
+
+                        }
+                    })
+                }
             });
         });
     </script>
@@ -38,24 +65,23 @@
             </div>
             <div id="login">
                 <div id="loginArea">
-                    <form action="login" method="post">
-                        账号：<input name="name"><br>
-                        密码：<input name="pass"><br>
-                        <select name="cl">
-                            <option>游客</option>
-                            <option>员工</option>
-                        </select>
-                        <input type="submit" value="登录" id="log2">
-                    </form>
+                    账号：<input name="name" id="name"><br>
+                    密码：<input name="pass" id="pass"><br>
+                    <select name="cl" id="cl">
+                        <option>游客</option>
+                        <option>员工</option>
+                    </select>
+                    <input type="button" value="登录" id="log2">
                 </div>
+                <input type="hidden" value="${sessionScope.user.name}" id="user">
                 <input type="button" value="登录" id="log1">
                 <input type="button" value="注册" id="reg">
             </div>
         </div>
         <div id="menu">
-            <a href="">首页</a>
-            <a href="">招聘</a>
-            <a href="">个人中心</a>
+            <a href="goFirst">首页</a>
+            <a href="seeRecruits">招聘</a>
+            <a href="goUserInfo">个人中心</a>
         </div>
         <div id="contenter">
 

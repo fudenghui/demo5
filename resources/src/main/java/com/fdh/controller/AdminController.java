@@ -55,4 +55,17 @@ public class AdminController {
         }
         return "";
     }
+    //查看面试邀请
+    @RequestMapping("adminSeeInterview")
+    public String adminSeeInterview(String curentPage,HttpSession session){
+        List<Interview> interviews=interviewService.seeInterview(1);
+        int totalRows=interviews.size();
+        int curentPage1=Integer.parseInt(curentPage);
+        int PAGESIZE=5;
+        int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
+        List<Interview> interviewList=interviewService.seeInterviewCur(1,curentPage1,PAGESIZE);
+        session.setAttribute("interviewList",interviewList);
+        session.setAttribute("allPages",allPages);
+        return "adminseeinterview";
+    }
 }

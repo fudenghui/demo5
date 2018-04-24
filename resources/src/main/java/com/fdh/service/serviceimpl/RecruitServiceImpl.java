@@ -22,8 +22,9 @@ public class RecruitServiceImpl implements RecruitService {
     }
     //查看招聘信息当前页
     @Override
-    public List<Recruit> seeRecruitCur(int firstRow, int PAGESIZE) {
-        int lastRow=firstRow+PAGESIZE-1;
+    public List<Recruit> seeRecruitCur(int curentPage, int PAGESIZE) {
+        int firstRow=(curentPage-1)*PAGESIZE+1;
+        int lastRow=curentPage*PAGESIZE;
         return recruitMapper.seeRecruitCur(firstRow,lastRow);
     }
     //通过id查看招聘信息

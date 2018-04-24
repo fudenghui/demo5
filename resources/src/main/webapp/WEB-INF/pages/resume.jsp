@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -21,15 +23,41 @@
     </script>
 </head>
 <body>
-<div>
-    <div id="user_menu">
-        <a href="">账户信息</a><br>
-        <a href="">个人简历信息</a><br>
-        <a href="">编辑简历</a><br>
+    <div id="resume_body">
+        <div id="user_menu">
+            <a href="goUserInfo">账户信息</a><br>
+            <a href="seeResume">个人简历信息</a><br>
+            <a href="goAddResume">编辑简历</a><br>
+            <a href="seeInterview?curentPage=1">面试邀请查看</a><br>
+        </div>
+        <div id="user_content">
+            <table>
+                <tr>
+                    <td>简历id</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                <c:forEach items="resumes" var="resume">
+                    <tr>
+                        <td>${resume.id}</td>
+                        <td>${resume.userName}</td>
+                        <td>${resume.sex}</td>
+                        <td>${resume.age}</td>
+                        <td>${resume.state}</td>
+                        <td>
+                            <form method="post" action="">
+                                <input type="hidden" name="id">
+                                <input type="hidden" name="userId">
+                                <input type="submit" value="查看详情">
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </div>
-    <div id="user_content">
-
-    </div>
-</div>
 </body>
 </html>

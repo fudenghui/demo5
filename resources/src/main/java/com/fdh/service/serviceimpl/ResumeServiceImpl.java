@@ -7,6 +7,8 @@ import com.fdh.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/4/23 0023.
  */
@@ -30,5 +32,16 @@ public class ResumeServiceImpl implements ResumeService{
         Resume resume=new Resume();
         resume.setId(id);
         return resumeMapper.seeResumeById(resume);
+    }
+    //通过游客id查看简历
+    @Override
+    public List<Resume> seeResumeByUserId(int id) {
+        return resumeMapper.seeResumeByUserId(id);
+    }
+    //修改简历
+
+    @Override
+    public boolean updateResume(Resume resume) {
+        return resumeMapper.updateResume(resume);
     }
 }

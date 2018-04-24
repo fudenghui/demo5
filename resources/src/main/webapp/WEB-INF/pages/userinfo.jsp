@@ -22,10 +22,15 @@
 </head>
 <body>
     <div>
+        欢迎${sessionScope.user.name}
+    </div>
+    <div id="resume_body">
+
         <div id="user_menu">
-            <a href="">账户信息</a><br>
-            <a href="">个人简历信息</a><br>
-            <a href="">编辑简历</a><br>
+            <a href="goUserInfo">账户信息</a><br>
+            <a href="seeResume">个人简历信息</a><br>
+            <a href="goAddResume">编辑简历</a><br>
+            <a href="seeInterview?curentPage=1">面试邀请查看</a><br>
         </div>
         <div id="user_content">
             <table>

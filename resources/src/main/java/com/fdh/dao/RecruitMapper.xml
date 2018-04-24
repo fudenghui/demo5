@@ -35,13 +35,13 @@
         <result property="startTime" column="t_recruit_startTime"/>
         <result property="overTime" column="t_recruit_overTime"/>
         <result property="recruitState" column="t_recruit_state"/>
-        <collection property="depart" ofType="Depart">
+        <association property="depart" javaType="Depart">
             <id property="id" column="t_depart_id"/>
             <result property="departName" column="t_depart_name"/>
-        </collection>
-        <collection property="position" ofType="Position">
+        </association>
+        <association property="position" javaType="Position">
             <id property="id" column="t_position_id"/>
             <result property="positionName" column="t_position_name"/>
-        </collection>
+        </association>
     </resultMap>
 </mapper>

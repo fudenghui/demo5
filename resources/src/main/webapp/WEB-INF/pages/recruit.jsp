@@ -15,7 +15,53 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title></title>
+    <title>招聘信息页面</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+    <script language="JavaScript">
+        $(function () {
+            $("#log1").click(function () {
+                $("#loginArea").css("display","block");
+            });
+            $("#log2").click(function () {
+                $.ajax({
+                    type:"post",
+                    url:"login",
+                    data:{"name":$("#name").val(),"pass":$("#pass").val(),"cl":$("#cl option:selected").val()},
+                    success:function (obj) {
+                        $("#loginArea").css("display","none");
+                        $("#user").val(${sessionScope.user.name});
+                        $("#user").attr("type","text");
+                    }
+                })
+            });
+            $("#reg").click(function () {
+                location.href="goRegister";
+            });
+
+            $("#deliver").click(function () {
+                if($("#user").val()==""){
+                    alert("请先登录");
+                }else {
+                    $.ajax({
+                        type:"post",
+                        url:"addDeliverResume",
+                        data:{"recruitId":$("#recruitId").val(),"resumeId":$("#resumeId option:selected").val()},
+                        success:function (obj) {
+
+                        }
+                    })
+                }
+            });
+            $("#goUser").click(function () {
+                if($("#user").val()==""){
+                    alert("请先登录");
+                }else {
+                    location.href="goUserInfo";
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <div>
@@ -25,24 +71,23 @@
         </div>
         <div id="login">
             <div id="loginArea">
-                <form action="login" method="post">
-                    账号：<input name="name"><br>
-                    密码：<input name="pass"><br>
-                    <select name="cl">
-                        <option>游客</option>
-                        <option>员工</option>
-                    </select>
-                    <input type="submit" value="登录" id="log2">
-                </form>
+                账号：<input name="name" id="name"><br>
+                密码：<input name="pass" id="pass"><br>
+                <select name="cl" id="cl">
+                    <option>游客</option>
+                    <option>员工</option>
+                </select>
+                <input type="button" value="登录" id="log2">
             </div>
+            <input type="hidden" value="${sessionScope.user.name}" id="user">
             <input type="button" value="登录" id="log1">
             <input type="button" value="注册" id="reg">
         </div>
     </div>
     <div id="menu">
-        <a href="">首页</a>
-        <a href="">招聘</a>
-        <a href="">个人中心</a>
+        <a href="goFirst">首页</a>
+        <a href="seeRecruits">招聘</a>
+        <a id="goUser">个人中心</a>
     </div>
     <div id="contenter">
         <table>
@@ -52,14 +97,13 @@
                     职位：<td>${recruit.position.positionName}</td>
                     招聘人数：<td>${recruit.number}</td>
                     <td>
-                        <form action="addDeliverResume?recuitId=${recruit.id}" method="post">
-                            简历选择：<select name="resumeId">
-                                <c:forEach items="" var="resume">
-                                    <option>${resume.id}</option>
-                                </c:forEach>
-                            </select>
-                            <input type="submit" value="投递">
-                        </form>
+                        <input type="hidden" name="recruitId" value="${recruit.id}" id="recruitId">
+                        简历选择：<select name="resumeId" id="resumeId">
+                            <c:forEach items="${sessionScope.resumes}" var="resume">
+                                <option>${resume.id}</option>
+                            </c:forEach>
+                        </select>
+                        <input type="button" value="投递" id="deliver">
                     </td>
                 </tr>
                 <tr>

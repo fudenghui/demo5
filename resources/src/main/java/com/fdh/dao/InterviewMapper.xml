@@ -5,4 +5,42 @@
     <insert id="addInterview">
         insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{userId},#{departId},#{positionId},#{interviewTime},#{location},#{phone},#{deliverRecruitId})
     </insert>
+    <update id="updateInterviewById">
+        UPDATE t_interview SET T_INTERVIEW_STATE=#{1} where t_interview_id=#{0}
+    </update>
+    <select id="seeInterview" resultMap="interview">
+        SELECT * from T_INTERVIEW where T_INTERVIEW_STATE=#{0}
+    </select>
+    <select id="seeInterviewCur" resultMap="interview">
+        SELECT t_i.* FROM
+        (SELECT rownum rn,* from T_INTERVIEW where T_INTERVIEW_STATE=#{0}) t_i
+        where t_i.rn between #{1} and #{2}
+    </select>
+    <select id="seeInterviewByUserId" resultMap="interview">
+        SELECT * from T_INTERVIEW where T_INTERVIEW_USER_ID=#{0} and T_INTERVIEW_STATE=#{1}
+    </select>
+    <select id="seeInterviewByUserIdCur" resultType="interview">
+        SELECT t_i.* FROM
+        (SELECT rownum rn,* from T_INTERVIEW where T_INTERVIEW_STATE=#{1} and t_interview_user_id=#{0}) t_i
+        where t_i.rn between #{2} and #{3}
+    </select>
+    <resultMap id="interview" type="Interview">
+        <id property="id" column="t_interview_id"/>
+        <result property="staffId" column="t_interview_admin_id"/>
+        <result property="userId" column="t_interview_user_id"/>
+        <result property="departId" column="t_interview_depart_id"/>
+        <result property="positionId" column="t_interview_position_id"/>
+        <result property="interviewTime" column="t_interview_time"/>
+        <result property="location" column="t_interview_locaton"/>
+        <result property="phone" column="t_interview_phone"/>
+        <result property="interviewState" column="t_interview_state"/>
+        <association property="depart" javaType="Depart">
+            <id property="id" column="t_depart_id"/>
+            <result property="departName" column="t_depart_name"/>
+        </association>
+        <association property="position" javaType="Position">
+            <id property="id" column="t_position_id"/>
+            <result property="positionName" column="t_position_id"/>
+        </association>
+     </resultMap>
 </mapper>

@@ -25,7 +25,7 @@
     </resultMap>
     <resultMap id="staff" type="Staff">
         <id property="id" column="t_staff_id"/>
-        <result property="staffName" column="t_staff_name"/>
+        <result property="name" column="t_staff_name"/>
         <result property="staffPass" column="t_staff_pass"/>
         <result property="staffLevel" column="t_staff_level"/>
         <result property="cardId" column="t_staff_cardId"/>
