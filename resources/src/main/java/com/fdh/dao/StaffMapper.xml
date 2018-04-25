@@ -8,7 +8,7 @@
             <if test="pass!='' and pass!=null">
                 t_staff_pass=#{staffPass},
             </if>
-            <if test="staffLevel!='' and staff!=null">
+            <if test="level!='' and level!=null">
                 t_staff_level=#{staffLevel},
             </if>
             <if test="cardId!='' and cardId!=null">
@@ -50,7 +50,7 @@
         <id property="id" column="t_staff_id"/>
         <result property="name" column="t_staff_name"/>
         <result property="staffPass" column="t_staff_pass"/>
-        <result property="staffLevel" column="t_staff_level"/>
+        <result property="level" column="t_staff_level"/>
         <result property="cardId" column="t_staff_cardId"/>
         <result property="sex" column="t_staff_sex"/>
         <result property="age" column="t_staff_age"/>

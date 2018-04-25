@@ -40,7 +40,7 @@
                     <td>状态</td>
                     <td>操作</td>
                 </tr>
-                <c:forEach items="resumes" var="resume">
+                <c:forEach items="${sessionScope.resumes}" var="resume">
                     <tr>
                         <td>${resume.id}</td>
                         <td>${resume.userName}</td>

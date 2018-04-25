@@ -3,6 +3,7 @@ package com.fdh.service.serviceimpl;
 import com.fdh.dao.ResumeMapper;
 import com.fdh.model.DeliverResume;
 import com.fdh.model.Resume;
+import com.fdh.model.User;
 import com.fdh.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class ResumeServiceImpl implements ResumeService{
     private ResumeMapper resumeMapper;
     //添加简历
     @Override
-    public boolean addResume(Resume resume){
+    public boolean addResume(User user, Resume resume){
+        resume.setUserId(user.getId());
         return resumeMapper.addResume(resume);
     }
     //投递简历

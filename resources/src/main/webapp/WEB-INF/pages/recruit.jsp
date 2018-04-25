@@ -72,21 +72,21 @@
         <div id="login">
             <div id="loginArea">
                 账号：<input name="name" id="name"><br>
-                密码：<input name="pass" id="pass"><br>
+                密码：<input type="password" name="pass" id="pass"><br>
                 <select name="cl" id="cl">
                     <option>游客</option>
                     <option>员工</option>
                 </select>
                 <input type="button" value="登录" id="log2">
             </div>
-            <input type="hidden" value="${sessionScope.user.name}" id="user">
+            <input type="hidden" readonly="readonly" value="${sessionScope.user.name}" id="user">
             <input type="button" value="登录" id="log1">
             <input type="button" value="注册" id="reg">
         </div>
     </div>
     <div id="menu">
         <a href="goFirst">首页</a>
-        <a href="seeRecruits">招聘</a>
+        <a href="seeRecruits?curentPage=1">招聘</a>
         <a id="goUser">个人中心</a>
     </div>
     <div id="contenter">

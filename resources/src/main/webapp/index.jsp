@@ -30,9 +30,11 @@
                     url:"login",
                     data:{"name":$("#name").val(),"pass":$("#pass").val(),"cl":$("#cl option:selected").val()},
                     success:function (obj) {
+                        alert(obj.level);
                         $("#loginArea").css("display","none");
-                        $("#user").val(${sessionScope.user.name});
-                        $("#user").attr("type","text");
+                        $("#user").html(obj.name);
+                        $("#level").html(obj.level+"");
+                        $("#sp").css("display","block");
                     }
                 })
             });
@@ -54,6 +56,19 @@
                     })
                 }
             });
+            $("#goUser").click(function () {
+                if($("#user").html()==""){
+                    alert("请先登录");
+                }else {
+                    if ($("#level").html()=='1'){
+                        location.href="goUserInfo";
+                    }else if ($("#level").html()=='2'){
+                        location.href="goStaff";
+                    }else {
+                        location.href="goAdmin";
+                    }
+                }
+            });
         });
     </script>
 </head>
@@ -66,22 +81,23 @@
             <div id="login">
                 <div id="loginArea">
                     账号：<input name="name" id="name"><br>
-                    密码：<input name="pass" id="pass"><br>
+                    密码：<input type="password" name="pass" id="pass"><br>
                     <select name="cl" id="cl">
                         <option>游客</option>
                         <option>员工</option>
                     </select>
                     <input type="button" value="登录" id="log2">
                 </div>
-                <input type="hidden" value="${sessionScope.user.name}" id="user">
+                <span id="sp">欢迎<span id="user">${sessionScope.user.name}</span></span>
+                <span id="level">${sessionScope.user.level}</span>
                 <input type="button" value="登录" id="log1">
                 <input type="button" value="注册" id="reg">
             </div>
         </div>
         <div id="menu">
             <a href="goFirst">首页</a>
-            <a href="seeRecruits">招聘</a>
-            <a href="goUserInfo">个人中心</a>
+            <a href="seeRecruits?curentPage=1">招聘</a>
+            <a id="goUser">个人中心</a>
         </div>
         <div id="contenter">
 

@@ -23,7 +23,7 @@
 <body>
 <form action="register" method="post">
     账号：<input name="name"><br>
-    密码：<input name="pass"><br>
+    密码：<input type="password" name="pass"><br>
     <input type="submit" value="注册">
 </form>
 </body>

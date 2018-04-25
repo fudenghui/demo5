@@ -2,6 +2,7 @@ package com.fdh.service;
 
 import com.fdh.model.DeliverResume;
 import com.fdh.model.Resume;
+import com.fdh.model.User;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ResumeService {
     //添加简历
-    boolean addResume(Resume resume);
+    boolean addResume(User user, Resume resume);
     //投递简历
     boolean addDeliverResume(DeliverResume deliverResume);
     //通过id查看简历

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.CheckMapper">
+    <select id="seeCheck" resultMap="check">
+        SELECT * from t_check where T_CHECK_STAFF_ID=#{0} and t_check_date between #{1} and #{2}
+    </select>
+    <resultMap id="check" type="Check">
+        <id property="id" column="t_check_id"/>
+        <result property="staffId" column="t_check_staff_id"/>
+        <result property="onWorkTime" column="t_check_onWork_time"/>
+        <result property="onworkState" column="t_check_onWork_state"/>
+        <result property="outWorkTime" column="t_check_outWork_Time"/>
+        <result property="outworkState" column="t_check_outWork_state"/>
+        <result property="checkDate" column="t_check_date"/>
+    </resultMap>
 </mapper>

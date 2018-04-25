@@ -11,7 +11,8 @@ public class Check {
     private Date onWorkTime;
     private String onworkState;
     private Date outWorkTime;
-    private String outworkTime;
+    private String outworkState;
+    private Date checkDate;
 
     public Check() {
     }
@@ -56,11 +57,19 @@ public class Check {
         this.outWorkTime = outWorkTime;
     }
 
-    public String getOutworkTime() {
-        return outworkTime;
+    public String getOutworkState() {
+        return outworkState;
     }
 
-    public void setOutworkTime(String outworkTime) {
-        this.outworkTime = outworkTime;
+    public void setOutworkState(String outworkState) {
+        this.outworkState = outworkState;
+    }
+
+    public Date getCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(Date checkDate) {
+        this.checkDate = checkDate;
     }
 }

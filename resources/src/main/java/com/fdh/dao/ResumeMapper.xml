@@ -3,7 +3,7 @@
 <mapper namespace="com.fdh.dao.ResumeMapper">
     <insert id="addResume">
         INSERT INTO t_resume VALUES (t_resume_seq.nextval,#{userName},#{sex},#{age},#{cardId},#{phone},#{email},#{state},#{expSal},
-        #{edu},#{major},#{workOld},,#{rate})
+        #{edu},#{major},#{workOld},#{rate},#{school},#{userId})
     </insert>
     <insert id="addDeliverResume">
         insert into t_deliver_resume VALUES (T_DELIVER_RESUME_SEQ.nextval,

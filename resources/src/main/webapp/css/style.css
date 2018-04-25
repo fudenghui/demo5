@@ -20,6 +20,9 @@
     clear:both;
     zoom:1;
 }
+#sp,#level{
+    display: none;
+}
 #loginArea{
     display: none;
 }
@@ -37,4 +40,24 @@
     height: 600px;
     border:1px solid darkgray;
     margin: 0 auto;
+}
+#middle_position{
+    display:none;
+}
+#left_depart,#middle_position,#right_staff{
+    width: 400px;
+    height:500px;
+    float:left;
+}
+#contenter_admin:after{
+    content: "";
+    clear:both;
+    zoom:1;
+}
+#left_depart a{
+    display: block;
+    cursor: pointer;
+}
+.a{
+    background-color: beige;
 }

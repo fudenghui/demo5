@@ -7,7 +7,7 @@ public class Staff {
     private int id;
     private String name;
     private String staffPass;
-    private int staffLevel;
+    private int level;
     private String staffRealName;
     private String cardId;
     private String sex;
@@ -48,11 +48,15 @@ public class Staff {
     }
 
     public int getStaffLevel() {
-        return staffLevel;
+        return level;
     }
 
-    public void setStaffLevel(int staffLevel) {
-        this.staffLevel = staffLevel;
+    public void setLevel(int staffLevel) {
+        this.level = staffLevel;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public String getStaffRealName() {

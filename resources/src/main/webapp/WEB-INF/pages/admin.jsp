@@ -14,6 +14,11 @@
 <head>
     <base href="<%=basePath%>"/>
     <title>管理员页面</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+    <script language="JavaScript">
+
+    </script>
 </head>
 <body>
     <div>
@@ -25,8 +30,9 @@
         <div>
             <div id="menu_admin">
                 <a href="">首页</a><br>
+                <a href="seeDepart">查看部门职位</a>
                 <a href="">查看招聘投递</a><br>
-                <a href="">添加招聘信息</a><br>
+                <a href="goAddRecruit">添加招聘信息</a><br>
                 <a href="">查看招聘信息</a><br>
                 <a href="">个人中心</a><br>
             </div>

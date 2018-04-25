@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -34,7 +35,7 @@ public class UserController {
     //注册
     @RequestMapping("register")
     public String register(User user, Model model){
-        user.setLevel(1);
+        user.setLevel(3);
         boolean flag=userService.register(user);
         if (flag){
             return "../../index";
@@ -44,7 +45,7 @@ public class UserController {
     }
     //登录
     @RequestMapping("login")
-    public String userLogin(String name,String pass,String cl, HttpSession session){
+    public @ResponseBody Object userLogin(String name, String pass, String cl, HttpSession session){
         if (cl.equals("游客")){
             User user=new User();
             user.setName(name);
@@ -52,9 +53,9 @@ public class UserController {
             User user1=userService.userLogin(user);
             if (user1!=null){
                 session.setAttribute("user",user1);
-                return "success";
+                return user1;
             }else {
-                return "../../index";
+                return null;
             }
         }else {
             Staff staff=new Staff();
@@ -63,9 +64,9 @@ public class UserController {
             Staff staff1=userService.staffLogin(staff);
             if (staff1!=null){
                 session.setAttribute("user",staff1);
-                return "success";
+                return staff1;
             }else {
-                return "../../index";
+                return null;
             }
         }
     }
@@ -107,8 +108,9 @@ public class UserController {
     }
     //编辑简历
     @RequestMapping("addResume")
-    public String addResume(Resume resume){
-        boolean flag=resumeService.addResume(resume);
+    public String addResume(Resume resume,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        boolean flag=resumeService.addResume(user,resume);
         if (flag){
             return "userinfo";
         }

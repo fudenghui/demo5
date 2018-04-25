@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
     public Staff staffLogin(Staff staff){
         Staff staff1=userMapper.staffLogin(staff);
         if (staff1!=null){
-            if (staff1.getStaffName().equals(staff.getStaffName())&&staff1.getStaffPass().equals(staff.getStaffPass())){
+            if (staff1.getName().equals(staff.getName())&&staff1.getStaffPass().equals(staff.getStaffPass())){
                 return staff1;
             }
             return null;
