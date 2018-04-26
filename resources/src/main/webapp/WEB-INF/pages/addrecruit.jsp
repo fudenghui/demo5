@@ -21,14 +21,15 @@
     <script language="JavaScript">
         $(function () {
             $("#depart").change(function () {
+                var name=$("#depart option:selected").val();
                 $.ajax({
                    type:"post",
                     url:"getPositionsByDep",
-                    data:{"departName":$(this).html()},
+                    data:{"departName":name},
                     success:function (obj) {
-                       alert("11111111");
+                       $("#position").html("");
                         for(var i=0;i<obj.length;i++){
-                            $("#position").html($("#position").html()+"<option>${obj[i].positionName}</option>")
+                            $("#position").html($("#position").html()+"<option>"+obj[i].positionName+"</option>")
                         }
                     }
                 });
@@ -39,17 +40,17 @@
 <body>
     <div id="recruit_body">
         <form method="post" action="addRecruit">
-            部门名称：<select name="departName" id="depart">
-                        <c:forEach items="${sessionScope.departs}" var="depart">
-                            <option>${depart.departName}</option>
-                        </c:forEach>
-                      </select>
-            职位名称：<select name="positionName" id="position">
-                      </select><br>
-            招聘人数：<input name="number"><br>
-            招聘开始时间：<input name="startTime"><br>
-            招聘结束时间：<input name="overTime"><br>
-            招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
+                部门名称：<select name="departName" id="depart">
+                            <c:forEach items="${sessionScope.departs}" var="depart">
+                                <option>${depart.departName}</option>
+                            </c:forEach>
+                          </select>
+                职位名称：<select name="positionName" id="position">
+                          </select><br>
+                招聘人数：<input name="number"><br>
+                招聘开始时间：<input name="startTime"><br>
+                招聘结束时间：<input name="overTime"><br>
+                招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
              <input type="submit" value="保存">
         </form>
     </div>

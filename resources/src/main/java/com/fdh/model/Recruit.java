@@ -1,5 +1,7 @@
 package com.fdh.model;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2018/4/23 0023.
  */
@@ -96,5 +98,21 @@ public class Recruit {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "Recruit{" +
+                "id=" + id +
+                ", departId=" + departId +
+                ", positionId=" + positionId +
+                ", number=" + number +
+                ", demand='" + demand + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", overTime='" + overTime + '\'' +
+                ", recruitState=" + recruitState +
+                ", depart=" + depart +
+                ", position=" + position +
+                '}';
     }
 }

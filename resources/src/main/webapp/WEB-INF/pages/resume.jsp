@@ -48,7 +48,7 @@
                         <td>${resume.age}</td>
                         <td>${resume.state}</td>
                         <td>
-                            <form method="post" action="">
+                            <form method="post" action="seeResumeInfo">
                                 <input type="hidden" name="id">
                                 <input type="hidden" name="userId">
                                 <input type="submit" value="查看详情">

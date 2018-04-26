@@ -24,6 +24,7 @@
     <select id="seeResumeByUserId" resultMap="resume">
         SELECT * from t_resume where T_USER_ID=#{0}
     </select>
+
     <resultMap id="resume" type="Resume">
         <id property="id" column="t_resume_id"/>
         <result property="userName" column="t_resume_name"/>

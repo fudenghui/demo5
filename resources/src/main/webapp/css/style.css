@@ -58,6 +58,23 @@
     display: block;
     cursor: pointer;
 }
+#resume_span{
+    display: none;
+}
+#menu_left{
+    width:80%;
+    float:left;
+}
+#menu_right{
+    width:20%;
+    float:left;
+    display: none;
+}
+#menu:after{
+    content: "";
+    clear:both;
+    zoom:1;
+}
 .a{
     background-color: beige;
 }

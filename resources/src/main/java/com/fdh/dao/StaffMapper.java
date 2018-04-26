@@ -10,4 +10,6 @@ public interface StaffMapper {
     boolean updateStaff(Staff staff);
     //查询员工
     Staff getStaffByName(Staff staff);
+    //添加员工
+    boolean addStaff(Staff staff);
 }

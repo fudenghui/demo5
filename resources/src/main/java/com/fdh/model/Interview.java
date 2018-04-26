@@ -5,14 +5,14 @@ package com.fdh.model;
  */
 public class Interview {
     private int id;
-    private int staffId;
+    private int adminId;
     private int userId;
     private int departId;
     private int positionId;
     private String interviewTime;
     private String location;
     private String phone;
-    private int deliverRecruitId;
+    private int deliverResumeId;
     private int interviewState;
     private Depart depart;
     private Position position;
@@ -29,12 +29,12 @@ public class Interview {
         this.id = id;
     }
 
-    public int getStaffId() {
-        return staffId;
+    public int getAdminId() {
+        return adminId;
     }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 
     public int getDepartId() {
@@ -77,12 +77,12 @@ public class Interview {
         this.phone = phone;
     }
 
-    public int getDeliverRecruitId() {
-        return deliverRecruitId;
+    public int getDeliverResumeId() {
+        return deliverResumeId;
     }
 
-    public void setDeliverRecruitId(int deliverRecruitId) {
-        this.deliverRecruitId = deliverRecruitId;
+    public void setDeliverResumeId(int deliverResumeId) {
+        this.deliverResumeId = deliverResumeId;
     }
 
     public int getInterviewState() {

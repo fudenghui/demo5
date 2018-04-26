@@ -1,10 +1,7 @@
 package com.fdh.controller;
 
 import com.fdh.model.*;
-import com.fdh.service.DepartService;
-import com.fdh.service.InterviewService;
-import com.fdh.service.PositionService;
-import com.fdh.service.RecruitService;
+import com.fdh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +23,8 @@ public class AdminController {
     private PositionService positionService;
     @Autowired
     private DepartService departService;
+    @Autowired
+    private DeliverService deliverService;
     //管理员登录
     @RequestMapping("goAdmin")
     public String goAdmin(HttpSession session){
@@ -41,13 +40,21 @@ public class AdminController {
         return "addrecruit";
     }
     @RequestMapping("addRecruit")
-    public String addRecruit(Recruit recruit, HttpSession session){
-        boolean flag=recruitService.addRecRuit(recruit);
+    public String addRecruit(String departName,String positionName,Recruit recruit, HttpSession session){
+        boolean flag=recruitService.addRecRuit(departName,positionName,recruit);
         if (flag){
             String curentPage="1";
             return adminSeeRecruits(curentPage,session);
         }
         return "addrecruit";
+    }
+    //发布
+    @RequestMapping("updateRecruitState")
+    public String updateRecruitState(String recruitId,HttpSession session){
+        int recruitId1=Integer.parseInt(recruitId);
+        boolean flag=recruitService.updateRecruitState(recruitId1);
+        String curentPage="1";
+        return adminSeeRecruits(curentPage,session);
     }
     //根据部门名查职位
     @RequestMapping("getPositionsByDep")
@@ -68,26 +75,66 @@ public class AdminController {
         session.setAttribute("allPages",allPages);
         return "adminseerecruit";
     }
+    //查看招聘投递
+    @RequestMapping("adminSeeDeliver")
+    public String adminSeeDeliver(String curentPage,HttpSession session){
+        int curentPage1=Integer.parseInt(curentPage);
+        List<DeliverResume> delivers=deliverService.getDeliverResume();
+        int totalRows=delivers.size();
+        int PAGESIZE=5;
+        int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
+        List<DeliverResume> deliverList=deliverService.getDeliverResumeCur(curentPage1,PAGESIZE);
+        session.setAttribute("deliverList",deliverList);
+        session.setAttribute("allPages",allPages);
+        return "adminseedeliver";
+    }
+    //查看投递详情
+    @RequestMapping("seeDeliverInfo")
+    public String seeDeliverInfo(String deliverId,HttpSession session){
+        int deliverId1=Integer.parseInt(deliverId);
+        DeliverResume deliverResume=deliverService.getDeliverById(deliverId1);
+        if (deliverResume!=null){
+            session.setAttribute("deliverResume",deliverResume);
+            return "adminseedeliverinfo";
+        }
+        return "adminseedeliverinfo";
+    }
     //发出面试邀请
     @RequestMapping("addInterview")
-    public String addInterview(Interview interview,String departName,String positionName,HttpSession session){
-        Staff staff= (Staff) session.getAttribute("staff");
-        interview.setStaffId(staff.getId());
+    public String addInterview(String deliverResumeId,String recruitId,String userId,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        int deliverResumeId1=Integer.parseInt(deliverResumeId);
+        int recruitId1=Integer.parseInt(recruitId);
+        int userId1=Integer.parseInt(userId);
+        Interview interview=new Interview();
+        interview.setAdminId(user.getId());
+        Recruit recruit=recruitService.seeRecruitById(recruitId1);
+        interview.setDepartId(recruit.getDepartId());
+        interview.setPositionId(recruit.getPositionId());
+        interview.setDeliverResumeId(deliverResumeId1);
+        session.setAttribute("interview1",interview);
+        return "addinterview";
+    }
+    @RequestMapping("addInterview1")
+    public String addInterview1(Interview interview,HttpSession session){
+        interview.setInterviewState(1);
         boolean flag=interviewService.addInterview(interview);
         if (flag){
-            return "";
+            session.setAttribute("interview",interview);
+            String curentPage="1";
+            return adminSeeDeliver(curentPage,session);
         }
-        return "";
+        return "addinterview";
     }
     //查看面试邀请
     @RequestMapping("adminSeeInterview")
     public String adminSeeInterview(String curentPage,HttpSession session){
-        List<Interview> interviews=interviewService.seeInterview(1);
+        List<Interview> interviews=interviewService.seeInterview(2);
         int totalRows=interviews.size();
         int curentPage1=Integer.parseInt(curentPage);
         int PAGESIZE=5;
         int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
-        List<Interview> interviewList=interviewService.seeInterviewCur(1,curentPage1,PAGESIZE);
+        List<Interview> interviewList=interviewService.seeInterviewCur(2,curentPage1,PAGESIZE);
         session.setAttribute("interviewList",interviewList);
         session.setAttribute("allPages",allPages);
         return "adminseeinterview";

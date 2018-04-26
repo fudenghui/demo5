@@ -18,8 +18,8 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
-            if($("#user").val()!=""){
-                $("#user").attr("type","text");
+            if($("#user").html()!=""){
+                $(".sp").css("display","block");
             }
             $("#log1").click(function () {
                 $("#loginArea").css("display","block");

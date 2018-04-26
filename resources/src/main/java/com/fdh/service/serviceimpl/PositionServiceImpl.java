@@ -34,7 +34,7 @@ public class PositionServiceImpl implements PositionService {
         Depart depart1=departMapper.getDepartByName(depart);
         position.setDepartId(depart1.getId());
         Position position1=positionMapper.getPositionByName(position);
-        if (position1!=null){
+        if (position1==null){
             return positionMapper.addPosition(position);
         }
         return false;

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.StaffMapper">
+    <insert id="addStaff">
+        insert into t_staff VALUES (T_STAFF_SEQ.nextval,#{name},#{staffPass},#{level},#{cardId},#{sex},#{age},#{salary},#{departId}
+        ,#{positionId},#{hireTime},#{staffState},#{reson},#{outTime},#{staffRealName})
+    </insert>
 
     <update id="updateStaff">
         update t_staff

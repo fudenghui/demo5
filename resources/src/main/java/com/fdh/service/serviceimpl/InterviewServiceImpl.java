@@ -20,6 +20,7 @@ public class InterviewServiceImpl implements InterviewService {
     //面试邀请
     @Override
     public boolean addInterview(Interview interview) {
+
         return interviewMapper.addInterview(interview);
     }
     //查看面试邀请
@@ -50,5 +51,10 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public boolean updateInterviewById(int interviewId, int state) {
         return interviewMapper.updateInterviewById(interviewId,state);
+    }
+    //根据id查看面试邀请
+    @Override
+    public Interview getInterviewById(int id) {
+        return interviewMapper.getInterviewById(id);
     }
 }

@@ -21,4 +21,6 @@ public interface InterviewService {
     List<Interview> seeInterviewCur(User user,int state,int curentPage,int PAGESIZE);
     //确认面试
     boolean updateInterviewById(int interviewId,int state);
+    //根据id查看面试邀请
+    Interview getInterviewById(int id);
 }

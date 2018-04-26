@@ -8,7 +8,7 @@
         select * from T_DEPART
     </select>
     <select id="getDepartByName" resultMap="depart">
-        select * from T_DEPART where T_DEPART_ID=#{departName}
+        select * from T_DEPART where T_DEPART_NAME=#{departName}
     </select>
     <resultMap id="depart" type="Depart">
         <id property="id" column="t_depart_id"/>

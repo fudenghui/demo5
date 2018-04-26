@@ -3,7 +3,7 @@
 <mapper namespace="com.fdh.dao.InterviewMapper">
 
     <insert id="addInterview">
-        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{userId},#{departId},#{positionId},#{interviewTime},#{location},#{phone},#{deliverRecruitId})
+        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{adminId},#{departId},#{positionId},#{interviewTime},#{location},#{phone},#{userId},#{interviewState})
     </insert>
     <update id="updateInterviewById">
         UPDATE t_interview SET T_INTERVIEW_STATE=#{1} where t_interview_id=#{0}
@@ -24,9 +24,12 @@
         (SELECT rownum rn,* from T_INTERVIEW where T_INTERVIEW_STATE=#{1} and t_interview_user_id=#{0}) t_i
         where t_i.rn between #{2} and #{3}
     </select>
+    <select id="getInterviewById" resultMap="interview">
+         SELECT * from T_INTERVIEW where T_INTERVIEW_id=#{0}
+    </select>
     <resultMap id="interview" type="Interview">
         <id property="id" column="t_interview_id"/>
-        <result property="staffId" column="t_interview_admin_id"/>
+        <result property="adminId" column="t_interview_admin_id"/>
         <result property="userId" column="t_interview_user_id"/>
         <result property="departId" column="t_interview_depart_id"/>
         <result property="positionId" column="t_interview_position_id"/>
@@ -34,6 +37,7 @@
         <result property="location" column="t_interview_locaton"/>
         <result property="phone" column="t_interview_phone"/>
         <result property="interviewState" column="t_interview_state"/>
+        <result property="deliverResumeId" column="t_deliverResume_id"/>
         <association property="depart" javaType="Depart">
             <id property="id" column="t_depart_id"/>
             <result property="departName" column="t_depart_name"/>

@@ -4,7 +4,7 @@
     <insert id="addPosition">
         insert into T_POSITION VALUES (T_POSITION_SEQ.nextval,#{positionName},#{departId})
     </insert>
-    <select id="getPositionsByDep" resultType="Position">
+    <select id="getPositionsByDep" resultMap="position">
         SELECT * from T_POSITION  where T_DEPART_ID=#{departId}
     </select>
     <select id="getPositionByName" resultMap="position">

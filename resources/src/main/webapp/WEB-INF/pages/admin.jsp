@@ -30,10 +30,12 @@
         <div>
             <div id="menu_admin">
                 <a href="">首页</a><br>
-                <a href="seeDepart">查看部门职位</a>
-                <a href="">查看招聘投递</a><br>
+                <a href="seeDepart">查看部门职位</a><br>
+                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
+                <a href="addInterview">发出面试邀请</a>
+                <a href="/adminSeeInterview?curentPage=1">查看受邀面试</a>
                 <a href="goAddRecruit">添加招聘信息</a><br>
-                <a href="">查看招聘信息</a><br>
+                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
                 <a href="">个人中心</a><br>
             </div>
             <div id="contenter_admin">

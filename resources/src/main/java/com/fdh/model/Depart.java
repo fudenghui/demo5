@@ -36,4 +36,12 @@ public class Depart {
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
+
+    @Override
+    public String toString() {
+        return "Depart{" +
+                "id=" + id +
+                ", departName='" + departName + '\'' +
+                '}';
+    }
 }

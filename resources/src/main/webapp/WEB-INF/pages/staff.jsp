@@ -38,6 +38,7 @@
     </div>
     <div id="menu">
         <a href="goFirst">首页</a>
+        <a href="staffSeeDepart">查看部门职位</a>
         <a href="seeTrain">培训</a>
         <a href="seeSalary">薪资</a>
         <a href="seeWardPunish">奖惩</a>

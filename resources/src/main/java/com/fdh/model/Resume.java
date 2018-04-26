@@ -143,4 +143,25 @@ public class Resume {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Resume{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", cardId='" + cardId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", state='" + state + '\'' +
+                ", expSal=" + expSal +
+                ", edu='" + edu + '\'' +
+                ", school='" + school + '\'' +
+                ", major='" + major + '\'' +
+                ", workOld='" + workOld + '\'' +
+                ", rate='" + rate + '\'' +
+                '}';
+    }
 }

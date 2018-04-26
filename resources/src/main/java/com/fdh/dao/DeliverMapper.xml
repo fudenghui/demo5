@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdh.dao.DeliverMapper">
+    <select id="getDeliverResume" resultMap="deliverResume">
+        select * from T_DELIVER_RESUME
+    </select>
+    <select id="getDeliverResumeCur" resultMap="deliverResume">
+        SELECT t_dr.* from
+        (select rownum rn,t_de.*,t_r.*,t_u.*  from T_DELIVER_RESUME t_de,T_RECRUIT t_r,T_USER t_u,t_depart t_d,t_position t_p
+        where  t_de.t_recruit_id=t_r.T_RECRUIT_ID and t_de.T_USER_ID=t_u.T_USER_ID and t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID
+        and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID
+        )
+        t_dr
+        where rn BETWEEN #{0} and #{1}
+    </select>
+    <select id="getDeliverById" resultMap="deliverResume">
+        select t_de.*,t_r.*,t_u.*,t_d.*,t_p.*
+         from T_DELIVER_RESUME t_de,T_RECRUIT t_r,T_USER t_u,t_depart t_d,t_position t_p
+        where  t_de.t_recruit_id=t_r.T_RECRUIT_ID and t_de.T_USER_ID=t_u.T_USER_ID and t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID
+        and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID and t_de.T_DELIVER_RESUME_ID=#{0}
+    </select>
+    <resultMap id="deliverResume" type="DeliverResume">
+        <id property="id" column="t_deliver_resume_id"/>
+        <result property="recruitId" column="t_recruit_id"/>
+        <result property="userId" column="t_user_id"/>
+        <result property="userName" column="t_resume_name"/>
+        <result property="sex" column="t_resume_sex"/>
+        <result property="age" column="t_resume_age"/>
+        <result property="cardId" column="t_resume_cardId"/>
+        <result property="phone" column="t_resume_phone"/>
+        <result property="email" column="t_resume_email"/>
+        <result property="state" column="t_resume_state"/>
+        <result property="expSal" column="t_resume_expSal"/>
+        <result property="edu" column="t_resume_edu"/>
+        <result property="school" column="t_resume_school"/>
+        <result property="major" column="t_resume_major"/>
+        <result property="workOld" column="t_resume_work"/>
+        <result property="rate" column="t_resume_rate"/>
+        <association property="recruit" javaType="Recruit">
+            <id property="id" column="t_recruit_id"/>
+            <result property="departId" column="t_recruit_depart_id"/>
+            <result property="positionId" column="t_recruit_position_id"/>
+            <result property="number" column="t_recruit_number"/>
+            <result property="demand" column="t_recruit_demand"/>
+            <result property="startTime" column="t_recruit_startTime"/>
+            <result property="overTime" column="t_recruit_overTime"/>
+            <result property="recruitState" column="t_recruit_state"/>
+        </association>
+        <association property="depart" javaType="Depart">
+            <id property="id" column="t_depart_id"/>
+            <result property="departName" column="t_depart_name"/>
+        </association>
+        <association property="position" javaType="Position">
+            <id property="id" column="t_position_id"/>
+            <result property="positionName" column="t_position_name"/>
+        </association>
+        <association property="user" javaType="User">
+            <id property="id" column="t_user_id"/>
+            <result property="name" column="t_user_name"/>
+        </association>
+    </resultMap>
+</mapper>

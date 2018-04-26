@@ -2,6 +2,7 @@ package com.fdh.dao;
 
 import com.fdh.model.DeliverResume;
 import com.fdh.model.Resume;
+import com.fdh.model.User;
 
 import java.util.List;
 
@@ -19,4 +20,5 @@ public interface ResumeMapper {
     List<Resume> seeResumeByUserId(int id);
     //修改简历
     boolean updateResume(Resume resume);
+
 }

@@ -3,8 +3,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/4/23 0023
-  Time: 下午 7:27
+  Date: 2018/4/26 0026
+  Time: 上午 10:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,7 +15,7 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>查看受邀面试</title>
+    <title>查看投递信息</title>
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
@@ -39,19 +39,30 @@
             <a href="">个人中心</a><br>
         </div>
         <div id="contenter_admin">
-            <c:forEach items="${sessionScope.interviewList}" var="interview">
-                邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试部门id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试职位id：<input readonly="readonly" value="${interview.adminId}"/><br>
-                受邀用户id：<input readonly="readonly"  value="${interview.userId}">
-                面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
-                面试地址：<input name="location" value="${interview.location}">
-                联系电话：<input name="phone" value="${interview.phone}"><br>
-                <form action="/addStaff" method="post">
-                    <input type="hidden" name="interviewId" value="${interview.id}">
-                    <input type="submit" value="录用">
-                </form>
-            </c:forEach>
+            <table>
+                <tr>
+                    <td>部门</td>
+                    <td>职位</td>
+                    <td>招聘人数</td>
+                    <td>用户</td>
+                    <td>操作</td>
+                </tr>
+                <c:forEach items="${sessionScope.deliverList}" var="deliver">
+                    <tr>
+                        <td>${deliver.depart.departName}</td>
+                        <td>${deliver.position.positionName}</td>
+                        <td>${deliver.number}</td>
+                        <td>${deliver.user.name}</td>
+                        <td>
+                            <form action="seeDeliverInfo" method="post">
+                                <input type="hidden" name="deliverId" value="${deliver.id}">
+                                <input type="submit" value="查看简历">
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </div>
 </div>
 </body>

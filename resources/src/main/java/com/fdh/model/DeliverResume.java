@@ -22,6 +22,10 @@ public class DeliverResume {
     private String rate;
     private int recruitId;
     private int userId;
+    private Depart depart;
+    private Position position;
+    private User user;
+    private Recruit recruit;
 
     public DeliverResume() {
     }
@@ -152,5 +156,37 @@ public class DeliverResume {
 
     public void setRate(String rate) {
         this.rate = rate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Recruit getRecruit() {
+        return recruit;
+    }
+
+    public void setRecruit(Recruit recruit) {
+        this.recruit = recruit;
+    }
+
+    public Depart getDepart() {
+        return depart;
+    }
+
+    public void setDepart(Depart depart) {
+        this.depart = depart;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

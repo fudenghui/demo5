@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -27,7 +29,19 @@
             <a href="seeInterview?curentPage=1">面试邀请查看</a><br>
         </div>
         <div id="user_content">
-
+            <c:forEach items="${sessionScope.interviewList}" var="interview">
+                邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
+                面试部门id：<input readonly="readonly"  value="${interview.adminId}"/>
+                面试职位id：<input readonly="readonly" value="${interview.adminId}"/><br>
+                受邀用户id：<input readonly="readonly"  value="${interview.userId}">
+                面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
+                面试地址：<input name="location" value="${interview.location}">
+                联系电话：<input name="phone" value="${interview.phone}"><br>
+                <form action="/updateInterview" method="post">
+                    <input type="hidden" name="interviewId" value="${interview.id}">
+                    <input type="submit" value="接受面试">
+                </form>
+            </c:forEach>
         </div>
     </div>
 </body>

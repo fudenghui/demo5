@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -25,35 +27,43 @@
         <div>
             <div id="menu_admin">
                 <a href="">首页</a><br>
-                <a href="">查看招聘投递</a><br>
-                <a href="">添加招聘信息</a><br>
-                <a href="">查看招聘信息</a><br>
+                <a href="seeDepart">查看部门职位</a><br>
+                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
+                <a href="goAddRecruit">添加招聘信息</a><br>
+                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
                 <a href="">个人中心</a><br>
             </div>
             <div id="contenter_admin">
                 <table>
                     <c:forEach items="${sessionScope.recruitList}" var="recruit">
                         <tr>
-                            部门：<td>${recruit.depart.departName}</td>
-                            职位：<td>${recruit.position.positionName}</td>
-                            招聘人数：<td>${recruit.number}</td>
+                            <td>部门：${recruit.depart.departName}</td>
+                            <td>职位：${recruit.position.positionName}</td>
+                            <td>招聘人数：${recruit.number}</td>
+                            <td>发布状态:
+                                <c:if test="${recruit.recruitState}==0">
+                                    未发布
+                                </c:if>
+                                <c:if test="${recruit.recruitState}==1">
+                                    已发布
+                                </c:if>
+                                <c:if test="${recruit.recruitState}==2">
+                                    已结束
+                                </c:if>
+                            </td>
                             <td>
-                                <form action="addDeliverResume?recuitId=${recruit.id}" method="post">
-                                    简历选择：<select name="resumeId">
-                                    <c:forEach items="" var="resume">
-                                        <option>${resume.id}</option>
-                                    </c:forEach>
-                                </select>
-                                    <input type="submit" value="投递">
+                                <form action="updateRecruitState" method="post">
+                                    <input type="hidden" name="recruitId" value="${recruit.id}">
+                                    <input type="submit" value="发布">
                                 </form>
                             </td>
                         </tr>
                         <tr>
-                            开始时间：<td>${recruit.startTime}</td>
-                            结束时间：<td>${recruit.overTime}</td>
+                            <td>开始时间：${recruit.startTime}</td>
+                            <td>结束时间：${recruit.overTime}</td>
                         </tr>
                         <tr>
-                            招聘要求：<td>${recruit.demand}</td>
+                            <td>招聘要求：${recruit.demand}</td>
                         </tr>
                     </c:forEach>
                 </table>

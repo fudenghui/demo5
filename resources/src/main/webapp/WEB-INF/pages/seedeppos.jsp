@@ -37,9 +37,8 @@
                     success:function (obj) {
                         $("#positions").html("");
                         for(var i=0;i<obj.length;i++){
-                            $("#positions").html($("#positions").html()+"<a>${obj[i].positionName}</a>");
+                            $("#positions").html($("#positions").html()+"<a>"+obj[i].positionName+"</a>");
                         }
-                        $("#middle_position").css("display","block");
                     }
                 });
             });
@@ -78,12 +77,23 @@
                 </div>
                 <form action="addPosition" method="post">
                     <input type="hidden" name="departName" id="departName">
-                    职位名称：<input type="text" name="departName">
+                    职位名称：<input type="text" name="positionName">
                     <input type="submit" value="添加职位">
                 </form>
             </div>
             <div id="right_staff">
-
+                <table>
+                    <tr>
+                        <td>员工id</td>
+                        <td>员工姓名</td>
+                    </tr>
+                </table>
+                <c:forEach items="${sessionScope.staffList}" var="staff">
+                    <tr>
+                        <td>${staff.id}</td>
+                        <td>${staff.name}</td>
+                    </tr>
+                </c:forEach>
             </div>
         </div>
     </div>

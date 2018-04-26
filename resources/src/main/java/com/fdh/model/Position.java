@@ -34,4 +34,13 @@ public class Position {
     public void setDepartId(int departId) {
         this.departId = departId;
     }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "id=" + id +
+                ", positionName='" + positionName + '\'' +
+                ", departId=" + departId +
+                '}';
+    }
 }
