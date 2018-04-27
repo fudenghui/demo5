@@ -5,8 +5,10 @@
         select * from T_DELIVER_RESUME
     </select>
     <select id="getDeliverResumeCur" resultMap="deliverResume">
-        SELECT t_dr.* from
-        (select rownum rn,t_de.*,t_r.*,t_u.*  from T_DELIVER_RESUME t_de,T_RECRUIT t_r,T_USER t_u,t_depart t_d,t_position t_p
+        SELECT t_dr.*  from
+        (select rownum rn,t_de.T_DELIVER_RESUME_ID,t_r.T_RECRUIT_ID,t_r.T_RECRUIT_DEPART_ID,t_r.T_RECRUIT_POSITION_ID,t_r.T_RECRUIT_NUMBER,
+        t_u.T_USER_ID,t_u.t_user_name,t_u.T_USER_PASS,t_d.T_DEPART_ID,t_d.T_DEPART_NAME,t_p.T_POSITION_ID,t_p.T_POSITION_NAME
+        from T_DELIVER_RESUME t_de,T_RECRUIT t_r,T_USER t_u,t_depart t_d,t_position t_p
         where  t_de.t_recruit_id=t_r.T_RECRUIT_ID and t_de.T_USER_ID=t_u.T_USER_ID and t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID
         and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID
         )

@@ -4,6 +4,9 @@
     <select id="seeTrain" resultType="com.fdh.model.Train">
         SELECT * from t_train where t_staff_id=#{staffId} and t_train_state=#{state}
     </select>
+    <select id="seeAllTrain" resultMap="train">
+        SELECT * from t_train
+    </select>
     <resultMap id="train" type="Train">
         <id property="id" column="t_tain_id"></id>
         <result property="departId" column="t_train_depart_id"/>

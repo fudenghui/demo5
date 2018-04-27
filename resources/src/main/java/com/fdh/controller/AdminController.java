@@ -25,6 +25,10 @@ public class AdminController {
     private DepartService departService;
     @Autowired
     private DeliverService deliverService;
+    @Autowired
+    private StaffService staffService;
+    @Autowired
+    private TrainService trainService;
     //管理员登录
     @RequestMapping("goAdmin")
     public String goAdmin(HttpSession session){
@@ -108,6 +112,7 @@ public class AdminController {
         int userId1=Integer.parseInt(userId);
         Interview interview=new Interview();
         interview.setAdminId(user.getId());
+        interview.setUserId(userId1);
         Recruit recruit=recruitService.seeRecruitById(recruitId1);
         interview.setDepartId(recruit.getDepartId());
         interview.setPositionId(recruit.getPositionId());
@@ -143,6 +148,8 @@ public class AdminController {
     @RequestMapping("seeDepart")
     public String seeDepart(HttpSession session){
         List<Depart> departs=departService.seeDepart();
+        List<Staff> staffList=staffService.getAllStaff();
+        session.setAttribute("staffList",staffList);
         session.setAttribute("departs",departs);
         return "seedeppos";
     }
@@ -164,6 +171,47 @@ public class AdminController {
         Depart depart=new Depart();
         depart.setDepartName(departName);
         List<Position> list=positionService.getPositionsByDep(depart);
+        return list;
+    }
+    //跳到员工操作页面
+    @RequestMapping("goStaffCtrl")
+    public String goStaffCtrl(String id,HttpSession session){
+        Staff staff=new Staff();
+        int id1=Integer.parseInt(id);
+        staff.setId(id1);
+        Staff staff1=staffService.getStaffById(staff);
+        List<Depart> departList=departService.seeDepart();
+        session.setAttribute("departs",departList);
+        session.setAttribute("staff",staff1);
+        return "adminctrlstaff";
+    }
+    //调档
+    @RequestMapping("resetDepPos")
+    public String resetDepPos(String id,String departName,String positionName,HttpSession session){
+        Staff staff=new Staff();
+        int id1=Integer.parseInt(id);
+        staff.setId(id1);
+        Depart depart=departService.getDepartByName(departName);
+        Position position=positionService.getPositionByName(positionName);
+        staff.setDepartId(depart.getId());
+        staff.setPositionId(position.getId());
+        boolean flag=staffService.updateStaff(staff);
+        return goStaffCtrl(id,session);
+    }
+    //查看添加培训信息
+    @RequestMapping("adminaddtrain")
+    public String adminaddtrain(HttpSession session){
+        List<Depart> departs=departService.seeDepart();
+        List<Train> trains=trainService.seeAllTrain();
+        session.setAttribute("trains",trains);
+        session.setAttribute("departs",departs);
+        return "adminaddtrain";
+    }
+    //根据部门查员工
+    @RequestMapping("getStaffByDep")
+    public @ResponseBody List<Staff> getStaffByDep(Depart depart,HttpSession session){
+        Depart depart1=departService.getDepartByName(depart.getDepartName());
+        List<Staff> list=staffService.getStaffByDep(depart1.getId());
         return list;
     }
 }

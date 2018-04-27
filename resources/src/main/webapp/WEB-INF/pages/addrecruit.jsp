@@ -27,7 +27,7 @@
                     url:"getPositionsByDep",
                     data:{"departName":name},
                     success:function (obj) {
-                       $("#position").html("");
+                       $("#position").html("<option>请选择职位</option>");
                         for(var i=0;i<obj.length;i++){
                             $("#position").html($("#position").html()+"<option>"+obj[i].positionName+"</option>")
                         }
@@ -41,11 +41,13 @@
     <div id="recruit_body">
         <form method="post" action="addRecruit">
                 部门名称：<select name="departName" id="depart">
+                            <option>请选择部门</option>
                             <c:forEach items="${sessionScope.departs}" var="depart">
                                 <option>${depart.departName}</option>
                             </c:forEach>
                           </select>
                 职位名称：<select name="positionName" id="position">
+                            <option>请选择职位</option>
                           </select><br>
                 招聘人数：<input name="number"><br>
                 招聘开始时间：<input name="startTime"><br>

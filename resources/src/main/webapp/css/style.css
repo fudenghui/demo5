@@ -75,6 +75,9 @@
     clear:both;
     zoom:1;
 }
+#t_body tr{
+    cursor: pointer;
+}
 .a{
     background-color: beige;
 }

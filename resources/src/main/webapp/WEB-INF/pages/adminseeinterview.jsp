@@ -23,36 +23,39 @@
     </script>
 </head>
 <body>
-<div>
-    <div id="top_admin">
-        <div id="logo_admin">
-            欢迎来到XXXXX公司
-        </div>
-    </div>
     <div>
-        <div id="menu_admin">
-            <a href="">首页</a><br>
-            <a href="seeDepart">查看部门职位</a><br>
-            <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
-            <a href="goAddRecruit">添加招聘信息</a><br>
-            <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
-            <a href="">个人中心</a><br>
+        <div id="top_admin">
+            <div id="logo_admin">
+                欢迎来到XXXXX公司
+            </div>
         </div>
-        <div id="contenter_admin">
-            <c:forEach items="${sessionScope.interviewList}" var="interview">
-                邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试部门id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试职位id：<input readonly="readonly" value="${interview.adminId}"/><br>
-                受邀用户id：<input readonly="readonly"  value="${interview.userId}">
-                面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
-                面试地址：<input name="location" value="${interview.location}">
-                联系电话：<input name="phone" value="${interview.phone}"><br>
-                <form action="/addStaff" method="post">
-                    <input type="hidden" name="interviewId" value="${interview.id}">
-                    <input type="submit" value="录用">
-                </form>
-            </c:forEach>
+        <div>
+            <div id="menu_admin">
+                <a href="">首页</a><br>
+                <a href="seeDepart">查看部门职位</a><br>
+                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
+                <a href="adminSeeInterview?curentPage=1">查看受邀面试</a><br>
+                <a href="goAddRecruit">添加招聘信息</a><br>
+                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
+                <a href="">个人中心</a><br>
+            </div>
+            <div id="contenter_admin">
+                <c:forEach items="${sessionScope.interviewList}" var="interview">
+                    邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
+                    面试部门id：<input readonly="readonly"  value="${interview.departId}"/>
+                    面试职位id：<input readonly="readonly" value="${interview.positionId}"/><br>
+                    受邀用户id：<input readonly="readonly"  value="${interview.userId}">
+                    面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
+                    面试地址：<input name="location" value="${interview.location}">
+                    联系电话：<input name="phone" value="${interview.phone}"><br>
+                    <form action="addStaff" method="post">
+                        薪资：<input name="salary">
+                        <input type="hidden" name="id" value="${interview.id}">
+                        <input type="submit" value="录用">
+                    </form>
+                </c:forEach>
+            </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

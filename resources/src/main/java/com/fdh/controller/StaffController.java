@@ -11,6 +11,7 @@ import com.fdh.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import sun.dc.pr.PRError;
 
 import javax.servlet.http.HttpSession;
@@ -31,10 +32,11 @@ public class StaffController {
     private PositionService positionService;
     //添加员工
     @RequestMapping("addStaff")
-    public String addStaff(Interview interview, HttpSession session){
+    public String addStaff(String salary,Interview interview, HttpSession session){
         Interview interview1=interviewService.getInterviewById(interview.getId());
         Staff staff=new Staff();
-        boolean flag=staffService.addStaff(interview,staff);
+        double salary1=Double.parseDouble(salary);
+        boolean flag=staffService.addStaff(salary1,interview1,staff);
         if (flag){
             return "seedeppos";
         }
@@ -63,7 +65,16 @@ public class StaffController {
     @RequestMapping("staffSeeDepart")
     public String staffSeeDepart(HttpSession session){
         List<Depart> departs=departService.seeDepart();
+        List<Staff> staffList=staffService.getAllStaff();
+        session.setAttribute("staffList",staffList);
         session.setAttribute("departs",departs);
         return "seedeppos";
+    }
+    //查看员工根据部门
+    @RequestMapping("staffSeeStaffByDep")
+    public @ResponseBody List<Staff> staffSeeStaffByDep(String departName){
+        Depart depart=departService.getDepartByName(departName);
+        List<Staff> list=staffService.getStaffByDep(depart.getId());
+        return list;
     }
 }

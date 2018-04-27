@@ -25,4 +25,11 @@ public class DepartServiceImpl implements DepartService {
     public boolean addDepart(Depart depart){
         return departMapper.addDepart(depart);
     }
+    //根据部门名查看部门
+    @Override
+    public Depart getDepartByName(String name) {
+        Depart depart=new Depart();
+        depart.setDepartName(name);
+        return departMapper.getDepartByName(depart);
+    }
 }

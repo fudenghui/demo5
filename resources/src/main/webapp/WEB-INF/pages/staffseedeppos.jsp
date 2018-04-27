@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -37,6 +39,19 @@
                         for(var i=0;i<obj.length;i++){
                             $("#positions").html($("#positions").html()+"<a>"+obj[i].positionName+"</a>");
                         }
+                        $.ajax({
+                            type:"post",
+                            url:"staffSeeStaffByDep",
+                            data:{"departName":name},
+                            success:function (obj1) {
+                                $("#t_body").html("");
+                                for(var i=0;i<obj1.length;i++){
+                                    var staff=obj1[i];
+                                    $("#t_body").html($("#t_body").html()+
+                                        "<tr><td>"+staff.id+"</td><td>"+staff.staffRealName+"</td><td>"+staff.sex+"</td><td>"+staff.age+"</td><td>"+staff.phone+"</td><td>"+staff.email+"</td></tr>");
+                                }
+                            }
+                        })
                     }
                 });
             });
@@ -77,34 +92,35 @@
             <c:forEach items="${sessionScope.departs}" var="depart">
                 <a>${depart.departName}</a>
             </c:forEach>
-            <form action="addDepart" method="post">
-                部门名称：<input type="text" name="departName">
-                <input type="submit" value="添加部门">
-            </form>
         </div>
         <div id="middle_position">
             <div id="positions">
 
             </div>
-            <form action="addPosition" method="post">
-                <input type="hidden" name="departName" id="departName">
-                职位名称：<input type="text" name="positionName">
-                <input type="submit" value="添加职位">
-            </form>
         </div>
         <div id="right_staff">
             <table>
                 <tr>
-                    <td>员工id</td>
-                    <td>员工姓名</td>
+                    <td>工号</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>手机号</td>
+                    <td>邮箱</td>
                 </tr>
+                <tbody id="t_body">
+                <c:forEach items="${sessionScope.staffList}" var="staff">
+                    <tr>
+                        <td><a>${staff.id}</a></td>
+                        <td>${staff.staffRealName}</td>
+                        <td>${staff.sex}</td>
+                        <td>${staff.age}</td>
+                        <td>${staff.phone}</td>
+                        <td>${staff.email}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
-            <c:forEach items="${sessionScope.staffList}" var="staff">
-                <tr>
-                    <td>${staff.id}</td>
-                    <td>${staff.name}</td>
-                </tr>
-            </c:forEach>
         </div>
     </div>
 </div>

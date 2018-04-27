@@ -39,4 +39,11 @@ public class PositionServiceImpl implements PositionService {
         }
         return false;
     }
+    //根据名称查职业
+    @Override
+    public Position getPositionByName(String name) {
+        Position position=new Position();
+        position.setPositionName(name);
+        return positionMapper.getPositionByName(position);
+    }
 }

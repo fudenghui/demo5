@@ -37,12 +37,13 @@
             请填写邀请信息：
             <form action="addInterview1" method="post">
                 邀请人id：<input readonly="readonly" name="adminId" value="${sessionScope.interview1.adminId}"/><br>
-                面试部门id：<input readonly="readonly" name="departId" value="${sessionScope.interview1.adminId}"/><br>
-                面试职位id：<input readonly="readonly" value="${sessionScope.interview1.adminId}" name="positionId"/><br>
+                面试部门id：<input readonly="readonly" name="departId" value="${sessionScope.interview1.departId}"/><br>
+                面试职位id：<input readonly="readonly" value="${sessionScope.interview1.positionId}" name="positionId"/><br>
                 受邀用户id：<input readonly="readonly" name="userId" value="${sessionScope.interview1.userId}"><br>
                 面试时间：<input name="interviewTime"/>
                 面试地址：<input name="location">
                 联系电话：<input name="phone">
+                <input type="hidden" name="deliverResumeId" value="${sessionScope.interview1.deliverResumeId}">
                 <input type="submit" value="邀请面试">
             </form>
         </div>

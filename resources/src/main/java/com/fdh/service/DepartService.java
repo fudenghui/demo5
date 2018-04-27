@@ -12,4 +12,6 @@ public interface DepartService {
     List<Depart> seeDepart();
     //添加部门
     boolean addDepart(Depart depart);
+    //根据部门名查看部门
+    Depart getDepartByName(String name);
 }

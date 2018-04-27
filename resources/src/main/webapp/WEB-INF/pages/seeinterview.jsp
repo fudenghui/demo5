@@ -31,13 +31,13 @@
         <div id="user_content">
             <c:forEach items="${sessionScope.interviewList}" var="interview">
                 邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试部门id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试职位id：<input readonly="readonly" value="${interview.adminId}"/><br>
+                面试部门id：<input readonly="readonly"  value="${interview.departId}"/>
+                面试职位id：<input readonly="readonly" value="${interview.positionId}"/><br>
                 受邀用户id：<input readonly="readonly"  value="${interview.userId}">
                 面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
                 面试地址：<input name="location" value="${interview.location}">
                 联系电话：<input name="phone" value="${interview.phone}"><br>
-                <form action="/updateInterview" method="post">
+                <form action="updateInterviewById" method="post">
                     <input type="hidden" name="interviewId" value="${interview.id}">
                     <input type="submit" value="接受面试">
                 </form>

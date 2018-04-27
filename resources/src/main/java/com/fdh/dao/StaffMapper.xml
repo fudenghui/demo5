@@ -2,14 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.StaffMapper">
     <insert id="addStaff">
-        insert into t_staff VALUES (T_STAFF_SEQ.nextval,#{name},#{staffPass},#{level},#{cardId},#{sex},#{age},#{salary},#{departId}
-        ,#{positionId},#{hireTime},#{staffState},#{reson},#{outTime},#{staffRealName})
+        insert into t_staff(T_STAFF_ID, T_STAFF_NAME, T_STAFF_PASS, T_STAFF_LEVEL, T_STAFF_CARDID, T_STAFF_SEX, T_STAFF_AGE, T_STAFF_SAL, T_STAFF_DEPART_ID, T_STAFF_POSITION_ID, T_STAFF_HIRETIME,
+        T_STAFF_STATE,T_STAFF_REALNAME,T_STAFF_PHONE,T_STAFF_EMAIL)
+        VALUES (T_STAFF_SEQ.nextval,#{name},#{staffPass},#{level},#{cardId},#{sex},#{age},#{salary},#{departId}
+        ,#{positionId},#{hireTime},#{staffState},#{staffRealName},#{phone},#{email})
     </insert>
 
     <update id="updateStaff">
         update t_staff
         <set>
-            <if test="pass!='' and pass!=null">
+            <if test="staffPass!='' and staffPass!=null">
                 t_staff_pass=#{staffPass},
             </if>
             <if test="level!='' and level!=null">
@@ -36,12 +38,15 @@
             <if test="staffRealName!='' and staffRealName!=null">
                 t_staff_realName=#{staffRealName},
             </if>
-            <if test="staffState=='离职'">
-                <if test="reson!='' and reson!=null">
-                    t_staff_reson=#{reson}
-                </if>
-                <if test="outTime!='' and outTime!=null">
-                    t_staff_outtime=#{outTime},
+            <if test="staffState!='' and staffState!=null">
+                t_staff_state=#{staffState}
+                <if test="staffState=='离职'">
+                    <if test="reson!='' and reson!=null">
+                        t_staff_reson=#{reson}
+                    </if>
+                    <if test="outTime!='' and outTime!=null">
+                        t_staff_outtime=#{outTime},
+                    </if>
                 </if>
             </if>
         </set>
@@ -50,11 +55,25 @@
     <select id="getStaffByName" resultType="staff">
         select * from t_staff where t_staff_name=#{name}
     </select>
+    <select id="getStaffByDep" resultMap="staff">
+        SELECT * from T_STAFF where T_STAFF_DEPART_ID=#{0}
+    </select>
+    <select id="getAllStaff" resultMap="staff">
+        SELECT * from T_STAFF
+    </select>
+    <select id="getStaffById" resultMap="staff1">
+        select t_s.*,t_d.T_DEPART_ID,t_d.T_DEPART_NAME,t_p.T_POSITION_ID,t_p.T_POSITION_NAME
+        from t_staff t_s,t_depart t_d,T_POSITION t_p
+        where t_s.T_STAFF_DEPART_ID=t_d.T_DEPART_ID and t_s.T_STAFF_POSITION_ID=t_p.T_POSITION_ID and t_s.T_STAFF_ID=#{id}
+    </select>
     <resultMap id="staff" type="Staff">
         <id property="id" column="t_staff_id"/>
         <result property="name" column="t_staff_name"/>
         <result property="staffPass" column="t_staff_pass"/>
         <result property="level" column="t_staff_level"/>
+        <result property="staffRealName" column="t_staff_realName"/>
+        <result property="phone" column="t_staff_phone"/>
+        <result property="email" column="t_staff_email"/>
         <result property="cardId" column="t_staff_cardId"/>
         <result property="sex" column="t_staff_sex"/>
         <result property="age" column="t_staff_age"/>
@@ -65,5 +84,32 @@
         <result property="staffState" column="t_staff_state"/>
         <result property="reson" column="t_staff_reson"/>
         <result property="outTime" column="t_staff_outTime"/>
+    </resultMap>
+    <resultMap id="staff1" type="Staff">
+        <id property="id" column="t_staff_id"/>
+        <result property="name" column="t_staff_name"/>
+        <result property="staffPass" column="t_staff_pass"/>
+        <result property="level" column="t_staff_level"/>
+        <result property="staffRealName" column="t_staff_realName"/>
+        <result property="phone" column="t_staff_phone"/>
+        <result property="email" column="t_staff_email"/>
+        <result property="cardId" column="t_staff_cardId"/>
+        <result property="sex" column="t_staff_sex"/>
+        <result property="age" column="t_staff_age"/>
+        <result property="salary" column="t_staff_sal"/>
+        <result property="departId" column="t_staff_depart_id"/>
+        <result property="positionId" column="t_staff_position_id"/>
+        <result property="hireTime" column="t_staff_hireTime"/>
+        <result property="staffState" column="t_staff_state"/>
+        <result property="reson" column="t_staff_reson"/>
+        <result property="outTime" column="t_staff_outTime"/>
+        <association property="depart" javaType="Depart">
+            <id property="id" column="t_depart_id"></id>
+            <result property="departName" column="t_depart_name"/>
+        </association>
+        <association property="position" javaType="Position">
+            <id property="id" column="t_position_id"/>
+            <result property="positionName" column="t_position_name"/>
+        </association>
     </resultMap>
 </mapper>

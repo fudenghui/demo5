@@ -39,8 +39,25 @@
                         for(var i=0;i<obj.length;i++){
                             $("#positions").html($("#positions").html()+"<a>"+obj[i].positionName+"</a>");
                         }
+                        $.ajax({
+                            type:"post",
+                            url:"staffSeeStaffByDep",
+                            data:{"departName":name},
+                            success:function (obj1) {
+                                $("#t_body").html("");
+                                for(var i=0;i<obj1.length;i++){
+                                    var staff=obj1[i];
+                                    $("#t_body").html($("#t_body").html()+
+                                        "<tr><td>"+staff.id+"</td><td>"+staff.staffRealName+"</td><td>"+staff.sex+"</td><td>"+staff.age+"</td><td>"+staff.phone+"</td><td>"+staff.email+"</td></tr>");
+                                }
+                            }
+                        })
                     }
                 });
+            });
+            $("#t_body tr").click(function () {
+                var id=$(this).find("td").get(0);
+                location.href="goStaffCtrl?id="+$(id).html();
             });
         })
     </script>
@@ -55,10 +72,11 @@
     <div>
         <div id="menu_admin">
             <a href="">首页</a><br>
-            <a href="">查看部门职位</a>
-            <a href="">查看招聘投递</a><br>
+            <a href="seeDepart">查看部门职位</a><br>
+            <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
+            <a href="adminSeeInterview?curentPage=1">查看受邀面试</a><br>
             <a href="goAddRecruit">添加招聘信息</a><br>
-            <a href="">查看招聘信息</a><br>
+            <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
             <a href="">个人中心</a><br>
         </div>
         <div id="contenter_admin">
@@ -84,16 +102,26 @@
             <div id="right_staff">
                 <table>
                     <tr>
-                        <td>员工id</td>
-                        <td>员工姓名</td>
+                        <td>工号</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>年龄</td>
+                        <td>手机号</td>
+                        <td>邮箱</td>
                     </tr>
+                    <tbody id="t_body">
+                    <c:forEach items="${sessionScope.staffList}" var="staff">
+                        <tr>
+                            <td>${staff.id}</td>
+                            <td>${staff.staffRealName}</td>
+                            <td>${staff.sex}</td>
+                            <td>${staff.age}</td>
+                            <td>${staff.phone}</td>
+                            <td>${staff.email}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
                 </table>
-                <c:forEach items="${sessionScope.staffList}" var="staff">
-                    <tr>
-                        <td>${staff.id}</td>
-                        <td>${staff.name}</td>
-                    </tr>
-                </c:forEach>
             </div>
         </div>
     </div>

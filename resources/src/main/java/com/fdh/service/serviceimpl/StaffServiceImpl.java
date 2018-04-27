@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/24 0024.
@@ -23,14 +24,17 @@ public class StaffServiceImpl implements StaffService {
     private DeliverMapper deliverMapper;
     //添加员工
     @Override
-    public boolean addStaff(Interview interview, Staff staff) {
+    public boolean addStaff(double salary,Interview interview, Staff staff) {
         DeliverResume deliverResume=deliverMapper.getDeliverById(interview.getDeliverResumeId());
         staff.setName(deliverResume.getPhone());
+        staff.setPhone(deliverResume.getPhone());
         String cardId=deliverResume.getCardId();
-        String pass=cardId.substring(cardId.length()-6,cardId.length()-1);
+        String pass=cardId.substring(cardId.length()-6,cardId.length());
         staff.setStaffPass(pass);
         staff.setLevel(2);
+        staff.setSalary(salary);
         staff.setCardId(cardId);
+        staff.setEmail(deliverResume.getEmail());
         staff.setSex(deliverResume.getSex());
         staff.setAge(deliverResume.getAge());
         staff.setDepartId(interview.getDepartId());
@@ -39,6 +43,7 @@ public class StaffServiceImpl implements StaffService {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String nowTime=sdf.format(date);
         staff.setHireTime(nowTime);
+        staff.setStaffState("试用期");
         staff.setStaffRealName(deliverResume.getUserName());
         return staffMapper.addStaff(staff);
     }
@@ -52,5 +57,21 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Staff getStaffByName(Staff staff) {
         return staffMapper.getStaffByName(staff);
+    }
+    //根据id查询员工
+    @Override
+    public Staff getStaffById(Staff staff) {
+        return staffMapper.getStaffById(staff);
+    }
+
+    //根据部门查询员工
+    @Override
+    public List<Staff> getStaffByDep(int departId) {
+        return staffMapper.getStaffByDep(departId);
+    }
+    //查看所有员工
+    @Override
+    public List<Staff> getAllStaff() {
+        return staffMapper.getAllStaff();
     }
 }

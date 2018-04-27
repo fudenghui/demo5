@@ -9,7 +9,9 @@ public class Staff {
     private String staffPass;
     private int level;
     private String staffRealName;
+    private String phone;
     private String cardId;
+    private String email;
     private String sex;
     private int age;
     private double salary;
@@ -19,6 +21,8 @@ public class Staff {
     private String staffState;
     private String reson;
     private String outTime;
+    private Depart depart;
+    private Position position;
 
     public Staff() {
     }
@@ -145,5 +149,62 @@ public class Staff {
 
     public void setOutTime(String outTime) {
         this.outTime = outTime;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Depart getDepart() {
+        return depart;
+    }
+
+    public void setDepart(Depart depart) {
+        this.depart = depart;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", staffPass='" + staffPass + '\'' +
+                ", level=" + level +
+                ", staffRealName='" + staffRealName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", salary=" + salary +
+                ", departId=" + departId +
+                ", positionId=" + positionId +
+                ", hireTime='" + hireTime + '\'' +
+                ", staffState='" + staffState + '\'' +
+                ", reson='" + reson + '\'' +
+                ", outTime='" + outTime + '\'' +
+                ", depart=" + depart +
+                ", position=" + position +
+                '}';
     }
 }

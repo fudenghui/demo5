@@ -116,4 +116,20 @@ public class Interview {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Interview{" +
+                "id=" + id +
+                ", adminId=" + adminId +
+                ", userId=" + userId +
+                ", departId=" + departId +
+                ", positionId=" + positionId +
+                ", interviewTime='" + interviewTime + '\'' +
+                ", location='" + location + '\'' +
+                ", phone='" + phone + '\'' +
+                ", deliverResumeId=" + deliverResumeId +
+                ", interviewState=" + interviewState +
+                '}';
+    }
 }

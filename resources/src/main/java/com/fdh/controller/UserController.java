@@ -181,7 +181,7 @@ public class UserController {
         return "seeinterview";
     }
     //确认面试
-    @RequestMapping("updateInterview")
+    @RequestMapping("updateInterviewById")
     public String updateInterviewById(String interviewId,HttpSession session){
         int state=2;
         int interviewId1=Integer.parseInt(interviewId);

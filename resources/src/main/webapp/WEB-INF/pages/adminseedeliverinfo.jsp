@@ -29,6 +29,7 @@
                 <a href="">首页</a><br>
                 <a href="seeDepart">查看部门职位</a><br>
                 <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
+                <a href="adminSeeInterview?curentPage=1">查看受邀面试</a><br>
                 <a href="goAddRecruit">添加招聘信息</a><br>
                 <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
                 <a href="">个人中心</a><br>
@@ -44,8 +45,8 @@
                 毕业院校：<input name="school" value="${sessionScope.deliverResume.school}">
                 专业：<input name="major" value="${sessionScope.deliverResume.major}"><br>
                 期望薪资：<input name="expSal" value="${sessionScope.deliverResume.expSal}"><br>
-                就业经历：<textarea name="workOld" cols="50" rows="20" content="${sessionScope.deliverResume.workOld}"></textarea><br>
-                自我评价：<textarea name="rate" cols="50" rows="10" content="${sessionScope.deliverResume.rate}"></textarea>
+                就业经历：<textarea name="workOld" cols="50" rows="20">${sessionScope.deliverResume.workOld}</textarea><br>
+                自我评价：<textarea name="rate" cols="50" rows="10">${sessionScope.deliverResume.rate}</textarea>
                 <form action="addInterview" method="post">
                     <input type="hidden" value="${sessionScope.deliverResume.id}" name="deliverResumeId">
                     <input type="hidden" value="${sessionScope.deliverResume.recruitId}" name="recruitId"/>

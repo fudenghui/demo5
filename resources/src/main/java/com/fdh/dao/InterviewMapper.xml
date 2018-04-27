@@ -3,7 +3,7 @@
 <mapper namespace="com.fdh.dao.InterviewMapper">
 
     <insert id="addInterview">
-        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{adminId},#{departId},#{positionId},#{interviewTime},#{location},#{phone},#{userId},#{interviewState})
+        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{adminId},#{departId},#{positionId},to_date(#{interviewTime},'yyyy-MM-dd'),#{location},#{phone},#{userId},#{interviewState},#{deliverResumeId})
     </insert>
     <update id="updateInterviewById">
         UPDATE t_interview SET T_INTERVIEW_STATE=#{1} where t_interview_id=#{0}
@@ -13,15 +13,15 @@
     </select>
     <select id="seeInterviewCur" resultMap="interview">
         SELECT t_i.* FROM
-        (SELECT rownum rn,* from T_INTERVIEW where T_INTERVIEW_STATE=#{0}) t_i
+        (SELECT rownum rn,t_in.* from T_INTERVIEW t_in where T_INTERVIEW_STATE=#{0}) t_i
         where t_i.rn between #{1} and #{2}
     </select>
     <select id="seeInterviewByUserId" resultMap="interview">
         SELECT * from T_INTERVIEW where T_INTERVIEW_USER_ID=#{0} and T_INTERVIEW_STATE=#{1}
     </select>
-    <select id="seeInterviewByUserIdCur" resultType="interview">
+    <select id="seeInterviewByUserIdCur" resultMap="interview">
         SELECT t_i.* FROM
-        (SELECT rownum rn,* from T_INTERVIEW where T_INTERVIEW_STATE=#{1} and t_interview_user_id=#{0}) t_i
+        (SELECT rownum rn,t_in.* from T_INTERVIEW t_in where T_INTERVIEW_STATE=#{1} and t_interview_user_id=#{0}) t_i
         where t_i.rn between #{2} and #{3}
     </select>
     <select id="getInterviewById" resultMap="interview">
@@ -34,7 +34,7 @@
         <result property="departId" column="t_interview_depart_id"/>
         <result property="positionId" column="t_interview_position_id"/>
         <result property="interviewTime" column="t_interview_time"/>
-        <result property="location" column="t_interview_locaton"/>
+        <result property="location" column="t_interview_location"/>
         <result property="phone" column="t_interview_phone"/>
         <result property="interviewState" column="t_interview_state"/>
         <result property="deliverResumeId" column="t_deliverResume_id"/>

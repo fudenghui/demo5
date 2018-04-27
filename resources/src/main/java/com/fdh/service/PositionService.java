@@ -13,4 +13,6 @@ public interface PositionService {
     List<Position> getPositionsByDep(Depart depart);
     //添加职位
     boolean addPosition(Position position,String departName);
+    //根据名称查职业
+    Position getPositionByName(String name);
 }
