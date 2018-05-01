@@ -26,6 +26,12 @@ public class PositionServiceImpl implements PositionService {
         position.setDepartId(depart1.getId());
         return positionMapper.getPositionsByDep(position);
     }
+    //根据部门id查职位
+    @Override
+    public List<Position> getPositionsByDepId(int departId) {
+        return positionMapper.getPositionsByDepId(departId);
+    }
+
     //添加职位
     @Override
     public boolean addPosition(Position position, String departName) {
@@ -45,5 +51,10 @@ public class PositionServiceImpl implements PositionService {
         Position position=new Position();
         position.setPositionName(name);
         return positionMapper.getPositionByName(position);
+    }
+    //删除职位
+    @Override
+    public boolean deletePositionById(int id) {
+        return positionMapper.deletePositionById(id);
     }
 }

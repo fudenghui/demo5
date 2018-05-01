@@ -17,21 +17,30 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        var userName=$("#user").html();
+        if(userName!=""){
+            $("#sp").css("display","block");
+        }
     </script>
 </head>
 <body>
     <div>
-        欢迎${sessionScope.user.name}
+        <div id="top_admin">
+            <div id="logo_admin">
+                欢迎来到XXXXX公司
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id="user_menu">
+            <a href="goFirst">首页</a>
+            <a href="goUserInfo">账户信息</a>
+            <a href="seeResume">个人简历信息</a>
+            <a href="goAddResume">编辑简历</a>
+            <a href="seeInterview?curentPage=1">面试邀请查看</a>
+        </div>
     </div>
     <div id="resume_body">
-
-        <div id="user_menu">
-            <a href="goUserInfo">账户信息</a><br>
-            <a href="seeResume">个人简历信息</a><br>
-            <a href="goAddResume">编辑简历</a><br>
-            <a href="seeInterview?curentPage=1">面试邀请查看</a><br>
-        </div>
         <div id="user_content">
             <table>
                 <tr>

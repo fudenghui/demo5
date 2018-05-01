@@ -21,5 +21,7 @@ public interface StaffService {
     List<Staff> getStaffByDep(int departId);
     //查看所有员工
     List<Staff> getAllStaff();
+    //根据职位查员工
+    List<Staff> getStaffByPos(int positionId);
 
 }

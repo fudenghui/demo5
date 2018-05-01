@@ -1,6 +1,7 @@
 package com.fdh.service.serviceimpl;
 
 import com.fdh.dao.TrainMapper;
+import com.fdh.model.Staff;
 import com.fdh.model.Train;
 import com.fdh.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,21 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public List<Train> seeAllTrain() {
         return trainMapper.seeAllTrain();
+    }
+    //添加培训信息
+    @Override
+    public boolean addTrain(String[] staffIds, Train train) {
+        for (int i=0;i<staffIds.length;i++){
+            int id=Integer.parseInt(staffIds[i]);
+            train.setStaffId(id);
+            train.setState(1);
+            trainMapper.addTrain(train);
+        }
+        return true;
+    }
+    //查看培训根据员工
+    @Override
+    public List<Train> seeTrainByStaff(Staff staff) {
+        return trainMapper.seeTrainByStaff(staff);
     }
 }

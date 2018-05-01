@@ -8,9 +8,8 @@ import java.util.Date;
 public class Train {
     private int id;
     private int departId;
-    private int target;
-    private Date trainStartTime;
-    private Date trainEndTime;
+    private String trainStartTime;
+    private String trainEndTime;
     private String location;
     private String content;
     private int state;
@@ -35,27 +34,19 @@ public class Train {
         this.departId = departId;
     }
 
-    public int getTarget() {
-        return target;
-    }
-
-    public void setTarget(int target) {
-        this.target = target;
-    }
-
-    public Date getTrainStartTime() {
+    public String getTrainStartTime() {
         return trainStartTime;
     }
 
-    public void setTrainStartTime(Date trainStartTime) {
+    public void setTrainStartTime(String trainStartTime) {
         this.trainStartTime = trainStartTime;
     }
 
-    public Date getTrainEndTime() {
+    public String getTrainEndTime() {
         return trainEndTime;
     }
 
-    public void setTrainEndTime(Date trainEndTime) {
+    public void setTrainEndTime(String trainEndTime) {
         this.trainEndTime = trainEndTime;
     }
 
@@ -89,5 +80,19 @@ public class Train {
 
     public void setStaffId(int staffId) {
         this.staffId = staffId;
+    }
+
+    @Override
+    public String toString() {
+        return "Train{" +
+                "id=" + id +
+                ", departId=" + departId +
+                ", trainStartTime=" + trainStartTime +
+                ", trainEndTime=" + trainEndTime +
+                ", location='" + location + '\'' +
+                ", content='" + content + '\'' +
+                ", state=" + state +
+                ", staffId=" + staffId +
+                '}';
     }
 }

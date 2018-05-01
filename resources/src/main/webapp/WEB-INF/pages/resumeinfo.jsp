@@ -21,12 +21,20 @@
     </script>
 </head>
 <body>
+    <div>
+        <div id="top_admin">
+            <div id="logo_admin">
+                欢迎来到XXXXX公司
+            </div>
+        </div>
+    </div>
     <div id="resume_body">
         <div id="user_menu">
-            <a href="goUserInfo">账户信息</a><br>
-            <a href="seeResume">个人简历信息</a><br>
-            <a href="goAddResume">编辑简历</a><br>
-            <a href="seeInterview?curentPage=1">面试邀请查看</a><br>
+            <a href="goFirst">首页</a>
+            <a href="goUserInfo">账户信息</a>
+            <a href="seeResume">个人简历信息</a>
+            <a href="goAddResume">编辑简历</a>
+            <a href="seeInterview?curentPage=1">面试邀请查看</a>
         </div>
         <div id="user_content">
             <form method="post" action="updateResume">
@@ -40,8 +48,8 @@
                 毕业院校：<input name="school" value="${sessionScope.resumeInfo.school}">
                 专业：<input name="major" value="${sessionScope.resumeInfo.major}"><br>
                 期望薪资：<input name="expSal" value="${sessionScope.resumeInfo.expSal}"><br>
-                就业经历：<textarea name="workOld" cols="50" rows="20" content="${sessionScope.resumeInfo.workOld}"></textarea><br>
-                自我评价：<textarea name="rate" cols="50" rows="10" content="${sessionScope.resumeInfo.rate}"></textarea>
+                就业经历：<textarea name="workOld" cols="50" rows="10" >${sessionScope.resumeInfo.workOld}</textarea><br>
+                自我评价：<textarea name="rate" cols="50" rows="10">${sessionScope.resumeInfo.rate}</textarea><br>
                 <input type="submit" value="保存">
             </form>
         </div>

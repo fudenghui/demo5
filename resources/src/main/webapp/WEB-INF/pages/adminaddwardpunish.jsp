@@ -27,30 +27,10 @@
                     url:"getStaffByDep",
                     data:{"departName":name},
                     success:function (obj){
-                        $("#trainStaff").html("<input type='checkbox' id='selAll'>全选<br>");
+                        $("#staffName").html("<option>请选择员工</option>");
                         for(var i=0;i<obj.length;i++){
-                            $("#trainStaff").append("<input type='checkbox' name='staffId' class='sel' value='"+obj[i].id+"'>"+obj[i].staffRealName);
+                            $("#staffName").append("<option>"+obj[i].staffRealName+"</option>");
                         }
-                        $("#selAll").click(function () {
-                            if ($(this).is(':checked')){
-                                $(".sel").prop("checked",true);
-                            }else {
-                                $(".sel").prop("checked",false);
-                            }
-                        });
-                        $(".sel").click(function () {
-                            var allSel=false;
-                            $(".sel").each(function () {
-                                if (!$(this).is(':checked')){
-                                    allSel=true;
-                                }
-                            });
-                            if (allSel){
-                                $("#selAll").prop("checked",false);
-                            }else {
-                                $("#selAll").prop("checked",true);
-                            }
-                        });
                     }
                 });
             });
@@ -78,26 +58,25 @@
         </div>
         <div id="contenter_admin">
             <div id="addTrain">
-                <form action="addTrain" method="post">
-                    <h5>培训对象</h5>
+                <form action="addWardPunish" method="post">
+                    <h5>奖惩对象</h5>
                     部门名称：<select name="departName" id="depart">
                                  <option>请选择部门</option>
                                  <c:forEach items="${sessionScope.departs}" var="depart">
                                     <option>${depart.departName}</option>
                                  </c:forEach>
                               </select><br>
-                    员工：<div id="trainStaff">
-                          </div>
-                    <h5>培训内容</h5>
-                    <textarea name="content" cols="50" rows="10"></textarea><br>
-                    开始时间：<input name="trainStartTime"><br>
-                    结束时间：<input name="trainEndTime"><br>
-                    培训地址：<input name="location"><br>
-                    <input type="submit" value="添加培训">
+                    员工：
+                    <select name="staffName" id="staffName">
+                    </select><br>
+                    奖励金额：<input name="ward">描述：<textarea name="wardDes" cols="30" rows="3"></textarea> <br>
+                    惩罚金额：<input name="punish">描述：<textarea name="punishDes" cols="30" rows="3"></textarea> <br>
+                    发布时间：<input name="wardPunishTime"><br>
+                    <input type="submit" value="发布奖惩">
                 </form>
             </div>
             <div id="seeTrain">
-                <c:forEach items="${sessionScope.trains}" var="train">
+                <c:forEach items="${sessionScope.wpList}" var="wp">
                     ${train}
                 </c:forEach>
             </div>

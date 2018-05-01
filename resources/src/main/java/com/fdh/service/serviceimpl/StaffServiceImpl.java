@@ -74,4 +74,9 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> getAllStaff() {
         return staffMapper.getAllStaff();
     }
+    //根据职位查员工
+    @Override
+    public List<Staff> getStaffByPos(int positionId) {
+        return staffMapper.getStaffByPos(positionId);
+    }
 }

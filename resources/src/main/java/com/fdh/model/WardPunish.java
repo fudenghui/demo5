@@ -12,7 +12,7 @@ public class WardPunish {
     private String wardDes;
     private double punish;
     private String punishDes;
-    private Date wardPunishTime;
+    private String wardPunishTime;
 
     public WardPunish() {
     }
@@ -65,11 +65,11 @@ public class WardPunish {
         this.punishDes = punishDes;
     }
 
-    public Date getWardPunishTime() {
+    public String getWardPunishTime() {
         return wardPunishTime;
     }
 
-    public void setWardPunishTime(Date wardPunishTime) {
+    public void setWardPunishTime(String wardPunishTime) {
         this.wardPunishTime = wardPunishTime;
     }
 }

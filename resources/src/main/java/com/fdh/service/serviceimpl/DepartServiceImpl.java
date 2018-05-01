@@ -32,4 +32,9 @@ public class DepartServiceImpl implements DepartService {
         depart.setDepartName(name);
         return departMapper.getDepartByName(depart);
     }
+    //删除部门
+    @Override
+    public boolean deleteDepartById(int id) {
+        return departMapper.deleteDepartById(id);
+    }
 }

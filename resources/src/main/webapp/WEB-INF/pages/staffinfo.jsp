@@ -14,8 +14,9 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+
 </head>
 <body>
-
+<a href="goFirst">首页</a>
 </body>
 </html>

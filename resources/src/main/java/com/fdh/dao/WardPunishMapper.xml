@@ -1,4 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.WardPunishMapper">
+    <insert id="addWardPunishForWard">
+        INSERT INTO T_WARD_PUNISH(T_WARD_PUNISH_ID, T_STAFF_ID, T_WARD_PUNISH_WARD, T_WARD_PUNISH_WARD_DES,T_WARD_PUNISH_TIME)
+        VALUES (T_WARD_PUNISH_SEQ.nextval,#{staffId},,#{ward},#{wardDes},#{wardPunishTime})
+    </insert>
+    <insert id="addWardPunishForPunish">
+        INSERT INTO T_WARD_PUNISH(T_WARD_PUNISH_ID, T_STAFF_ID,T_WARD_PUNISH_PUNISH, T_WARD_PUNISH_PU_DES,T_WARD_PUNISH_TIME)
+        VALUES (T_WARD_PUNISH_SEQ.nextval,#{staffId},#{punish},#{punishDes},#{wardPunishTime})
+    </insert>
+    <insert id="addWardPunish">
+        INSERT INTO T_WARD_PUNISH(T_WARD_PUNISH_ID, T_STAFF_ID,T_WARD_PUNISH_WARD, T_WARD_PUNISH_WARD_DES,T_WARD_PUNISH_PUNISH, T_WARD_PUNISH_PU_DES,T_WARD_PUNISH_TIME)
+        VALUES (T_WARD_PUNISH_SEQ.nextval,#{staffId},,#{ward},#{wardDes},#{punish},#{punishDes},#{wardPunishTime})
+    </insert>
+    <update id="updateWardPunishForPu">
+        UPDATE T_WARD_PUNISH SET T_WARD_PUNISH_PUNISH=#{punish}
+        where t_ward_punish_id=#{id}
+    </update>
+    <select id="getAllWardPu" resultMap="wardPunish">
+        SELECT * from T_WARD_PUNISH
+    </select>
+    <select id="getWardPunish" resultMap="wardPunish">
+        SELECT * from T_WARD_PUNISH where T_STAFF_ID=#{0} and t_ward_punish_time between #{1} and #{2}
+    </select>
+    <resultMap id="wardPunish" type="WardPunish">
+        <id property="id" column="t_ward_punish_id"/>
+        <result property="staffId" column="t_staff_id"/>
+        <result property="ward" column="t_ward_punish_ward"/>
+        <result property="wardDes" column="t_ward_punish_ward_des"/>
+        <result property="punish" column="t_ward_punish_punish"/>
+        <result property="punishDes" column="t_ward_punish_pu_des"/>
+        <result property="wardPunishTime" column="t_ward_punish_time"/>
+    </resultMap>
 </mapper>

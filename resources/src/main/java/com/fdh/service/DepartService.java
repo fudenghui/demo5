@@ -14,4 +14,6 @@ public interface DepartService {
     boolean addDepart(Depart depart);
     //根据部门名查看部门
     Depart getDepartByName(String name);
+    //删除部门
+    boolean deleteDepartById(int id);
 }

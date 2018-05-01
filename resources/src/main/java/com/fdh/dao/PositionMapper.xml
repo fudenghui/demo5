@@ -4,14 +4,25 @@
     <insert id="addPosition">
         insert into T_POSITION VALUES (T_POSITION_SEQ.nextval,#{positionName},#{departId})
     </insert>
+    <delete id="deletePositionById">
+        DELETE from T_POSITION where T_POSITION_ID=#{0}
+    </delete>
     <select id="getPositionsByDep" resultMap="position">
         SELECT * from T_POSITION  where T_DEPART_ID=#{departId}
     </select>
     <select id="getPositionByName" resultMap="position">
         SELECT * from T_POSITION where T_POSITION_NAME=#{positionName}
     </select>
+    <select id="getPositionById" resultMap="position">
+        SELECT * from T_POSITION where T_POSITION_ID=#{0}
+    </select>
+    <select id="getPositionsByDepId" resultMap="position">
+        SELECT * from T_POSITION where T_DEPART_ID=#{0}
+    </select>
     <resultMap id="position" type="Position">
         <id property="id" column="t_position_id"/>
         <result property="positionName" column="t_position_name"/>
+        <result property="departId" column="t_depart_id"/>
+        <result property="baseSal" column="t_position_baseSal"/>
     </resultMap>
 </mapper>

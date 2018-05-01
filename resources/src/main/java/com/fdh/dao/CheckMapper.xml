@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.CheckMapper">
+    <insert id="addCheckForAm">
+        INSERT INTO T_CHECK (T_CHECK_ID, T_CHECK_STAFF_ID,T_CHECK_ONWORK_TIME, T_CHECK_ONWORK_STATE,T_CHECK_DATE)
+        VALUES (T_CHECK_SEQ.nextval,#{staffId},#{onWorkTime},#{onworkState},#{checkDate})
+    </insert>
+    <update id="updateCheckForPm">
+        UPDATE T_CHECK SET T_CHECK_OUTWORK_TIME=#{outWorkTime},t_check_outwork_state=#{outworkState}
+        where t_check_staff_id=#{staffId} and t_check_date=#{checkDate}
+    </update>
     <select id="seeCheck" resultMap="check">
-        SELECT * from t_check where T_CHECK_STAFF_ID=#{0} and t_check_date between #{1} and #{2}
+        SELECT * from t_check where T_CHECK_STAFF_ID=#{0} and t_check_date between to_date(#{1},'yyyy-MM-dd hh24:MI:ss') and to_date(#{2},'yyyy-MM-dd hh24:MI:ss')
+    </select>
+    <select id="getCheckByStaff" resultMap="check">
+        select * from T_CHECK WHERE T_CHECK_STAFF_ID=#{0} and t_check_date between to_date(#{1},'yyyy-MM-dd hh24:MI:ss') and to_date(#{2},'yyyy-MM-dd hh24:MI:ss')
     </select>
     <resultMap id="check" type="Check">
         <id property="id" column="t_check_id"/>

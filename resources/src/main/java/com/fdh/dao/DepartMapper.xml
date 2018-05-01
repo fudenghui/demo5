@@ -4,6 +4,9 @@
     <insert id="addDepart">
         INSERT INTO T_DEPART VALUES (T_DEPART_SEQ.nextval,#{departName})
     </insert>
+    <delete id="deleteDepartById">
+        DELETE FROM T_DEPART where T_DEPART_ID=#{0}
+    </delete>
     <select id="seeDepart" resultMap="depart">
         select * from T_DEPART
     </select>

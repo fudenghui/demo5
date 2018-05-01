@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.TrainMapper">
+    <insert id="addTrain">
+        INSERT into T_TRAIN VALUES (T_TRAIN_SEQ.nextval,#{departId},#{trainStartTime},#{location},#{content},#{state},#{trainEndTime},#{staffId})
+    </insert>
     <select id="seeTrain" resultType="com.fdh.model.Train">
         SELECT * from t_train where t_staff_id=#{staffId} and t_train_state=#{state}
     </select>
     <select id="seeAllTrain" resultMap="train">
         SELECT * from t_train
     </select>
+    <select id="seeTrainByStaff" resultMap="train">
+        SELECT * from t_train where T_STAFF_ID=#{id}
+    </select>
     <resultMap id="train" type="Train">
         <id property="id" column="t_tain_id"></id>
         <result property="departId" column="t_train_depart_id"/>
-        <result property="target" column="t_train_target"/>
         <result property="trainStartTime" column="t_train_startTime"/>
         <result property="trainEndTime" column="t_train_endtime"/>
         <result property="location" column="t_train_location"/>

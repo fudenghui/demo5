@@ -20,39 +20,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
-            if($("#user").html()!=""){
-                $(".sp").css("display","block");
+            var userName=$("#user").html();
+            if(userName!=""){
+                $("#sp").css("display","block");
             }
             $("#log1").click(function () {
-                $("#loginArea").css("display","block");
-            });
-            $("#log2").click(function () {
-                $.ajax({
-                    type:"post",
-                    url:"login",
-                    data:{"name":$("#name").val(),"pass":$("#pass").val(),"cl":$("#cl option:selected").val()},
-                    success:function (obj) {
-                        alert(obj.level);
-                        $("#loginArea").css("display","none");
-                        $("#user").html(obj.name);
-                        $("#level").html(obj.level+"");
-                        $("#sp").css("display","block");
-                        if ($("#level").html()=="1"){
-                            $.ajax({
-                                type:"post",
-                                url:"getResumes",
-                                data:{"userId":obj.id},
-                                success:function (obj1) {
-                                    $("#resumeId").html("");
-                                    for(var i=0;i<obj1.length;i++){
-                                        $("#resumeId").html($("#resumeId").html()+"<option>"+obj1[i].id+"</option>");
-                                    }
-                                    $("#menu_right").css("display","block");
-                                }
-                            })
-                        }
-                    }
-                })
+                location.href="goLogin";
             });
             $("#reg").click(function () {
                 location.href="goRegister";
@@ -95,19 +68,12 @@
             欢迎来到XXXXX公司
         </div>
         <div id="login">
-            <div id="loginArea">
-                账号：<input name="name" id="name"><br>
-                密码：<input type="password" name="pass" id="pass"><br>
-                <select name="cl" id="cl">
-                    <option>游客</option>
-                    <option>员工</option>
-                </select>
-                <input type="button" value="登录" id="log2">
+            <div id="login_menu">
+                <span id="sp">欢迎<span id="user">${sessionScope.user.name}</span></span>
+                <span id="level">${sessionScope.user.level}</span>
+                <input type="button" value="登录" id="log1">
+                <input type="button" value="注册" id="reg">
             </div>
-            <span id="sp">欢迎<span id="user">${sessionScope.user.name}</span></span>
-            <span id="level">${sessionScope.user.level}</span>
-            <input type="button" value="登录" id="log1">
-            <input type="button" value="注册" id="reg">
         </div>
     </div>
     <div id="menu">

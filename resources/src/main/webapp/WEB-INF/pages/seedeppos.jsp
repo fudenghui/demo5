@@ -20,6 +20,10 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            var userName=$("#user").html();
+            if(userName!=""){
+                $("#sp").css("display","block");
+            }
             $("#left_depart a").mouseout(function () {
                 $(this).toggleClass("a");
             });
@@ -39,6 +43,10 @@
                         for(var i=0;i<obj.length;i++){
                             $("#positions").html($("#positions").html()+"<a>"+obj[i].positionName+"</a>");
                         }
+                        $("#deleteForPos").html("<option>请选择职位</option>");
+                        for(var i=0;i<obj.length;i++){
+                            $("#deleteForPos").append("<option value='"+obj[i].id+"'>"+obj[i].positionName+"</option>");
+                        }
                         $.ajax({
                             type:"post",
                             url:"staffSeeStaffByDep",
@@ -50,6 +58,10 @@
                                     $("#t_body").html($("#t_body").html()+
                                         "<tr><td>"+staff.id+"</td><td>"+staff.staffRealName+"</td><td>"+staff.sex+"</td><td>"+staff.age+"</td><td>"+staff.phone+"</td><td>"+staff.email+"</td></tr>");
                                 }
+                                $("#t_body tr").click(function () {
+                                    var id=$(this).find("td").get(0);
+                                    location.href="goStaffCtrl?id="+$(id).html();
+                                });
                             }
                         })
                     }
@@ -58,6 +70,12 @@
             $("#t_body tr").click(function () {
                 var id=$(this).find("td").get(0);
                 location.href="goStaffCtrl?id="+$(id).html();
+            });
+            $("#delDep").click(function () {
+                location.href="deleteDep?id="+$("#departForDel option:selected").val();
+            });
+            $("#delPos").click(function () {
+                location.href="deletePos?id="+$("#deleteForPos option:selected").val();
             });
         })
     </script>
@@ -71,33 +89,44 @@
     </div>
     <div>
         <div id="menu_admin">
-            <a href="">首页</a><br>
-            <a href="seeDepart">查看部门职位</a><br>
-            <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
-            <a href="adminSeeInterview?curentPage=1">查看受邀面试</a><br>
-            <a href="goAddRecruit">添加招聘信息</a><br>
-            <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
-            <a href="">个人中心</a><br>
+            <a href="goFirst">首页</a>
+            <a href="seeDepart">查看部门职位</a>
+            <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a>
+            <a href="adminSeeInterview?curentPage=1">查看受邀面试</a>
+            <a href="goAddRecruit">添加招聘信息</a>
+            <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
+            <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
             <div id="left_depart">
-                <c:forEach items="${sessionScope.departs}" var="depart">
-                    <a>${depart.departName}</a>
-                </c:forEach>
                 <form action="addDepart" method="post">
                     部门名称：<input type="text" name="departName">
                     <input type="submit" value="添加部门">
                 </form>
+                <select name="departId" id="departForDel">
+                    <option>请选择部门</option>
+                    <c:forEach items="${sessionScope.departs}" var="depart">
+                        <option value="${depart.id}">${depart.departName}</option>
+                    </c:forEach>
+                </select>
+                <input type="button" value="删除部门" id="delDep">
+                <c:forEach items="${sessionScope.departs}" var="depart">
+                    <a>${depart.departName}</a>
+                </c:forEach>
             </div>
             <div id="middle_position">
-                <div id="positions">
-
-                </div>
                 <form action="addPosition" method="post">
                     <input type="hidden" name="departName" id="departName">
                     职位名称：<input type="text" name="positionName">
                     <input type="submit" value="添加职位">
                 </form>
+                <select name="positionId" id="deleteForPos">
+
+                </select>
+                <input type="button" value="删除职位" id="delPos">
+                <div id="positions">
+
+                </div>
             </div>
             <div id="right_staff">
                 <table>

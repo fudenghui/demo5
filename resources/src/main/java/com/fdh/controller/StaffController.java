@@ -1,13 +1,7 @@
 package com.fdh.controller;
 
-import com.fdh.model.Depart;
-import com.fdh.model.Interview;
-import com.fdh.model.Position;
-import com.fdh.model.Staff;
-import com.fdh.service.DepartService;
-import com.fdh.service.InterviewService;
-import com.fdh.service.PositionService;
-import com.fdh.service.StaffService;
+import com.fdh.model.*;
+import com.fdh.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +24,15 @@ public class StaffController {
     private DepartService departService;
     @Autowired
     private PositionService positionService;
+    @Autowired
+    private CheckService checkService;
+    @Autowired
+    private TrainService trainService;
+    //跳转到员工
+    @RequestMapping("goStaff")
+    public String goStaff(){
+        return "staff";
+    }
     //添加员工
     @RequestMapping("addStaff")
     public String addStaff(String salary,Interview interview, HttpSession session){
@@ -68,7 +71,7 @@ public class StaffController {
         List<Staff> staffList=staffService.getAllStaff();
         session.setAttribute("staffList",staffList);
         session.setAttribute("departs",departs);
-        return "seedeppos";
+        return "staffseedeppos";
     }
     //查看员工根据部门
     @RequestMapping("staffSeeStaffByDep")
@@ -76,5 +79,30 @@ public class StaffController {
         Depart depart=departService.getDepartByName(departName);
         List<Staff> list=staffService.getStaffByDep(depart.getId());
         return list;
+    }
+    //查看考勤
+    @RequestMapping("seeCheck")
+    public String seeCheck(HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        List<Check> checkList=checkService.getChecks(staff.getId());
+        session.setAttribute("checkList",checkList);
+        return "staffseecheck";
+    }
+    //考勤打卡
+    @RequestMapping("addCheck")
+    public String addCheck(HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        Check check=new Check();
+        check.setStaffId(staff.getId());
+        boolean flag=checkService.addCheck(check);
+        return seeCheck(session);
+    }
+    //查看培训
+    @RequestMapping("seeTrain")
+    public String seeTrain(HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        List<Train> trainList=trainService.seeTrainByStaff(staff);
+        session.setAttribute("trainList",trainList);
+        return "staffseetrain";
     }
 }

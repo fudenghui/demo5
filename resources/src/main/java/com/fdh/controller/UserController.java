@@ -27,6 +27,11 @@ public class UserController {
     private RecruitService recruitService;
     @Autowired
     private InterviewService interviewService;
+    //跳到登录页面
+    @RequestMapping("goLogin")
+    public String goLogin(){
+        return "login";
+    }
     //跳转到注册页
     @RequestMapping("goRegister")
     public String goRegister(){
@@ -45,7 +50,7 @@ public class UserController {
     }
     //登录
     @RequestMapping("login")
-    public @ResponseBody Object userLogin(String name, String pass, String cl, HttpSession session){
+    public String userLogin(String name, String pass, String cl, HttpSession session){
         if (cl.equals("游客")){
             User user=new User();
             user.setName(name);
@@ -55,7 +60,7 @@ public class UserController {
                 List<Resume> resumes=resumeService.seeResumeByUserId(user1.getId());
                 session.setAttribute("resumes",resumes);
                 session.setAttribute("user",user1);
-                return user1;
+                return "../../index";
             }else {
                 return null;
             }
@@ -66,7 +71,7 @@ public class UserController {
             Staff staff1=userService.staffLogin(staff);
             if (staff1!=null){
                 session.setAttribute("user",staff1);
-                return staff1;
+                return "../../index";
             }else {
                 return null;
             }
@@ -205,7 +210,7 @@ public class UserController {
     @RequestMapping("seeResumeInfo")
     public String seeResumeInfo(Resume resume,HttpSession session){
         Resume resume1=resumeService.seeResumeById(resume.getId());
-        session.setAttribute("resumeInfo",resume);
+        session.setAttribute("resumeInfo",resume1);
         return "resumeinfo";
     }
     //修改简历

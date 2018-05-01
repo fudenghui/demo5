@@ -26,13 +26,15 @@
         </div>
         <div>
             <div id="menu_admin">
-                <a href="">首页</a><br>
-                <a href="seeDepart">查看部门职位</a><br>
-                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a><br>
-                <a href="adminSeeInterview?curentPage=1">查看受邀面试</a><br>
-                <a href="goAddRecruit">添加招聘信息</a><br>
-                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a><br>
-                <a href="">个人中心</a><br>
+                <a href="goFirst">首页</a>
+                <a href="seeDepart">查看部门职位</a>
+                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a>
+                <a href="adminSeeInterview?curentPage=1">查看受邀面试</a>
+                <a href="goAddRecruit">添加招聘信息</a>
+                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
+                <a href="adminaddtrain?curentPage=1">查看添加培训信息</a>
+                <a href="adminAddWardPunish?curentPage=1">查看添加奖惩</a>
+                <a href="">个人中心</a>
             </div>
             <div id="contenter_admin">
                 <input type="hidden" value="${sessionScope.deliverResume.id}">

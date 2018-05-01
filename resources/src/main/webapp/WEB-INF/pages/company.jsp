@@ -17,7 +17,12 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            var userName=$("#user").html();
+            if(userName!=""){
+                $("#sp").css("display","block");
+            }
+        })
     </script>
 </head>
 <body>

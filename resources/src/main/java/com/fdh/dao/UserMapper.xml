@@ -15,7 +15,7 @@
         select * from t_user where T_USER_NAME=#{name}
     </select>
     <select id="staffLogin" resultMap="staff">
-        select * from t_staff where T_STAFF_NAME=#{staffName}
+        select * from t_staff where T_STAFF_NAME=#{name}
     </select>
     <resultMap id="user" type="User">
         <id property="id" column="t_user_id"/>
@@ -27,7 +27,7 @@
         <id property="id" column="t_staff_id"/>
         <result property="name" column="t_staff_name"/>
         <result property="staffPass" column="t_staff_pass"/>
-        <result property="staffLevel" column="t_staff_level"/>
+        <result property="level" column="t_staff_level"/>
         <result property="cardId" column="t_staff_cardId"/>
         <result property="sex" column="t_staff_sex"/>
         <result property="age" column="t_staff_age"/>

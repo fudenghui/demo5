@@ -66,6 +66,9 @@
         from t_staff t_s,t_depart t_d,T_POSITION t_p
         where t_s.T_STAFF_DEPART_ID=t_d.T_DEPART_ID and t_s.T_STAFF_POSITION_ID=t_p.T_POSITION_ID and t_s.T_STAFF_ID=#{id}
     </select>
+    <select id="getStaffByPos" resultMap="staff">
+        SELECT * from T_STAFF where T_STAFF_POSITION_ID=#{0}
+    </select>
     <resultMap id="staff" type="Staff">
         <id property="id" column="t_staff_id"/>
         <result property="name" column="t_staff_name"/>

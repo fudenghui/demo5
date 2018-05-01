@@ -39,22 +39,42 @@
 </head>
 <body>
     <div id="recruit_body">
-        <form method="post" action="addRecruit">
-                部门名称：<select name="departName" id="depart">
-                            <option>请选择部门</option>
-                            <c:forEach items="${sessionScope.departs}" var="depart">
-                                <option>${depart.departName}</option>
-                            </c:forEach>
-                          </select>
-                职位名称：<select name="positionName" id="position">
-                            <option>请选择职位</option>
-                          </select><br>
-                招聘人数：<input name="number"><br>
-                招聘开始时间：<input name="startTime"><br>
-                招聘结束时间：<input name="overTime"><br>
-                招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
-             <input type="submit" value="保存">
-        </form>
+        <div id="top_admin">
+            <div id="logo_admin">
+                欢迎来到XXXXX公司
+            </div>
+        </div>
+        <div>
+            <div id="menu_admin">
+                <a href="goFirst">首页</a>
+                <a href="seeDepart">查看部门职位</a>
+                <a href="adminSeeDeliver?curentPage=1">查看招聘投递</a>
+                <a href="adminSeeInterview?curentPage=1">查看受邀面试</a>
+                <a href="goAddRecruit">添加招聘信息</a>
+                <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
+                <a href="adminaddtrain?curentPage=1">查看添加培训信息</a>
+                <a href="adminAddWardPunish?curentPage=1">查看添加奖惩</a>
+                <a href="">个人中心</a>
+            </div>
+            <div id="contenter_admin">
+                <form method="post" action="addRecruit">
+                    部门名称：<select name="departName" id="depart">
+                    <option>请选择部门</option>
+                    <c:forEach items="${sessionScope.departs}" var="depart">
+                        <option>${depart.departName}</option>
+                    </c:forEach>
+                </select>
+                    职位名称：<select name="positionName" id="position">
+                    <option>请选择职位</option>
+                </select><br>
+                    招聘人数：<input name="number"><br>
+                    招聘开始时间：<input name="startTime"><br>
+                    招聘结束时间：<input name="overTime"><br>
+                    招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
+                    <input type="submit" value="保存">
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

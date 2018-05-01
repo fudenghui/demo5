@@ -14,4 +14,6 @@ public interface DepartMapper {
     Depart getDepartByName(Depart depart);
     //添加部门
     boolean addDepart(Depart depart);
+    //删除部门
+    boolean deleteDepartById(int id);
 }

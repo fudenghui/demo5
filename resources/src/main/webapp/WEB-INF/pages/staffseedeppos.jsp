@@ -20,6 +20,10 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            var userName=$("#user").html();
+            if(userName!=""){
+                $("#sp").css("display","block");
+            }
             $("#left_depart a").mouseout(function () {
                 $(this).toggleClass("a");
             });

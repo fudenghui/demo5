@@ -15,4 +15,10 @@ public interface PositionMapper {
     Position getPositionByName(Position position);
     //添加职位
     boolean addPosition(Position position);
+    //根据id查职位
+    Position getPositionById(int id);
+    //删除职位
+    boolean deletePositionById(int id);
+    //根据部门id查职位
+    List<Position> getPositionsByDepId(int departId);
 }

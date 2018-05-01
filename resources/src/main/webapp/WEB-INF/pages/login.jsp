@@ -20,21 +20,18 @@
 
     </script>
 </head>
-<body>
 <div>
-    <div id="top_admin">
-        <div id="logo_admin">
-            欢迎来到XXXXX公司
-        </div>
-    </div>
-</div>
 <div>
-    <a href="goFirst">返回首页</a>
+<a href="goFirst">首页</a>
 </div>
-<form action="register" method="post">
-    账号：<input name="name"><br>
-    密码：<input type="password" name="pass"><br>
-    <input type="submit" value="注册">
+<form action="login" method="post">
+    账号：<input name="name" id="name"><br>
+    密码：<input type="password" name="pass" id="pass"><br>
+    <select name="cl" id="cl">
+        <option>游客</option>
+        <option>员工</option>
+    </select>
+    <input type="submit" value="登录">
 </form>
 </body>
 </html>

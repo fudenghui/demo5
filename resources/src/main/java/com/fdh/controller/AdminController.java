@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class AdminController {
     private StaffService staffService;
     @Autowired
     private TrainService trainService;
+    @Autowired
+    private WardPunishService wardPunishService;
     //管理员登录
     @RequestMapping("goAdmin")
     public String goAdmin(HttpSession session){
@@ -159,6 +162,38 @@ public class AdminController {
         departService.addDepart(depart);
         return seeDepart(session);
     }
+    //删除部门
+    @RequestMapping("deleteDep")
+    public String deleteDep(Depart depart,HttpSession session){
+        List<Staff> staffList=staffService.getStaffByDep(depart.getId());
+        if (staffList.size()==0){
+            //删除部门
+            departService.deleteDepartById(depart.getId());
+            //删除职位
+            List<Position> positions=positionService.getPositionsByDepId(depart.getId());
+            if (positions.size()==0){
+                return seeDepart(session);
+            }else {
+                for (int i=0;i<positions.size();i++){
+                    positionService.deletePositionById(positions.get(i).getId());
+                }
+                return seeDepart(session);
+            }
+        }else {
+            return seeDepart(session);
+        }
+    }
+    //删除职位
+    @RequestMapping("deletePos")
+    public String deletePos(Position position,HttpSession session){
+        List<Staff> staffList=staffService.getStaffByPos(position.getId());
+        if (staffList.size()==0){
+            positionService.deletePositionById(position.getId());
+            return seeDepart(session);
+        }else {
+            return seeDepart(session);
+        }
+    }
     //添加职位
     @RequestMapping("addPosition")
     public String addPosition(Position position,String departName,HttpSession session){
@@ -213,5 +248,29 @@ public class AdminController {
         Depart depart1=departService.getDepartByName(depart.getDepartName());
         List<Staff> list=staffService.getStaffByDep(depart1.getId());
         return list;
+    }
+    //添加培训
+    @RequestMapping("addTrain")
+    public String addTrain(Train train,String departName,HttpServletRequest request,HttpSession session){
+        String[] staffIds=request.getParameterValues("staffId");
+        Depart depart=departService.getDepartByName(departName);
+        train.setDepartId(depart.getId());
+        boolean flag=trainService.addTrain(staffIds,train);
+        return adminaddtrain(session);
+    }
+    //去添加奖惩页
+    @RequestMapping("adminAddWardPunish")
+    public String adminAddWardPunish(HttpSession session){
+        List<WardPunish> wpList=wardPunishService.getAllWardPu();
+        List<Depart> departs=departService.seeDepart();
+        session.setAttribute("departs",departs);
+        session.setAttribute("wpList",wpList);
+        return "adminaddwardpunish";
+    }
+    //添加奖惩
+    @RequestMapping("addWardPunish")
+    public String addWardPunish(WardPunish wardPunish,HttpSession session){
+        wardPunishService.addWardPunish(wardPunish);
+        return adminAddWardPunish(session);
     }
 }

@@ -7,6 +7,7 @@ public class Position {
     private int id;
     private String positionName;
     private int departId;
+    private double baseSal;
 
     public Position() {
     }
@@ -35,12 +36,21 @@ public class Position {
         this.departId = departId;
     }
 
+    public double getBaseSal() {
+        return baseSal;
+    }
+
+    public void setBaseSal(double baseSal) {
+        this.baseSal = baseSal;
+    }
+
     @Override
     public String toString() {
         return "Position{" +
                 "id=" + id +
                 ", positionName='" + positionName + '\'' +
                 ", departId=" + departId +
+                ", baseSal=" + baseSal +
                 '}';
     }
 }
