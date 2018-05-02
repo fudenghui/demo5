@@ -54,6 +54,7 @@
             <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
             <a href="adminaddtrain?curentPage=1">查看添加培训信息</a>
             <a href="adminAddWardPunish?curentPage=1">查看添加奖惩</a>
+            <a href="goAddSalary">发布薪资单</a>
             <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
@@ -71,13 +72,12 @@
                     </select><br>
                     奖励金额：<input name="ward">描述：<textarea name="wardDes" cols="30" rows="3"></textarea> <br>
                     惩罚金额：<input name="punish">描述：<textarea name="punishDes" cols="30" rows="3"></textarea> <br>
-                    发布时间：<input name="wardPunishTime"><br>
                     <input type="submit" value="发布奖惩">
                 </form>
             </div>
             <div id="seeTrain">
                 <c:forEach items="${sessionScope.wpList}" var="wp">
-                    ${train}
+                    ${wp}
                 </c:forEach>
             </div>
         </div>

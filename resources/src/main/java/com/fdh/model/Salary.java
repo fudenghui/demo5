@@ -9,12 +9,12 @@ public class Salary {
     private double baseSal;
     private double performance;//绩效
     private double ward;
-    private String wardDes;
+    private double overTime;
     private double punish;
-    private String punishDes;
     private double emuem;//五险一金
     private double tax;
     private double allMoney;
+    private String salaryDate;
 
     public Salary() {
     }
@@ -59,28 +59,12 @@ public class Salary {
         this.ward = ward;
     }
 
-    public String getWardDes() {
-        return wardDes;
-    }
-
-    public void setWardDes(String wardDes) {
-        this.wardDes = wardDes;
-    }
-
     public double getPunish() {
         return punish;
     }
 
     public void setPunish(double punish) {
         this.punish = punish;
-    }
-
-    public String getPunishDes() {
-        return punishDes;
-    }
-
-    public void setPunishDes(String punishDes) {
-        this.punishDes = punishDes;
     }
 
     public double getEmuem() {
@@ -105,5 +89,39 @@ public class Salary {
 
     public void setAllMoney(double allMoney) {
         this.allMoney = allMoney;
+    }
+
+    public String getSalaryDate() {
+        return salaryDate;
+    }
+
+    public void setSalaryDate(String salaryDate) {
+        this.salaryDate = salaryDate;
+    }
+
+    public double getOverTime() {
+        return overTime;
+    }
+
+    public void setOverTime(double overTime) {
+        this.overTime = overTime;
+    }
+
+    @Override
+    public String
+    toString() {
+        return "Salary{" +
+                "id=" + id +
+                ", staffId=" + staffId +
+                ", baseSal=" + baseSal +
+                ", performance=" + performance +
+                ", ward=" + ward +
+                ", overTime=" + overTime +
+                ", punish=" + punish +
+                ", emuem=" + emuem +
+                ", tax=" + tax +
+                ", allMoney=" + allMoney +
+                ", salaryDate='" + salaryDate + '\'' +
+                '}';
     }
 }

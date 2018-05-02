@@ -79,4 +79,14 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> getStaffByPos(int positionId) {
         return staffMapper.getStaffByPos(positionId);
     }
+    //根据真实姓名查员工
+    @Override
+    public Staff getStaffByRealName(String name) {
+        return staffMapper.getStaffByRealName(name);
+    }
+    //查询所有在职员工
+    @Override
+    public List<Staff> getStaffs() {
+        return staffMapper.getStaffs();
+    }
 }

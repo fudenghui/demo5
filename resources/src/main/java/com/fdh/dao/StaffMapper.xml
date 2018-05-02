@@ -69,6 +69,12 @@
     <select id="getStaffByPos" resultMap="staff">
         SELECT * from T_STAFF where T_STAFF_POSITION_ID=#{0}
     </select>
+    <select id="getStaffByRealName" resultMap="staff">
+        SELECT * from T_STAFF where T_STAFF_REALNAME=#{0}
+    </select>
+    <select id="getStaffs" resultMap="staff">
+        SELECT * from T_STAFF where T_STAFF_STATE IN ('正式','试用期')
+    </select>
     <resultMap id="staff" type="Staff">
         <id property="id" column="t_staff_id"/>
         <result property="name" column="t_staff_name"/>

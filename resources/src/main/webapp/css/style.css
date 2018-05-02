@@ -65,6 +65,10 @@
     height:500px;
     float:left;
 }
+#addTrain,#seeTrain{
+    width: 50%;
+    float: left;
+}
 #contenter_admin:after{
     content: "";
     clear:both;

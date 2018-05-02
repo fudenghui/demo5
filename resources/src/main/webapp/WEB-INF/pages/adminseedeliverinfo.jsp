@@ -34,6 +34,7 @@
                 <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
                 <a href="adminaddtrain?curentPage=1">查看添加培训信息</a>
                 <a href="adminAddWardPunish?curentPage=1">查看添加奖惩</a>
+                <a href="goAddSalary">发布薪资单</a>
                 <a href="">个人中心</a>
             </div>
             <div id="contenter_admin">

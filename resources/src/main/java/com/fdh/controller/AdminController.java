@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +36,8 @@ public class AdminController {
     private TrainService trainService;
     @Autowired
     private WardPunishService wardPunishService;
+    @Autowired
+    private SalaryService salaryService;
     //管理员登录
     @RequestMapping("goAdmin")
     public String goAdmin(HttpSession session){
@@ -269,8 +275,74 @@ public class AdminController {
     }
     //添加奖惩
     @RequestMapping("addWardPunish")
-    public String addWardPunish(WardPunish wardPunish,HttpSession session){
+    public String addWardPunish(String departName,String ward,String punish,String staffName,String wardDes,String punishDes,HttpSession session){
+        WardPunish wardPunish=new WardPunish();
+        double ward1=0;
+        double punish1=0;
+        if (!ward.equals("")) {
+            ward1 = Double.parseDouble(ward);
+        }
+        if (!punish.equals("")) {
+            punish1 = Double.parseDouble(punish);
+        }
+        Staff staff=staffService.getStaffByRealName(staffName);
+        wardPunish.setStaffId(staff.getId());
+        wardPunish.setWard(ward1);
+        wardPunish.setWardDes(wardDes);
+        wardPunish.setPunish(punish1);
+        wardPunish.setPunishDes(punishDes);
         wardPunishService.addWardPunish(wardPunish);
         return adminAddWardPunish(session);
+    }
+    //跳转到发薪页面
+    @RequestMapping("goAddSalary")
+    public String goAddSalary(HttpSession session){
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String nowTime=sdf.format(date);
+        String str1=nowTime.substring(5,7);
+        int month=Integer.parseInt(str1);
+        String str2=nowTime.substring(0,4);
+        List<String> strList=new ArrayList<>();
+        for (int i=month-1;i>0;i--){
+            strList.add(str2+"年"+i+"月");
+        }
+        session.setAttribute("dateList",strList);
+        return "adminaddsalary";
+    }
+    //发薪
+    @RequestMapping("addSalary")
+    public @ResponseBody Object addSalary(String salaryMonth,HttpSession session){
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str4=sdf.format(date);
+        String str5=str4.substring(0,8);
+        String str3=str5+"15 00:00:00";
+        try {
+            Date salaryDate=sdf.parse(str3);
+            if (date.after(salaryDate)){
+                List<Salary> salList=salaryService.getSalarys(salaryMonth);
+                if (salList.size()==0) {
+                    List<Staff> staffs = staffService.getStaffs();
+                    Salary salary = new Salary();
+                    for (int i = 0; i < staffs.size(); i++) {
+                        Staff staff = staffs.get(i);
+                        salary.setStaffId(staff.getId());
+                        salary.setSalaryDate(salaryMonth);
+                        salary.setBaseSal(staff.getSalary());
+                        salary.setPerformance(staff.getSalary()*0.2);
+                        salary.setEmuem(280);
+                        salaryService.addSalary(salary);
+                    }
+                }else {
+                    return 2;
+                }
+            }else {
+                return 1;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

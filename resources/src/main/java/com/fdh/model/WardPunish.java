@@ -72,4 +72,17 @@ public class WardPunish {
     public void setWardPunishTime(String wardPunishTime) {
         this.wardPunishTime = wardPunishTime;
     }
+
+    @Override
+    public String toString() {
+        return "WardPunish{" +
+                "id=" + id +
+                ", staffId=" + staffId +
+                ", ward=" + ward +
+                ", wardDes='" + wardDes + '\'' +
+                ", punish=" + punish +
+                ", punishDes='" + punishDes + '\'' +
+                ", wardPunishTime='" + wardPunishTime + '\'' +
+                '}';
+    }
 }

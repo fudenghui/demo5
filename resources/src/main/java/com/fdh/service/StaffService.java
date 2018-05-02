@@ -23,5 +23,8 @@ public interface StaffService {
     List<Staff> getAllStaff();
     //根据职位查员工
     List<Staff> getStaffByPos(int positionId);
-
+    //查询员工根据姓名
+    Staff getStaffByRealName(String name);
+    //查询所有在职员工
+    List<Staff> getStaffs();
 }

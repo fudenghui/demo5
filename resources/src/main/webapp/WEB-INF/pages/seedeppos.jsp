@@ -95,6 +95,9 @@
             <a href="adminSeeInterview?curentPage=1">查看受邀面试</a>
             <a href="goAddRecruit">添加招聘信息</a>
             <a href="adminSeeRecruits?curentPage=1">查看招聘信息</a>
+            <a href="adminaddtrain?curentPage=1">查看添加培训信息</a>
+            <a href="adminAddWardPunish?curentPage=1">查看添加奖惩</a>
+            <a href="goAddSalary">发布薪资单</a>
             <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
@@ -118,6 +121,7 @@
                 <form action="addPosition" method="post">
                     <input type="hidden" name="departName" id="departName">
                     职位名称：<input type="text" name="positionName">
+                    基本薪资：<input type="text" name="baseSal">
                     <input type="submit" value="添加职位">
                 </form>
                 <select name="positionId" id="deleteForPos">
