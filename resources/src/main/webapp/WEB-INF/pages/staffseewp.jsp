@@ -15,7 +15,7 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title>查看考勤并打卡</title>
+    <title>查看奖惩</title>
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
@@ -38,23 +38,9 @@
             <a href="seeCheck">考勤</a>
         </div>
         <div id="content_staff">
-            <a href="addCheck">打卡</a>
-            <table>
-                <tr>
-                    <td>上班打卡时间</td>
-                    <td>打卡状态</td>
-                    <td>下班打卡时间</td>
-                    <td>打卡状态</td>
-                </tr>
-                <c:forEach items="${sessionScope.checkList}" var="check">
-                    <tr>
-                        <td><fmt:formatDate value="${check.onWorkTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-                        <td>${check.onworkState}</td>
-                        <td><fmt:formatDate value="${check.outWorkTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                        <td>${check.outworkState}</td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <c:forEach items="${sessionScope.wpList}" var="wp">
+                ${wp}
+            </c:forEach>
         </div>
     </div>
 </body>

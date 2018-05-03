@@ -38,6 +38,8 @@ public class AdminController {
     private WardPunishService wardPunishService;
     @Autowired
     private SalaryService salaryService;
+    @Autowired
+    private ReconsiderService reconsiderService;
     //管理员登录
     @RequestMapping("goAdmin")
     public String goAdmin(HttpSession session){
@@ -307,6 +309,8 @@ public class AdminController {
         for (int i=month-1;i>0;i--){
             strList.add(str2+"年"+i+"月");
         }
+        List<Reconsider> recList=reconsiderService.getReconsiders();
+        session.setAttribute("recList",recList);
         session.setAttribute("dateList",strList);
         return "adminaddsalary";
     }

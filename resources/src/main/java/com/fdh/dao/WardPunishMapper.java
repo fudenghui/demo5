@@ -1,5 +1,6 @@
 package com.fdh.dao;
 
+import com.fdh.model.Staff;
 import com.fdh.model.WardPunish;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface WardPunishMapper {
     boolean updateWardPunishForPu(WardPunish wardPunish);
     //根据时间查询惩罚记录
     List<WardPunish> getWardPunish(int staffId,String startTime,String endTime);
+    //查询某员工的所有奖惩记录
+    List<WardPunish> getWardPunishByStaff(Staff staff);
 }

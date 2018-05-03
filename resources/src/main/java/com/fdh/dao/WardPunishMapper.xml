@@ -21,7 +21,10 @@
         SELECT * from T_WARD_PUNISH
     </select>
     <select id="getWardPunish" resultMap="wardPunish">
-        SELECT * from T_WARD_PUNISH where T_STAFF_ID=#{0} and t_ward_punish_time between to_date(#{1},'yyyy-MM-dd HH24:MI:SS') and to_date(#{2},'yyyy-MM-dd HH24:MI:SS')
+        SELECT * from T_WARD_PUNISH where T_STAFF_ID=#{0} and t_ward_punish_time between #{1} and #{2}
+    </select>
+    <select id="getWardPunishByStaff" resultMap="wardPunish">
+        SELECT * from T_WARD_PUNISH where T_STAFF_ID=#{id}
     </select>
     <resultMap id="wardPunish" type="WardPunish">
         <id property="id" column="t_ward_punish_id"/>

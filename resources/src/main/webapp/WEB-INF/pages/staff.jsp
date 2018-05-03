@@ -14,26 +14,17 @@
 <head>
     <base href="<%=basePath%>"/>
     <title>员工操作部分</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+    <script language="JavaScript">
+
+    </script>
 </head>
 <body>
 <div>
     <div id="top">
         <div id="logo">
             欢迎来到XXXXX公司
-        </div>
-        <div id="login">
-            <div id="loginArea">
-                账号：<input name="name" id="name"><br>
-                密码：<input name="pass" id="pass"><br>
-                <select name="cl" id="cl">
-                    <option>游客</option>
-                    <option>员工</option>
-                </select>
-                <input type="button" value="登录" id="log2">
-            </div>
-            <input type="hidden" value="${sessionScope.user.name}" id="user">
-            <input type="button" value="登录" id="log1">
-            <input type="button" value="注册" id="reg">
         </div>
     </div>
     <div id="menu">

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fdh.dao.ReconsiderMapper">
+    <insert id="addReconsider">
+        INSERT into T_RECONSIDER VALUES (T_RECONSIDER_SEQ.nextval,#{staffId},#{recDate},#{recMoney},#{recContent},
+        #{recState},#{recTime})
+    </insert>
+    <select id="getReconsiderByStaff" resultMap="reconsider">
+        SELECT * from T_RECONSIDER WHERE T_RECONSIDER_STAFF_ID=#{id}
+    </select>
+    <select id="getReconsiders" resultMap="reconsider">
+        SELECT * from T_RECONSIDER
+    </select>
+    <resultMap id="reconsider" type="Reconsider">
+        <id property="id" column="t_reconsider_id"/>
+        <result property="staffId" column="t_reconsider_staff_id"/>
+        <result property="recDate" column="t_reconsider_date"/>
+        <result property="recMoney" column="t_reconsider_money"/>
+        <result property="recContent" column="t_reconsider_content"/>
+        <result property="recState" column="t_reconsider_state"/>
+        <result property="recTime" column="t_reconsider_time"/>
+    </resultMap>
+</mapper>

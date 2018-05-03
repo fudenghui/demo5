@@ -5,6 +5,7 @@ import com.fdh.dao.SalaryMapper;
 import com.fdh.dao.WardPunishMapper;
 import com.fdh.model.Check;
 import com.fdh.model.Salary;
+import com.fdh.model.Staff;
 import com.fdh.model.WardPunish;
 import com.fdh.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,11 @@ public class SalaryServiceImpl implements SalaryService {
         salary.setOverTime(money1);
         double money2=salary.getBaseSal()+salary.getPerformance()+allWard+money1;
         salary.setAllMoney(money2-allPunish);
-        return false;
+        return salaryMapper.addSalary(salary);
+    }
+    //查询某员工的所有薪资单
+    @Override
+    public List<Salary> getSalaryByStaff(Staff staff) {
+        return salaryMapper.getSalaryByStaff(staff);
     }
 }

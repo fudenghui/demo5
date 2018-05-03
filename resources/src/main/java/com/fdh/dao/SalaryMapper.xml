@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.SalaryMapper">
     <insert id="addSalary">
-
+      INSERT INTO T_SALARY VALUES (T_SALARY_SEQ.nextval,#{staffId},#{baseSal},#{performance},#{ward},#{overTime},
+      #{punish},#{emuem},#{allMoney},#{salaryDate})
     </insert>
     <select id="getSalarys" resultMap="salary">
         SELECT * from T_SALARY where T_SALARY_DATE=#{0}
+    </select>
+    <select id="getSalaryByStaff" resultMap="salary">
+        SELECT * from T_SALARY where T_SALARY_STAFF_ID=#{id}
     </select>
     <resultMap id="salary" type="Salary">
         <id property="id" column="t_salary_id"></id>
@@ -13,9 +17,8 @@
         <result property="baseSal" column="t_salary_staff_baseSal"/>
         <result property="performance" column="t_salary_performance"/>
         <result property="ward" column="t_salary_ward"/>
-        <result property="wardDes" column="t_salary_ward_des"/>
+        <result property="overTime" column="t_salary_overTime"/>
         <result property="punish" column="t_salary_punish"/>
-        <result property="punishDes" column="t_salary_punish_des"/>
         <result property="emuem" column="t_salary_emuem"/>
         <result property="tax" column="t_salary_tax"/>
         <result property="allMoney" column="t_salary_allMoney"/>

@@ -24,8 +24,10 @@
 </head>
 <body>
     <div>
-        <div>
-            欢迎来到XXXXX公司
+        <div id="top">
+            <div id="logo">
+                欢迎来到XXXXX公司
+            </div>
         </div>
         <div id="menu">
             <a href="goFirst">首页</a>

@@ -19,7 +19,7 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
-            $("#giveMoney").click(function () {
+           /* $("#giveMoney").click(function () {
                 $.ajax({
                     type:"post",
                     url:"addSalary",
@@ -28,7 +28,7 @@
 
                     }
                 })
-            });
+            });*/
         })
     </script>
 </head>
@@ -53,14 +53,56 @@
                 <a href="">个人中心</a>
             </div>
             <div id="contenter_admin">
-                <form action="addSalary" method="post">
-                    <select name="salaryMonth">
-                        <c:forEach items="${sessionScope.dateList}" var="date">
-                            <option>${date}</option>
+                <div id="contenter_admin_left">
+                    <form action="addSalary" method="post">
+                        <select name="salaryMonth">
+                            <c:forEach items="${sessionScope.dateList}" var="date">
+                                <option>${date}</option>
+                            </c:forEach>
+                        </select>
+                        <input type="submit" value="发布" id="giveMoney">
+                    </form>
+                </div>
+                <div id="contenter_admin_right">
+                    薪资复议记录：
+                    <table>
+                        <tr>
+                            <td>工号</td>
+                            <td>薪资时间</td>
+                            <td>复议金额</td>
+                            <td>复议描述</td>
+                            <td>复议状态</td>
+                            <td>申请时间</td>
+                            <td>操作</td>
+                        </tr>
+                        <c:forEach items="${sessionScope.recList}" var="rec">
+                            <tr>
+                                <td>${rec.staffId}</td>
+                                <td>${rec.recDate}</td>
+                                <td>${rec.recMoney}</td>
+                                <td>${rec.recContent}</td>
+                                <td>
+                                    <c:if test="${rec.recState==1}">
+                                        处理中
+                                    </c:if>
+                                    <c:if test="${rec.recState==2}">
+                                        已通过
+                                    </c:if>
+                                    <c:if test="${rec.recState==0}">
+                                        未通过
+                                    </c:if>
+                                </td>
+                                <td>${rec.recTime}</td>
+                                <td>
+                                    <form>
+                                        <input type="button" value="通过">
+                                        <input type="button" value="不通过">
+                                    </form>
+                                </td>
+                            </tr>
                         </c:forEach>
-                    </select>
-                    <input type="submit" value="发布" id="giveMoney">
-                </form>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

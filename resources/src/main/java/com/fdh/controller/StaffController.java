@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import sun.dc.pr.PRError;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebEndpoint;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +31,12 @@ public class StaffController {
     private CheckService checkService;
     @Autowired
     private TrainService trainService;
+    @Autowired
+    private WardPunishService wardPunishService;
+    @Autowired
+    private SalaryService salaryService;
+    @Autowired
+    private ReconsiderService reconsiderService;
     //跳转到员工
     @RequestMapping("goStaff")
     public String goStaff(){
@@ -104,5 +113,37 @@ public class StaffController {
         List<Train> trainList=trainService.seeTrainByStaff(staff);
         session.setAttribute("trainList",trainList);
         return "staffseetrain";
+    }
+    //查看奖惩
+    @RequestMapping("seeWardPunish")
+    public String seeWardPunish(HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        List<WardPunish> wpList=wardPunishService.getWardPunishByStaff(staff);
+        session.setAttribute("wpList",wpList);
+        return "staffseewp";
+    }
+    //查看薪资
+    @RequestMapping("seeSalary")
+    public String seeSalary(HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        List<Salary> salaryList=salaryService.getSalaryByStaff(staff);
+        //查所有薪资复议记录
+        List<Reconsider> recList=reconsiderService.getReconsiderByStaff(staff);
+        session.setAttribute("recList",recList);
+        session.setAttribute("salaryList",salaryList);
+        return "staffseesalary";
+    }
+    //申请薪资复议
+    @RequestMapping("addReconsider")
+    public String addReconsider(Reconsider reconsider,HttpSession session){
+        Staff staff= (Staff) session.getAttribute("user");
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String nowTime=sdf.format(date);
+        reconsider.setStaffId(staff.getId());
+        reconsider.setRecTime(nowTime);
+        reconsider.setRecState(1);
+        boolean flag=reconsiderService.addReconsider(reconsider);
+        return seeSalary(session);
     }
 }

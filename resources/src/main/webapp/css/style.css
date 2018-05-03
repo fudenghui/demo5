@@ -101,6 +101,52 @@
 #menu_admin,#user_menu{
     background-color: azure;
 }
+#content_staff{
+    width: 1330px;
+    height: 440px;
+    border:1px skyblue solid;
+}
+#content_staff_left{
+    width:500px;
+    height: 440px;
+    border-right:2px gainsboro solid;
+    float: left;
+}
+#content_staff_right{
+    float: left;
+    width:820px;
+    height: 440px;
+    border-right:2px gainsboro solid;
+    overflow: hidden;
+    float: left;
+}
+#content_staff:after{
+    content: "";
+    clear: both;
+    zoom:1;
+}
+#contenter_admin{
+    width: 1330px;
+    height: 440px;
+    border:1px skyblue solid;
+}
+#contenter_admin_left{
+    float: left;
+    width: 150px;
+    height: 440px;
+    border-right:2px gainsboro solid;
+}
+#contenter_admin_right{
+    float: left;
+    width: 1150px;
+    height: 440px;
+    border-right:2px gainsboro solid;
+}
+#contenter_admin:after{
+    content: "";
+    clear: both;
+    zoom:1;
+}
 .a{
     background-color: beige;
 }

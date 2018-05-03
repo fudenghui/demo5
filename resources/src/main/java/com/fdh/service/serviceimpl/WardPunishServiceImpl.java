@@ -1,6 +1,7 @@
 package com.fdh.service.serviceimpl;
 
 import com.fdh.dao.WardPunishMapper;
+import com.fdh.model.Staff;
 import com.fdh.model.WardPunish;
 import com.fdh.service.WardPunishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class WardPunishServiceImpl implements WardPunishService {
             return false;
         }
 
+    }
+    //查询某员工的奖惩信息
+    @Override
+    public List<WardPunish> getWardPunishByStaff(Staff staff) {
+        return wardPunishMapper.getWardPunishByStaff(staff);
     }
 }

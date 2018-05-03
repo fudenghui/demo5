@@ -26,4 +26,5 @@ public interface StaffMapper {
     Staff getStaffByRealName(String name);
     //查询所有在职员工
     List<Staff> getStaffs();
+
 }

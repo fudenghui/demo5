@@ -120,7 +120,7 @@
             <div id="middle_position">
                 <form action="addPosition" method="post">
                     <input type="hidden" name="departName" id="departName">
-                    职位名称：<input type="text" name="positionName">
+                    职位名称：<input type="text" name="positionName"><br>
                     基本薪资：<input type="text" name="baseSal">
                     <input type="submit" value="添加职位">
                 </form>
