@@ -37,21 +37,38 @@ public class UserController {
     public String goRegister(){
         return "register";
     }
+    //注册验证
+    @RequestMapping("getUser")
+    public @ResponseBody int getUser(User user){
+        User user1=userService.getUser(user);
+        if (user1!=null){
+            return 0;
+        }else {
+            return 1;
+        }
+    }
     //注册
     @RequestMapping("register")
-    public String register(User user, Model model){
-        user.setLevel(3);
-        boolean flag=userService.register(user);
-        if (flag){
-            return "../../index";
+    public String register(User user,String pass1, Model model){
+        String str="^([a-zA-Z0-9]|[\u4e00-\u9fa5]){6,18}$";
+        String str1="^[a-zA-Z][a-zA-Z0-9]{5,18}$";
+        if (user.getName().matches(str)&&user.getPass().matches(str1)&&pass1.equals(user.getPass())) {
+            user.setLevel(1);
+            boolean flag = userService.register(user);
+            if (flag) {
+                return "../../index";
+            } else {
+                return "register";
+            }
         }else {
+            model.addAttribute("error",0);
             return "register";
         }
     }
     //登录
     @RequestMapping("login")
     public String userLogin(String name, String pass, String cl, HttpSession session){
-        if (cl.equals("游客")){
+        if (cl.equals("游客/管理员")){
             User user=new User();
             user.setName(name);
             user.setPass(pass);
@@ -134,6 +151,7 @@ public class UserController {
     public String addDeliverResume(String resumeId,String recruitId,HttpSession session){
         int resumeId1=Integer.parseInt(resumeId);
         int recruitId1=Integer.parseInt(recruitId);
+        System.out.println(resumeId1);
         Resume resume=resumeService.seeResumeById(resumeId1);
         Recruit recruit=recruitService.seeRecruitById(recruitId1);
         DeliverResume deliverResume=new DeliverResume();
@@ -205,6 +223,13 @@ public class UserController {
         List<Resume> resumes=resumeService.seeResumeByUserId(user.getId());
         session.setAttribute("resumes",resumes);
         return "resume";
+    }
+    //查看游客的简历
+    @RequestMapping("seeResumes")
+    public @ResponseBody List<Resume> seeResumes(String userName,HttpSession session){
+        User user= (User) session.getAttribute("user");
+        List<Resume> resumes=resumeService.seeResumeByUserId(user.getId());
+        return resumes;
     }
     //查看简历详情
     @RequestMapping("seeResumeInfo")

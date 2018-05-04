@@ -1,7 +1,36 @@
+*{
+    margin:0;
+    padding:0;
+}
+#register,#content_login{
+    width: 500px;
+    height: 200px;
+    position: absolute;
+    margin-top:180px;
+    margin-left:600px;
+}
+#register form{
+    width: 500px;
+    height: 200px;
+
+}
+#content_login form{
+    width:300px;
+    height:200px;
+    text-align: center;
+}
+#log{
+    width: 80px;
+    height: 25px;
+}
+#span,#sp1,#sp2{
+    font-size:10px;
+}
 #top,#top_admin{
     width: 100%;
     height: 150px;
-    background-color: gainsboro;
+    background:url("../images/top.png") no-repeat;
+    background-size: 100% 150px;
 }
 #top_admin{
     text-align: center;
@@ -39,17 +68,46 @@
 #sp,#level{
     display: none;
 }
+#sp{
+    color: gold;
+}
 #loginArea{
     display: none;
 }
 #menu{
     width: 100%;
     height:30px;
-    background-color: azure;
+    background-color: skyblue;
+}
+#menu a,#user_menu a{
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: cornflowerblue;
+    float: left;
 }
 #contenter{
     width: 100%;
-    height: 500px;
+    height: 440px;
+}
+#content_left{
+    float: left;
+    width:70%;
+    height: 440px;
+}
+#content_right{
+    float: left;
+    width:28%;
+    height: 440px;
+}
+#content:after{
+    content: '';
+    clear: both;
+    zoom:1;
 }
 #resume_body{
     width: 800px;
@@ -85,12 +143,10 @@
     width:80%;
     float:left;
 }
-#menu_right{
-    width:20%;
-    float:left;
+.menu_right{
     display: none;
 }
-#menu:after{
+#menu:after,#user_menu:after{
     content: "";
     clear:both;
     zoom:1;
@@ -149,4 +205,12 @@
 }
 .a{
     background-color: beige;
+}
+.tr{
+    cursor: pointer;
+}
+.contenter{
+    background:url("../images/content.png") no-repeat;
+    background-size: 100% 440px;
+    position: relative;
 }

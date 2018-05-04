@@ -5,6 +5,9 @@
         INSERT into T_RECONSIDER VALUES (T_RECONSIDER_SEQ.nextval,#{staffId},#{recDate},#{recMoney},#{recContent},
         #{recState},#{recTime})
     </insert>
+    <update id="updateRecState">
+        UPDATE T_RECONSIDER SET T_RECONSIDER_STATE=#{recState} where t_reconsider_id=#{id}
+    </update>
     <select id="getReconsiderByStaff" resultMap="reconsider">
         SELECT * from T_RECONSIDER WHERE T_RECONSIDER_STAFF_ID=#{id}
     </select>

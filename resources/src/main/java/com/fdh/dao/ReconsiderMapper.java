@@ -15,4 +15,6 @@ public interface ReconsiderMapper {
     List<Reconsider> getReconsiderByStaff(Staff staff);
     //查所有员工的复议记录
     List<Reconsider> getReconsiders();
+    //更改复议状态
+    boolean updateRecState(Reconsider reconsider);
 }

@@ -21,14 +21,41 @@
     <script language="JavaScript">
         $(function () {
             var userName=$("#user").html();
+            var level=$("#level").html();
             if(userName!=""){
                 $("#sp").css("display","block");
             }
+            $(".tr").click(function () {
+                var resume=$(this).find("input").get(0);
+                var resumeId=$(resume).val();
+                $("#recruitId").attr("value",resumeId);
+            });
+            if (level=="1"){
+                $.ajax({
+                    type:"post",
+                    url:"seeResumes",
+                    data:{"userName":userName},
+                    success:function (obj) {
+                        $("#resumeId").html("<option>请选择简历</option>");
+                        for(var i=0;i<obj.length;i++){
+                            $("#resumeId").append("<option>"+obj[i].id+"</option>");
+                        }
+                    }
+                })
+                $(".menu_right").css("display","block");
+            }
+
             $("#log1").click(function () {
                 location.href="goLogin";
             });
             $("#reg").click(function () {
                 location.href="goRegister";
+            });
+            $("#menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu a").mouseout(function () {
+                $(this).toggleClass("a");
             });
 
             $("#deliver").click(function () {
@@ -82,35 +109,35 @@
             <a href="seeRecruits?curentPage=1">招聘</a>
             <a id="goUser">个人中心</a>
         </div>
-        <div id="menu_right">
-            简历选择：<select name="resumeId" id="resumeId">
-            <c:forEach items="${sessionScope.resumes}" var="resume">
-                <option>${resume.id}</option>
-            </c:forEach>
-        </select>
-        </div>
     </div>
     <div id="contenter">
-        <table>
-            <c:forEach items="${sessionScope.recruitList}" var="recruit">
-                <tr>
-                    <td>部门：${recruit.depart.departName}</td>
-                    <td>职位：${recruit.position.positionName}</td>
-                    <td>招聘人数：${recruit.number}</td>
-                    <td>
-                        <input type="hidden" name="recruitId" value="${recruit.id}" id="recruitId">
-                        <input type="button" value="投递" id="deliver">
-                    </td>
-                </tr>
-                <tr>
-                    <td>开始时间：${recruit.startTime}</td>
-                    <td>结束时间：${recruit.overTime}</td>
-                </tr>
-                <tr>
-                    <td>招聘要求：${recruit.demand}</td>
-                </tr>
-            </c:forEach>
-        </table>
+        <div id="content_left">
+            <table>
+                <c:forEach items="${sessionScope.recruitList}" var="recruit">
+                    <tr class="tr">
+                        <input type="hidden" value="${recruit.id}">
+                        <td>部门：${recruit.depart.departName}</td>
+                        <td>职位：${recruit.position.positionName}</td>
+                        <td>招聘人数：${recruit.number}</td>
+                    </tr>
+                    <tr>
+                        <td>开始时间：${recruit.startTime}</td>
+                        <td>结束时间：${recruit.overTime}</td>
+                    </tr>
+                    <tr>
+                        <td>招聘要求：${recruit.demand}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+        <div id="content_right">
+            <div class="menu_right">
+                简历选择：<select name="resumeId" id="resumeId">
+                          </select>
+                <input type="hidden" name="recruitId" id="recruitId">
+                <input type="button" value="投递" id="deliver">
+            </div>
+        </div>
     </div>
 </div>
 </body>

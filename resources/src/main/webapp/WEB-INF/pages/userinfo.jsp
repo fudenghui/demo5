@@ -17,10 +17,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-        var userName=$("#user").html();
-        if(userName!=""){
-            $("#sp").css("display","block");
-        }
+        $(function () {
+            $("#user_menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#user_menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>

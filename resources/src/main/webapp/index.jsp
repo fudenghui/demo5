@@ -25,24 +25,15 @@
             $("#log1").click(function () {
                 location.href="goLogin";
             });
-            /*$("#log2").click(function () {
-                $.ajax({
-                    type:"post",
-                    url:"login",
-                    data:{"name":$("#name").val(),"pass":$("#pass").val(),"cl":$("#cl option:selected").val()},
-                    success:function (obj) {
-                        alert(obj.level);
-                        $("#loginArea").css("display","none");
-                        $("#user").html(obj.name);
-                        $("#level").html(obj.level+"");
-                        $("#sp").css("display","block");
-                    }
-                })
-            });*/
             $("#reg").click(function () {
                 location.href="goRegister";
             });
-
+            $("#menu a").mouseover(function () {
+               $(this).toggleClass("a");
+            });
+            $("#menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
             $("#deliver").click(function () {
                 if($("#user").val()==""){
                     alert("请先登录");
@@ -93,7 +84,7 @@
             <a href="seeRecruits?curentPage=1">招聘</a>
             <a id="goUser">个人中心</a>
         </div>
-        <div id="contenter">
+        <div id="contenter" class="contenter">
 
         </div>
     </div>

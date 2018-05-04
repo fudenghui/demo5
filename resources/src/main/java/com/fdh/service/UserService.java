@@ -17,4 +17,6 @@ public interface UserService {
     Staff staffLogin(Staff staff);
     //修改密码
     boolean updateUser(User user);
+    //根据账户查用户
+    User getUser(User user);
 }

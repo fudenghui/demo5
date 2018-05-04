@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService{
     public boolean updateUser(User user){
         return userMapper.updateUser(user);
     }
+    //根据账户查用户
+    @Override
+    public User getUser(User user) {
+        return userMapper.userLogin(user);
+    }
 }

@@ -94,9 +94,13 @@
                                 </td>
                                 <td>${rec.recTime}</td>
                                 <td>
-                                    <form>
-                                        <input type="button" value="通过">
-                                        <input type="button" value="不通过">
+                                    <form action="goWp" method="post">
+                                        <input type="hidden" name="id" value="${rec.id}">
+                                        <input type="submit" value="通过" id="pass">
+                                    </form>
+                                    <form action="updateRecState" method="post">
+                                        <input type="hidden" name="id" value="${rec.id}">
+                                        <input type="submit" value="不通过" id="nopass">
                                     </form>
                                 </td>
                             </tr>

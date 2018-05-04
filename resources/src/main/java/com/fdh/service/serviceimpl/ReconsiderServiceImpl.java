@@ -31,4 +31,9 @@ public class ReconsiderServiceImpl implements ReconsiderService {
     public List<Reconsider> getReconsiders() {
         return reconsiderMapper.getReconsiders();
     }
+    //更改复议状态
+    @Override
+    public boolean updateRecState(Reconsider reconsider) {
+        return reconsiderMapper.updateRecState(reconsider);
+    }
 }

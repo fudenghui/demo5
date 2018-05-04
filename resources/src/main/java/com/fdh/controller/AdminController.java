@@ -349,4 +349,26 @@ public class AdminController {
         }
         return "";
     }
+    //跳转到添加奖惩页面
+    @RequestMapping("goWp")
+    public String goWp(Reconsider reconsider, HttpSession session){
+        List<WardPunish> wpList=wardPunishService.getAllWardPu();
+        List<Depart> departs=departService.seeDepart();
+        session.setAttribute("departs",departs);
+        session.setAttribute("wpList",wpList);
+        //复议通过状态改为2
+        reconsider.setRecState(2);
+        boolean flag=reconsiderService.updateRecState(reconsider);
+        if (flag){
+            return "adminaddwardpunish";
+        }
+        return goAddSalary(session);
+    }
+    //薪资复议不通过
+    @RequestMapping("updateRecState")
+    public String updateRecState(Reconsider reconsider,HttpSession session){
+        reconsider.setRecState(0);
+        boolean flag=reconsiderService.updateRecState(reconsider);
+        return goAddSalary(session);
+    }
 }
