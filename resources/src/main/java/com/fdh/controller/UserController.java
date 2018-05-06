@@ -180,12 +180,12 @@ public class UserController {
     //查看招聘信息
     @RequestMapping("seeRecruits")
     public String seeRecruits(String curentPage,HttpSession session){
-        List<Recruit> recruits=recruitService.seeRecruit();
+        List<Recruit> recruits=recruitService.seeRecruitByOn();
         int totalRows=recruits.size();
         int curentPage1=Integer.parseInt(curentPage);
         int PAGESIZE=5;
         int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
-        List<Recruit> recruitList=recruitService.seeRecruitCur(curentPage1,PAGESIZE);
+        List<Recruit> recruitList=recruitService.seeRecruitCurByOn(curentPage1,PAGESIZE);
         session.setAttribute("recruitList",recruitList);
         session.setAttribute("allPages",allPages);
         return "recruit";
@@ -193,12 +193,13 @@ public class UserController {
     //查看面试邀请
     @RequestMapping("seeInterview")
     public String seeInterview(String curentPage,HttpSession session){
-        List<Interview> interviews=interviewService.seeInterview(1);
+        User user1= (User) session.getAttribute("user");
+        List<Interview> interviews=interviewService.seeInterviewByUser(user1);
         int totalRows=interviews.size();
         int curentPage1=Integer.parseInt(curentPage);
         int PAGESIZE=5;
         int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
-        List<Interview> interviewList=interviewService.seeInterviewCur(1,curentPage1,PAGESIZE);
+        List<Interview> interviewList=interviewService.seeInterviewByUserCur(user1,curentPage1,PAGESIZE);
         session.setAttribute("interviewList",interviewList);
         session.setAttribute("allPages",allPages);
         return "seeinterview";
@@ -206,6 +207,12 @@ public class UserController {
     //确认面试
     @RequestMapping("updateInterviewById")
     public String updateInterviewById(String interviewId,HttpSession session){
+        int id=Integer.parseInt(interviewId);
+        Interview interview1=interviewService.getInterviewById(id);
+        if (interview1.getInterviewState()==2||interview1.getInterviewState()==1||interview1.getInterviewState()==0){
+            String curentPage="1";
+            return seeInterview(curentPage,session);
+        }
         int state=2;
         int interviewId1=Integer.parseInt(interviewId);
         boolean flag=interviewService.updateInterviewById(interviewId1,state);

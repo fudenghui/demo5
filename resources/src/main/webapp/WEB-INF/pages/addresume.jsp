@@ -17,7 +17,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#user_menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#user_menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -37,8 +44,8 @@
             <a href="seeInterview?curentPage=1">面试邀请查看</a>
         </div>
     </div>
-    <div id="resume_body">
-        <div id="user_content">
+    <div id="resume_body_1">
+        <div id="user_content_2">
             <form method="post" action="addResume">
                 姓名：<input name="userName"/>年龄：<input name="age"><br>
                 性别：<input name="sex">电话：<input name="phone"><br>
@@ -54,7 +61,7 @@
                 专业：<input name="major"><br>
                 期望薪资：<input name="expSal"><br>
                 就业经历：<textarea name="workOld" cols="50" rows="10"></textarea><br>
-                自我评价：<textarea name="rate" cols="50" rows="10"></textarea>
+                自我评价：<textarea name="rate" cols="50" rows="10"></textarea><br>
                 <input type="submit" value="保存">
             </form>
         </div>

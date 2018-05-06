@@ -10,10 +10,14 @@ import java.util.List;
 public interface RecruitMapper {
     //查看招聘信息
     List<Recruit> seeRecruit();
+    //查看招聘信息已发布的
+    List<Recruit> seeRecruitByOn();
     //查看招聘信息当前页
     List<Recruit> seeRecruitCur(int firstRow,int lastRow);
+    //查看招聘信息当前页
+    List<Recruit> seeRecruitCurByOn(int firstRow,int lastRow);
     //查看招聘信息
-    List<Recruit> seeRecruitByState();
+    List<Recruit> seeRecruitByState(int state);
     //查看招聘信息当前页
     List<Recruit> seeRecruitCurByState(int curentPage,int PAGESIZE);
     //通过id查看招聘信息

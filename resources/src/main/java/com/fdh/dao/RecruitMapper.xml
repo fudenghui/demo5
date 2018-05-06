@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fdh.dao.RecruitMapper">
     <insert id="addRecRuit">
-        insert INTO T_RECRUIT VALUES (T_RECRUIT_SEQ.nextval,#{departId},#{positionId},#{number},#{demand},to_date(#{startTime},'yyyy-MM-dd'),to_date(#{overTime},'yyyy-MM-dd'),#{recruitState})
+        insert INTO T_RECRUIT VALUES (T_RECRUIT_SEQ.nextval,#{departId},#{positionId},#{number},#{demand},#{recruitState})
     </insert>
     <update id="updateRecruitState">
         update T_RECRUIT SET T_RECRUIT_STATE=#{recruitState} where t_recruit_id=#{id}
@@ -26,9 +26,23 @@
     <select id="seeRecruitByState" resultMap="recruits">
         SELECT * from T_RECRUIT t_r,t_depart t_d,t_position t_p
         where t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID
-        and t_r.T_RECRUIT_STATE=1
+        and t_r.T_RECRUIT_STATE=#{0}
     </select>
     <select id="seeRecruitCurByState" resultMap="recruits">
+         SELECT t_r1.* FROM
+        (SELECT rownum rn,t_r.* ,t_d.T_DEPART_NAME,t_d.T_DEPART_ID,t_p.T_POSITION_ID,
+        t_p.T_POSITION_NAME
+        from T_RECRUIT t_r,t_depart t_d,t_position t_p
+        where t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID
+        and t_r.T_RECRUIT_STATE=1) t_r1
+        where t_r1.rn BETWEEN #{0} and #{1}
+    </select>
+    <select id="seeRecruitByOn" resultMap="recruits">
+        SELECT * from T_RECRUIT t_r,t_depart t_d,t_position t_p
+        where t_r.T_RECRUIT_DEPART_ID=t_d.T_DEPART_ID and t_r.T_RECRUIT_POSITION_ID=t_p.T_POSITION_ID
+        and t_r.T_RECRUIT_STATE=1
+    </select>
+    <select id="seeRecruitCurByOn" resultMap="recruits">
          SELECT t_r1.* FROM
         (SELECT rownum rn,t_r.* ,t_d.T_DEPART_NAME,t_d.T_DEPART_ID,t_p.T_POSITION_ID,
         t_p.T_POSITION_NAME
@@ -43,8 +57,6 @@
         <result property="positionId" column="t_recruit_position_id"/>
         <result property="number" column="t_recruit_number"/>
         <result property="demand" column="t_recruit_demand"/>
-        <result property="startTime" column="t_recruit_startTime"/>
-        <result property="overTime" column="t_recruit_overTime"/>
         <result property="recruitState" column="t_recruit_state"/>
     </resultMap>
     <resultMap id="recruits" type="Recruit">
@@ -53,8 +65,6 @@
         <result property="positionId" column="t_recruit_position_id"/>
         <result property="number" column="t_recruit_number"/>
         <result property="demand" column="t_recruit_demand"/>
-        <result property="startTime" column="t_recruit_startTime"/>
-        <result property="overTime" column="t_recruit_overTime"/>
         <result property="recruitState" column="t_recruit_state"/>
         <association property="depart" javaType="Depart">
             <id property="id" column="t_depart_id"/>

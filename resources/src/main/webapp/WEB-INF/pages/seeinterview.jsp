@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#user_menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#user_menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -40,20 +47,47 @@
         </div>
     </div>
     <div id="resume_body">
-        <div id="user_content">
-            <c:forEach items="${sessionScope.interviewList}" var="interview">
-                邀请人id：<input readonly="readonly"  value="${interview.adminId}"/>
-                面试部门id：<input readonly="readonly"  value="${interview.departId}"/>
-                面试职位id：<input readonly="readonly" value="${interview.positionId}"/><br>
-                受邀用户id：<input readonly="readonly"  value="${interview.userId}">
-                面试时间：<input name="interviewTime" value="${interview.interviewTime}"/>
-                面试地址：<input name="location" value="${interview.location}">
-                联系电话：<input name="phone" value="${interview.phone}"><br>
-                <form action="updateInterviewById" method="post">
-                    <input type="hidden" name="interviewId" value="${interview.id}">
-                    <input type="submit" value="接受面试">
-                </form>
-            </c:forEach>
+        <div id="seeInterview">
+            <table>
+                <tr>
+                    <td>面试部门</td>
+                    <td>面试职位</td>
+                    <td>面试时间</td>
+                    <td>面试地点</td>
+                    <td>联系电话</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+                <c:forEach items="${sessionScope.interviewList}" var="interview">
+                    <tr>
+                        <td>${interview.depart.departName}</td>
+                        <td>${interview.position.positionName}</td>
+                        <td>${interview.interviewTime}</td>
+                        <td>${interview.location}</td>
+                        <td>${interview.phone}</td>
+                        <td>
+                            <c:if test="${interview.interviewState==1}">
+                                已录用
+                            </c:if>
+                            <c:if test="${interview.interviewState==2}">
+                                已接受
+                            </c:if>
+                            <c:if test="${interview.interviewState==3}">
+                                未接受
+                            </c:if>
+                            <c:if test="${interview.interviewState==0}">
+                                未录用
+                            </c:if>
+                        </td>
+                        <td>
+                            <form action="updateInterviewById" method="post">
+                                <input type="hidden" name="interviewId" value="${interview.id}">
+                                <input type="submit" value="接受面试">
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
     </div>
 </body>

@@ -20,6 +20,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
             $("#depart").change(function () {
                 var name=$("#depart option:selected").val();
                 $.ajax({
@@ -58,22 +64,22 @@
                 <a href="">个人中心</a>
             </div>
             <div id="contenter_admin">
-                <form method="post" action="addRecruit">
-                    部门名称：<select name="departName" id="depart">
-                    <option>请选择部门</option>
-                    <c:forEach items="${sessionScope.departs}" var="depart">
-                        <option>${depart.departName}</option>
-                    </c:forEach>
-                </select>
-                    职位名称：<select name="positionName" id="position">
-                    <option>请选择职位</option>
-                </select><br>
-                    招聘人数：<input name="number"><br>
-                    招聘开始时间：<input name="startTime"><br>
-                    招聘结束时间：<input name="overTime"><br>
-                    招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
-                    <input type="submit" value="保存">
-                </form>
+                <div id="addRecruit">
+                    <form method="post" action="addRecruit">
+                        部门名称：<select name="departName" id="depart">
+                        <option>请选择部门</option>
+                        <c:forEach items="${sessionScope.departs}" var="depart">
+                            <option>${depart.departName}</option>
+                        </c:forEach>
+                    </select>
+                        职位名称：<select name="positionName" id="position">
+                        <option>请选择职位</option>
+                    </select><br>
+                        招聘人数：<input name="number"><br>
+                        招聘需求：<<textarea name="demand"  cols="50" rows="20"></textarea><br>
+                        <input type="submit" value="保存">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -20,6 +20,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
             $("#depart").change(function () {
                 var name=$("#depart option:selected").val();
                 $.ajax({
@@ -34,6 +40,16 @@
                     }
                 });
             });
+            $("#beRegular").click(function () {
+                $.ajax({
+                    type:"post",
+                    url:"updateStaffForBeRegular",
+                    data:{"id":$("#id").val()},
+                    success:function (obj) {
+                        var o=obj;
+                    }
+                })
+            });
         })
     </script>
 </head>
@@ -43,6 +59,7 @@
         <div id="logo_admin">
             欢迎来到XXXXX公司
         </div>
+        <input type="hidden" value="${sessionScope.user.id}" id="staffId">
     </div>
     <div>
         <div id="menu_admin">
@@ -58,37 +75,47 @@
             <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
-            <table>
-                <tr>
-                    <td>工号</td>
-                    <td>姓名</td>
-                    <td>年龄</td>
-                    <td>部门</td>
-                    <td>职位</td>
-                    <td>入职时间</td>
-                </tr>
-                <tr>
-                    <td>${sessionScope.staff.id}</td>
-                    <td>${sessionScope.staff.staffRealName}</td>
-                    <td>${sessionScope.staff.age}</td>
-                    <td>${sessionScope.staff.depart.departName}</td>
-                    <td>${sessionScope.staff.position.positionName}</td>
-                    <td>${sessionScope.staff.hireTime}</td>
-                </tr>
-            </table>
-            <form action="resetDepPos" method="post">
-                <input type="hidden" name="id" value="${sessionScope.staff.id}">
-                部门名称：<select name="departName" id="depart">
-                                <option>请选择部门</option>
-                            <c:forEach items="${sessionScope.departs}" var="depart">
-                                <option>${depart.departName}</option>
-                            </c:forEach>
-                          </select>
-                职位名称：<select name="positionName" id="position">
-                            <option>请选择职位</option>
-                          </select>
-                <input type="submit" value="变更职位">
-            </form>
+            <div id="ctrl_staff">
+                <table>
+                    <tr>
+                        <td>工号</td>
+                        <td>姓名</td>
+                        <td>年龄</td>
+                        <td>部门</td>
+                        <td>职位</td>
+                        <td>入职时间</td>
+                        <td>状态</td>
+                    </tr>
+                    <tr>
+                        <td>${sessionScope.staff.id}</td>
+                        <td>${sessionScope.staff.staffRealName}</td>
+                        <td>${sessionScope.staff.age}</td>
+                        <td>${sessionScope.staff.depart.departName}</td>
+                        <td>${sessionScope.staff.position.positionName}</td>
+                        <td>${sessionScope.staff.hireTime}</td>
+                        <td>${sessionScope.staff.staffState}</td>
+                    </tr>
+                </table>
+                <form action="resetDepPos" method="post">
+                    <input type="hidden" name="id" value="${sessionScope.staff.id}" id="Id">
+                    部门名称：<select name="departName" id="depart">
+                                    <option>请选择部门</option>
+                                <c:forEach items="${sessionScope.departs}" var="depart">
+                                    <option>${depart.departName}</option>
+                                </c:forEach>
+                              </select>
+                    职位名称：<select name="positionName" id="position">
+                                <option>请选择职位</option>
+                              </select>
+                    <input type="submit" value="变更职位">
+                </form><br>
+                <input type="button" value="员工转正" id="beRegular">
+                <br><br>
+                <form action="updateStaffForGoOut" method="post">
+                    <input type="hidden" name="id" value="${sessionScope.staff.id}">
+                    <input type="button" value="员工离职" id="goOut">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp离职原因：<input name="reson">
+                </form>
+            </div>
         </div>
     </div>
 </div>

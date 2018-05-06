@@ -13,6 +13,7 @@ public class WardPunish {
     private double punish;
     private String punishDes;
     private String wardPunishTime;
+    private Staff staff;
 
     public WardPunish() {
     }
@@ -73,6 +74,14 @@ public class WardPunish {
         this.wardPunishTime = wardPunishTime;
     }
 
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
     @Override
     public String toString() {
         return "WardPunish{" +
@@ -83,6 +92,7 @@ public class WardPunish {
                 ", punish=" + punish +
                 ", punishDes='" + punishDes + '\'' +
                 ", wardPunishTime='" + wardPunishTime + '\'' +
+                ", staff=" + staff +
                 '}';
     }
 }

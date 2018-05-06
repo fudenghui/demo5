@@ -17,5 +17,7 @@ public interface UserMapper {
     Staff staffLogin(Staff staff);
     //修改密码
     boolean updateUser(User user);
+    //根据Id查用户
+    User getUserById(int userId);
 
 }

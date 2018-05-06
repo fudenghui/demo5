@@ -17,7 +17,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#user_menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#user_menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -28,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div id="resume_body">
+    <div id="resume_body_2">
         <div id="user_menu">
             <a href="goFirst">首页</a>
             <a href="goUserInfo">账户信息</a>
@@ -36,7 +43,7 @@
             <a href="goAddResume">编辑简历</a>
             <a href="seeInterview?curentPage=1">面试邀请查看</a>
         </div>
-        <div id="user_content">
+        <div id="user_content_1">
             <form method="post" action="updateResume">
                 <input type="hidden" value="${sessionScope.resumeInfo.id}">
                 姓名：<input name="userName" value="${sessionScope.resumeInfo.userName}"/>年龄：<input name="age" value="${sessionScope.resumeInfo.age}"><br>

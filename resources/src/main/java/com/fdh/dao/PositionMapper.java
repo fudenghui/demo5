@@ -21,4 +21,6 @@ public interface PositionMapper {
     boolean deletePositionById(int id);
     //根据部门id查职位
     List<Position> getPositionsByDepId(int departId);
+    //查出所有职位
+    List<Position> getAllPosition();
 }

@@ -19,16 +19,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
-           /* $("#giveMoney").click(function () {
-                $.ajax({
-                    type:"post",
-                    url:"addSalary",
-                    data:{},
-                    success:function (obj) {
-
-                    }
-                })
-            });*/
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
         })
     </script>
 </head>

@@ -52,6 +52,13 @@
         </set>
         where t_staff_id=#{id}
     </update>
+    <update id="updateStaffForBeRegular">
+        UPDATE T_STAFF SET T_STAFF_SAL=#{salary},t_staff_state=#{staffState} where t_staff_id=#{id}
+    </update>
+    <update id="updateStaffForOut">
+        UPDATE T_STAFF SET T_STAFF_STATE=#{staffState},t_staff_reson=#{reson},t_staff_outTime=#{outTime}
+        where t_staff_id=#{id}
+    </update>
     <select id="getStaffByName" resultType="staff">
         select * from t_staff where t_staff_name=#{name}
     </select>

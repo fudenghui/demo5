@@ -15,7 +15,63 @@
 <html>
 <head>
     <base href="<%=basePath%>"/>
-    <title></title>
+    <title>邀请面试</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
+    <script language="JavaScript">
+      /*  function check() {
+            var phone=document.getElementById("telPhone").value;
+            var str=/^[1][0-9]{10}$/;
+            if (!str.test(phone)){
+                alert("电话号码不符合格式")
+                return false;
+            }else {
+                return true;
+            }
+        }*/
+        $(function () {
+            $("#interviewSub").submit(function () {
+                var phone=document.getElementById("telPhone").value;
+                var str=/^[1][0-9]{10}$/;
+                //language=JSRegexp
+                var timeStr=/^((2[0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|(((2[0-9])(0[048]|[2468][048]|[13579][26])|((0[048]|[2468][048]|[3579][26])00))-02-29)\\s+([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/;
+                var time=$("#interviewTime").val();
+                var flag=true;
+                $("input").each(function () {
+                    if ($(this).val()==""){
+                        alert("输入框不能为空")
+                        flag=false;
+                    }
+                })
+                if(flag=false){
+                    return false;
+                }else {
+                    if ((!str.test(phone)) || (!timeStr.test(time))) {
+                        alert("时间格式不符合或者电话号码不符合格式")
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            })
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+            /*$("#interviewTime").blur(function () {
+                var time=$(this).val();
+                if (timeStr.test(time)){
+                    $("#span").html("√");
+                    $("#span").css("background-color","green");
+                }else {
+                    $("#span").html("请输入格式为yyyy-MM-dd HH:mm:ss");
+                    $("#span").css("background-color","red");
+                }
+            });*/
+        })
+    </script>
 </head>
 <body>
 <div>
@@ -38,18 +94,20 @@
             <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
-            请填写邀请信息：
-            <form action="addInterview1" method="post">
-                邀请人id：<input readonly="readonly" name="adminId" value="${sessionScope.interview1.adminId}"/><br>
-                面试部门id：<input readonly="readonly" name="departId" value="${sessionScope.interview1.departId}"/><br>
-                面试职位id：<input readonly="readonly" value="${sessionScope.interview1.positionId}" name="positionId"/><br>
-                受邀用户id：<input readonly="readonly" name="userId" value="${sessionScope.interview1.userId}"><br>
-                面试时间：<input name="interviewTime"/>
-                面试地址：<input name="location">
-                联系电话：<input name="phone">
-                <input type="hidden" name="deliverResumeId" value="${sessionScope.interview1.deliverResumeId}">
-                <input type="submit" value="邀请面试">
-            </form>
+            <div id="addInterview">
+                请填写邀请信息：
+                <form action="addInterview1" method="post" id="interviewSub">
+                    <input type="hidden"  name="adminId" value="${sessionScope.interview1.adminId}"/>
+                    面试部门id：<input readonly="readonly" name="departId" value="${sessionScope.interview1.departId}"/>
+                    面试职位id：<input readonly="readonly" value="${sessionScope.interview1.positionId}" name="positionId"/><br>
+                    <input type="hidden"  name="userId" value="${sessionScope.interview1.userId}">
+                    面试时间：<input type="text" name="interviewTime" id="interviewTime"/><span id="span">格式为yyyy-MM-dd HH:mm:ss</span><br>
+                    面试地址：<input name="location">
+                    联系电话：<input name="phone" id="telPhone"><br>
+                    <input type="hidden" name="deliverResumeId" value="${sessionScope.interview1.deliverResumeId}">
+                    <input type="submit" value="邀请面试">
+                </form>
+            </div>
         </div>
     </div>
 </div>

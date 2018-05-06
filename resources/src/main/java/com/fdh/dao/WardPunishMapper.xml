@@ -17,8 +17,8 @@
         UPDATE T_WARD_PUNISH SET T_WARD_PUNISH_PUNISH=#{punish}
         where t_ward_punish_id=#{id}
     </update>
-    <select id="getAllWardPu" resultMap="wardPunish">
-        SELECT * from T_WARD_PUNISH
+    <select id="getAllWardPu" resultMap="wardPunishs">
+        SELECT * from T_WARD_PUNISH t_w,t_staff t_s where t_w.T_STAFF_ID=t_s.T_STAFF_ID
     </select>
     <select id="getWardPunish" resultMap="wardPunish">
         SELECT * from T_WARD_PUNISH where T_STAFF_ID=#{0} and t_ward_punish_time between #{1} and #{2}
@@ -34,5 +34,18 @@
         <result property="punish" column="t_ward_punish_punish"/>
         <result property="punishDes" column="t_ward_punish_pu_des"/>
         <result property="wardPunishTime" column="t_ward_punish_time"/>
+    </resultMap>
+    <resultMap id="wardPunishs" type="WardPunish">
+        <id property="id" column="t_ward_punish_id"/>
+        <result property="staffId" column="t_staff_id"/>
+        <result property="ward" column="t_ward_punish_ward"/>
+        <result property="wardDes" column="t_ward_punish_ward_des"/>
+        <result property="punish" column="t_ward_punish_punish"/>
+        <result property="punishDes" column="t_ward_punish_pu_des"/>
+        <result property="wardPunishTime" column="t_ward_punish_time"/>
+        <association property="staff" javaType="Staff">
+            <id property="id" column="t_staff_id"/>
+            <result property="staffRealName" column="t_staff_realName"/>
+        </association>
     </resultMap>
 </mapper>

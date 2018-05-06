@@ -17,7 +17,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -40,7 +47,7 @@
                 <a href="goAddSalary">发布薪资单</a>
                 <a href="">个人中心</a>
             </div>
-            <div id="contenter_admin">
+            <div id="contenter_admin" class="contenter">
 
             </div>
         </div>

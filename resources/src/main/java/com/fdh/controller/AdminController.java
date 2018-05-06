@@ -71,6 +71,14 @@ public class AdminController {
         String curentPage="1";
         return adminSeeRecruits(curentPage,session);
     }
+    //撤消
+    @RequestMapping("updateRecruitStateForBack")
+    public String updateRecruitStateForBack(String recruitId,HttpSession session){
+        int recruitId1=Integer.parseInt(recruitId);
+        boolean flag=recruitService.updateRecruitStateForBack(recruitId1);
+        String curentPage="1";
+        return adminSeeRecruits(curentPage,session);
+    }
     //根据部门名查职位
     @RequestMapping("getPositionsByDep")
     public @ResponseBody List<Position> getPositionsByDep(Depart depart, HttpSession session){
@@ -133,7 +141,8 @@ public class AdminController {
     }
     @RequestMapping("addInterview1")
     public String addInterview1(Interview interview,HttpSession session){
-        interview.setInterviewState(1);
+//        System.out.println(interview.getInterviewTime());
+        interview.setInterviewState(3);
         boolean flag=interviewService.addInterview(interview);
         if (flag){
             session.setAttribute("interview",interview);
@@ -145,23 +154,37 @@ public class AdminController {
     //查看面试邀请
     @RequestMapping("adminSeeInterview")
     public String adminSeeInterview(String curentPage,HttpSession session){
-        List<Interview> interviews=interviewService.seeInterview(2);
+        List<Interview> interviews=interviewService.seeInterview();
         int totalRows=interviews.size();
         int curentPage1=Integer.parseInt(curentPage);
         int PAGESIZE=5;
         int allPages=totalRows%PAGESIZE==0?totalRows/PAGESIZE:totalRows/curentPage1+1;
-        List<Interview> interviewList=interviewService.seeInterviewCur(2,curentPage1,PAGESIZE);
+        List<Interview> interviewList=interviewService.seeInterviewCur(curentPage1,PAGESIZE);
         session.setAttribute("interviewList",interviewList);
         session.setAttribute("allPages",allPages);
         return "adminseeinterview";
+    }
+    //不录用interview状态改为0
+    @RequestMapping("updateInterviewForNoSure")
+    public String updateInterviewForNoSure(Interview interview,HttpSession session){
+        Interview interview1=interviewService.getInterviewById(interview.getId());
+        if (interview1.getInterviewState()==1||interview1.getInterviewState()==3){
+            String curentPage="1";
+            return adminSeeInterview(curentPage,session);
+        }
+        boolean flag=interviewService.updateInterviewById(interview1.getId(),0);
+        String curentPage="1";
+        return adminSeeInterview(curentPage,session);
     }
     //查看部门
     @RequestMapping("seeDepart")
     public String seeDepart(HttpSession session){
         List<Depart> departs=departService.seeDepart();
         List<Staff> staffList=staffService.getAllStaff();
+        List<Position> positions=positionService.getAllPosition();
         session.setAttribute("staffList",staffList);
         session.setAttribute("departs",departs);
+        session.setAttribute("positions",positions);
         return "seedeppos";
     }
     //添加部门
@@ -238,6 +261,7 @@ public class AdminController {
         Position position=positionService.getPositionByName(positionName);
         staff.setDepartId(depart.getId());
         staff.setPositionId(position.getId());
+        staff.setSalary(position.getBaseSal());
         boolean flag=staffService.updateStaff(staff);
         return goStaffCtrl(id,session);
     }
@@ -370,5 +394,47 @@ public class AdminController {
         reconsider.setRecState(0);
         boolean flag=reconsiderService.updateRecState(reconsider);
         return goAddSalary(session);
+    }
+    //员工转正
+    @RequestMapping("updateStaffForBeRegular")
+    public @ResponseBody int updateStaffForBeRegular(Staff staff,HttpSession session){
+        Staff staff1=staffService.getStaffById(staff);
+        Date nowDate=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date hireDate=sdf.parse(staff1.getHireTime());
+            long time=60*24*60*60*1000;
+            long diff=nowDate.getTime()-hireDate.getTime();
+            if (diff<time){
+                return -1;
+            }
+            if (staff1.getStaffState().equals("试用期")){
+                Position position = positionService.getPositionById(staff1.getPositionId());
+                staff1.setSalary(position.getBaseSal());
+                staff1.setStaffState("正式工");
+                boolean flag = staffService.updateStaffForBeRegular(staff1);
+                if (flag) {
+                    return 1;
+                } else {
+                    return -2;
+                }
+            }else {
+                return 0;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return -2;
+    }
+    //员工离职
+    @RequestMapping("updateStaffForGoOut")
+    public String updateStaffForGoOut(Staff staff,HttpSession session){
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String nowTime=sdf.format(date);
+        staff.setOutTime(nowTime);
+        staff.setStaffState("离职");
+        boolean flag=staffService.updateStaffForOut(staff);
+        return seeDepart(session);
     }
 }

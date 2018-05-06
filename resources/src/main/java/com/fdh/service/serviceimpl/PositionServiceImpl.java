@@ -57,4 +57,14 @@ public class PositionServiceImpl implements PositionService {
     public boolean deletePositionById(int id) {
         return positionMapper.deletePositionById(id);
     }
+    //查出所有职位
+    @Override
+    public List<Position> getAllPosition() {
+        return positionMapper.getAllPosition();
+    }
+    //根据职位Id查职位
+    @Override
+    public Position getPositionById(int id) {
+        return positionMapper.getPositionById(id);
+    }
 }

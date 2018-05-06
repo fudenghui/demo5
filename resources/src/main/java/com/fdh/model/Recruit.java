@@ -11,8 +11,6 @@ public class Recruit {
     private int positionId;
     private int number;
     private String demand;
-    private String startTime;
-    private String overTime;
     private int recruitState;
     private Depart depart;
     private Position position;
@@ -60,21 +58,6 @@ public class Recruit {
         this.demand = demand;
     }
 
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getOverTime() {
-        return overTime;
-    }
-
-    public void setOverTime(String overTime) {
-        this.overTime = overTime;
-    }
 
     public int getRecruitState() {
         return recruitState;
@@ -108,8 +91,6 @@ public class Recruit {
                 ", positionId=" + positionId +
                 ", number=" + number +
                 ", demand='" + demand + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", overTime='" + overTime + '\'' +
                 ", recruitState=" + recruitState +
                 ", depart=" + depart +
                 ", position=" + position +

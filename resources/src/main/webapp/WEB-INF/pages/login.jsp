@@ -18,10 +18,6 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
-            var userName = $("#user").html();
-            if (userName != "") {
-                $("#sp").css("display", "block");
-            }
             $("#log1").click(function () {
                 location.href = "goLogin";
             });
@@ -45,8 +41,6 @@
             </div>
             <div id="login">
                 <div id="login_menu">
-                    <span id="sp">欢迎<span id="user">${sessionScope.user.name}</span></span>
-                    <span id="level">${sessionScope.user.level}</span>
                     <input type="button" value="登录" id="log1">
                     <input type="button" value="注册" id="reg">
                 </div>

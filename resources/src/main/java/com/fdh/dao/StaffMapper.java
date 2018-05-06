@@ -26,5 +26,8 @@ public interface StaffMapper {
     Staff getStaffByRealName(String name);
     //查询所有在职员工
     List<Staff> getStaffs();
-
+    //员工转正
+    boolean updateStaffForBeRegular(Staff staff);
+    //员工离职
+    boolean updateStaffForOut(Staff staff);
 }

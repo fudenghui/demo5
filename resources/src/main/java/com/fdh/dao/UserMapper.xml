@@ -17,6 +17,9 @@
     <select id="staffLogin" resultMap="staff">
         select * from t_staff where T_STAFF_NAME=#{name}
     </select>
+    <select id="getUserById" resultMap="user">
+        SELECT * from T_USER where T_USER_ID=#{0}
+    </select>
 
     <resultMap id="user" type="User">
         <id property="id" column="t_user_id"/>

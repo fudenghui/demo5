@@ -3,18 +3,25 @@
 <mapper namespace="com.fdh.dao.InterviewMapper">
 
     <insert id="addInterview">
-        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{adminId},#{departId},#{positionId},to_date(#{interviewTime},'yyyy-MM-dd'),#{location},#{phone},#{userId},#{interviewState},#{deliverResumeId})
+        insert into T_INTERVIEW VALUES (T_INTERVIEW_SEQ.nextval,#{adminId},#{departId},#{positionId},to_date(#{interviewTime},'yyyy-MM-dd HH24:MI:SS'),#{location},#{phone},#{userId},#{interviewState},#{deliverResumeId})
     </insert>
     <update id="updateInterviewById">
         UPDATE t_interview SET T_INTERVIEW_STATE=#{1} where t_interview_id=#{0}
     </update>
+    <update id="updateInterview">
+        UPDATE  T_INTERVIEW SET T_INTERVIEW_STATE=#{interviewState} where t_interview_id=#{id}
+    </update>
     <select id="seeInterview" resultMap="interview">
-        SELECT * from T_INTERVIEW where T_INTERVIEW_STATE=#{0}
+        SELECT t_i.*,t_d.T_DEPART_ID,t_d.t_depart_name,t_p.T_POSITION_ID,t_p.T_POSITION_NAME from T_INTERVIEW t_i,T_DEPART t_d,T_POSITION t_p
+        where t_i.T_INTERVIEW_DEPART_ID=t_d.T_DEPART_ID and t_i.T_INTERVIEW_POSITION_ID=t_p.T_POSITION_ID AND
+        T_INTERVIEW_STATE IN (1,2,3)
     </select>
     <select id="seeInterviewCur" resultMap="interview">
-        SELECT t_i.* FROM
-        (SELECT rownum rn,t_in.* from T_INTERVIEW t_in where T_INTERVIEW_STATE=#{0}) t_i
-        where t_i.rn between #{1} and #{2}
+        SELECT t_in.* FROM
+        (SELECT rownum rn,t_i.*,t_d.T_DEPART_ID,t_d.t_depart_name,t_p.T_POSITION_ID,t_p.T_POSITION_NAME from T_INTERVIEW t_i,T_DEPART t_d,T_POSITION t_p
+        where t_i.T_INTERVIEW_DEPART_ID=t_d.T_DEPART_ID and t_i.T_INTERVIEW_POSITION_ID=t_p.T_POSITION_ID AND T_INTERVIEW_STATE IN (1,2,3) )
+         t_in
+        where t_in.rn between #{0} and #{1}
     </select>
     <select id="seeInterviewByUserId" resultMap="interview">
         SELECT * from T_INTERVIEW where T_INTERVIEW_USER_ID=#{0} and T_INTERVIEW_STATE=#{1}
@@ -26,6 +33,18 @@
     </select>
     <select id="getInterviewById" resultMap="interview">
          SELECT * from T_INTERVIEW where T_INTERVIEW_id=#{0}
+    </select>
+    <select id="seeInterviewByUser" resultMap="interview">
+        SELECT t_i.*,t_d.T_DEPART_ID,t_d.t_depart_name,t_p.T_POSITION_ID,t_p.T_POSITION_NAME from T_INTERVIEW t_i,T_DEPART t_d,T_POSITION t_p
+        where t_i.T_INTERVIEW_DEPART_ID=t_d.T_DEPART_ID and t_i.T_INTERVIEW_POSITION_ID=t_p.T_POSITION_ID and t_i.T_INTERVIEW_USER_ID=#{0} AND
+        T_INTERVIEW_STATE IN (0,1,2,3)
+    </select>
+    <select id="seeInterviewByUserCur" resultMap="interview">
+        SELECT t_in.* FROM
+        (SELECT rownum rn,t_i.*,t_d.T_DEPART_ID,t_d.t_depart_name,t_p.T_POSITION_ID,t_p.T_POSITION_NAME from T_INTERVIEW t_i,T_DEPART t_d,T_POSITION t_p
+        where t_i.T_INTERVIEW_DEPART_ID=t_d.T_DEPART_ID and t_i.T_INTERVIEW_POSITION_ID=t_p.T_POSITION_ID AND T_INTERVIEW_USER_ID=#{0} AND T_INTERVIEW_STATE IN (0,1,2,3) )
+         t_in
+        where t_in.rn between #{1} and #{2}
     </select>
     <resultMap id="interview" type="Interview">
         <id property="id" column="t_interview_id"/>
@@ -44,7 +63,7 @@
         </association>
         <association property="position" javaType="Position">
             <id property="id" column="t_position_id"/>
-            <result property="positionName" column="t_position_id"/>
+            <result property="positionName" column="t_position_name"/>
         </association>
      </resultMap>
 </mapper>

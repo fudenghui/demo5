@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>

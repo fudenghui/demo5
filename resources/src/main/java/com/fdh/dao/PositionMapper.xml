@@ -19,6 +19,9 @@
     <select id="getPositionsByDepId" resultMap="position">
         SELECT * from T_POSITION where T_DEPART_ID=#{0}
     </select>
+    <select id="getAllPosition" resultMap="position">
+        SELECT * from T_POSITION
+    </select>
     <resultMap id="position" type="Position">
         <id property="id" column="t_position_id"/>
         <result property="positionName" column="t_position_name"/>

@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -43,39 +50,41 @@
                 <a href="">个人中心</a>
             </div>
             <div id="contenter_admin">
-                <table>
-                    <c:forEach items="${sessionScope.recruitList}" var="recruit">
-                        <tr>
-                            <td>部门：${recruit.depart.departName}</td>
-                            <td>职位：${recruit.position.positionName}</td>
-                            <td>招聘人数：${recruit.number}</td>
-                            <td>发布状态:
-                                <c:if test="${recruit.recruitState}==0">
-                                    未发布
-                                </c:if>
-                                <c:if test="${recruit.recruitState}==1">
-                                    已发布
-                                </c:if>
-                                <c:if test="${recruit.recruitState}==2">
-                                    已结束
-                                </c:if>
-                            </td>
-                            <td>
-                                <form action="updateRecruitState" method="post">
-                                    <input type="hidden" name="recruitId" value="${recruit.id}">
-                                    <input type="submit" value="发布">
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>开始时间：${recruit.startTime}</td>
-                            <td>结束时间：${recruit.overTime}</td>
-                        </tr>
-                        <tr>
-                            <td>招聘要求：${recruit.demand}</td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                <div id="seeRecruit">
+                    <table>
+                        <c:forEach items="${sessionScope.recruitList}" var="recruit">
+                            <tr>
+                                <td>部门：${recruit.depart.departName}</td>
+                                <td>职位：${recruit.position.positionName}</td>
+                                <td>招聘人数：${recruit.number}</td>
+                                <td>发布状态:
+                                    <c:if test="${recruit.recruitState==0}">
+                                        已结束
+                                    </c:if>
+                                    <c:if test="${recruit.recruitState==1}">
+                                        已发布
+                                    </c:if>
+                                    <c:if test="${recruit.recruitState==2}">
+                                        未发布
+                                    </c:if>
+                                </td>
+                                <td>
+                                    <form action="updateRecruitState" method="post">
+                                        <input type="hidden" name="recruitId" value="${recruit.id}">
+                                        <input type="submit" value="发布">
+                                    </form>
+                                    <form action="updateRecruitStateForBack" method="post">
+                                        <input type="hidden" name="recruitId" value="${recruit.id}">
+                                        <input type="submit" value="撤消">
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">招聘要求：${recruit.demand}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

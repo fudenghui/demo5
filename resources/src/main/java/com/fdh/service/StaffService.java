@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface StaffService {
     //添加员工
-    boolean addStaff(double salary,Interview interview,Staff staff);
+    boolean addStaff(Interview interview,Staff staff);
     //修改员工信息
     boolean updateStaff(Staff staff);
     //查询员工
@@ -27,4 +27,8 @@ public interface StaffService {
     Staff getStaffByRealName(String name);
     //查询所有在职员工
     List<Staff> getStaffs();
+    //员工转正
+    boolean updateStaffForBeRegular(Staff staff);
+    //员工离职
+    boolean updateStaffForOut(Staff staff);
 }

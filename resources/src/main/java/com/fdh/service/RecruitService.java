@@ -10,10 +10,14 @@ import java.util.List;
 public interface RecruitService {
     //查看招聘信息
     List<Recruit> seeRecruit();
+    //查看发布的招聘信息
+    List<Recruit> seeRecruitByOn();
     //查看招聘信息当前页
     List<Recruit> seeRecruitCur(int curentPage,int PAGESIZE);
+    //查看发布的招聘信息当前页
+    List<Recruit> seeRecruitCurByOn(int curentPage,int PAGESIZE);
     //查看招聘信息
-    List<Recruit> seeRecruitByState();
+    List<Recruit> seeRecruitByState(int state);
     //查看招聘信息当前页
     List<Recruit> seeRecruitCurByState(int curentPage,int PAGESIZE);
     //通过id查看招聘信息
@@ -22,4 +26,6 @@ public interface RecruitService {
     boolean addRecRuit(String departName,String positionName,Recruit recruit);
     //发布
     boolean updateRecruitState(int recruitId);
+    //撤消
+    boolean updateRecruitStateForBack(int recruitId);
 }

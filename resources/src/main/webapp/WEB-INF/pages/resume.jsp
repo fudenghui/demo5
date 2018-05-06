@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#user_menu a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#user_menu a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -40,7 +47,7 @@
         </div>
     </div>
     <div id="resume_body">
-        <div id="user_content">
+        <div id="user_content_resume">
             <table>
                 <tr>
                     <td>简历id</td>

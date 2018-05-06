@@ -21,7 +21,6 @@
         var str=/^([a-zA-Z0-9]|[\u4e00-\u9fa5]){6,18}$/;
         var str1=/^[a-zA-Z][a-zA-Z0-9]{5,18}$/;
         $(function() {
-            alert($("#error").val())
             if ($("#error").val()=='0'){
                 alert("注册失败");
             }
@@ -37,7 +36,7 @@
             });
             $("#pass").keyup(function () {
                 var pass=$(this).val();
-                if (str.test(pass)){
+                if (str1.test(pass)){
                     $("#sp1").html("长度为6-18位,字母开头的数字字母组成");
                     $("#sp1").css("color","black");
                 }else {

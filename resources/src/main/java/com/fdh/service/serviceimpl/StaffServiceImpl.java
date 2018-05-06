@@ -1,9 +1,11 @@
 package com.fdh.service.serviceimpl;
 
 import com.fdh.dao.DeliverMapper;
+import com.fdh.dao.PositionMapper;
 import com.fdh.dao.StaffMapper;
 import com.fdh.model.DeliverResume;
 import com.fdh.model.Interview;
+import com.fdh.model.Position;
 import com.fdh.model.Staff;
 import com.fdh.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +24,20 @@ public class StaffServiceImpl implements StaffService {
     private StaffMapper staffMapper;
     @Autowired
     private DeliverMapper deliverMapper;
+    @Autowired
+    private PositionMapper positionMapper;
     //添加员工
     @Override
-    public boolean addStaff(double salary,Interview interview, Staff staff) {
+    public boolean addStaff(Interview interview, Staff staff) {
         DeliverResume deliverResume=deliverMapper.getDeliverById(interview.getDeliverResumeId());
+        Position position=positionMapper.getPositionById(interview.getPositionId());
         staff.setName(deliverResume.getPhone());
         staff.setPhone(deliverResume.getPhone());
         String cardId=deliverResume.getCardId();
         String pass=cardId.substring(cardId.length()-6,cardId.length());
         staff.setStaffPass(pass);
         staff.setLevel(2);
-        staff.setSalary(salary);
+        staff.setSalary(position.getBaseSal()*0.8);
         staff.setCardId(cardId);
         staff.setEmail(deliverResume.getEmail());
         staff.setSex(deliverResume.getSex());
@@ -88,5 +93,15 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<Staff> getStaffs() {
         return staffMapper.getStaffs();
+    }
+    //员工转正
+    @Override
+    public boolean updateStaffForBeRegular(Staff staff) {
+        return staffMapper.updateStaffForBeRegular(staff);
+    }
+    //员工离职
+    @Override
+    public boolean updateStaffForOut(Staff staff) {
+        return staffMapper.updateStaffForOut(staff);
     }
 }

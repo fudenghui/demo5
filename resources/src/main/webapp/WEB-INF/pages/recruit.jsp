@@ -26,6 +26,10 @@
                 $("#sp").css("display","block");
             }
             $(".tr").click(function () {
+                $(".tr").each(function () {
+                    $(this).css("background-color","gainsboro");
+                });
+                $(this).css("background-color","gold");
                 var resume=$(this).find("input").get(0);
                 var resumeId=$(resume).val();
                 $("#recruitId").attr("value",resumeId);
@@ -62,6 +66,12 @@
                 if($("#user").html()==""){
                     alert("请先登录");
                 }else {
+                    var resume=$("#resumeId option:selected").val();
+                    var recruit=$("#recruitId").val();
+                    if (resume=="请选择简历"||recruit==""){
+                        alert("你还未选择简历,或者未选中招聘，不可投递")
+                        return;
+                    }
                     $.ajax({
                         type:"post",
                         url:"addDeliverResume",
@@ -121,12 +131,9 @@
                         <td>招聘人数：${recruit.number}</td>
                     </tr>
                     <tr>
-                        <td>开始时间：${recruit.startTime}</td>
-                        <td>结束时间：${recruit.overTime}</td>
+                        <td colspan="3">招聘要求：${recruit.demand}</td>
                     </tr>
-                    <tr>
-                        <td>招聘要求：${recruit.demand}</td>
-                    </tr>
+                    <br>
                 </c:forEach>
             </table>
         </div>

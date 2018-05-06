@@ -19,4 +19,8 @@ public interface PositionService {
     Position getPositionByName(String name);
     //删除职位
     boolean deletePositionById(int id);
+    //查出所有职位
+    List<Position> getAllPosition();
+    //根据职位Id查职位
+    Position getPositionById(int id);
 }

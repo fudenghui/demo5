@@ -37,6 +37,10 @@ public class StaffController {
     private SalaryService salaryService;
     @Autowired
     private ReconsiderService reconsiderService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AdminController adminController;
     //跳转到员工
     @RequestMapping("goStaff")
     public String goStaff(){
@@ -44,13 +48,18 @@ public class StaffController {
     }
     //添加员工
     @RequestMapping("addStaff")
-    public String addStaff(String salary,Interview interview, HttpSession session){
+    public String addStaff(Interview interview, HttpSession session){
         Interview interview1=interviewService.getInterviewById(interview.getId());
+        if (interview1.getInterviewState()==1||interview1.getInterviewState()==3){
+            String curentPage="1";
+            return adminController.adminSeeInterview(curentPage,session);
+        }
         Staff staff=new Staff();
-        double salary1=Double.parseDouble(salary);
-        boolean flag=staffService.addStaff(salary1,interview1,staff);
+        boolean flag=staffService.addStaff(interview1,staff);
         if (flag){
-            return "seedeppos";
+            //改变面试信息状态
+            interviewService.updateInterview(interview1);
+            return adminController.seeDepart(session);
         }
         return "adminseeinterview";
     }
@@ -87,6 +96,13 @@ public class StaffController {
     public @ResponseBody List<Staff> staffSeeStaffByDep(String departName){
         Depart depart=departService.getDepartByName(departName);
         List<Staff> list=staffService.getStaffByDep(depart.getId());
+        return list;
+    }
+    //查看员工根据职位
+    @RequestMapping("staffSeeStaffByPos")
+    public @ResponseBody List<Staff> staffSeeStaffByPos(String positionName){
+        Position position=positionService.getPositionByName(positionName);
+        List<Staff> list=staffService.getStaffByPos(position.getId());
         return list;
     }
     //查看考勤

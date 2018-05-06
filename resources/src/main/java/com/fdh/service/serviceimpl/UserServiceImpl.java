@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService{
     public User getUser(User user) {
         return userMapper.userLogin(user);
     }
+    //根据Id查用户
+    @Override
+    public User getUserById(int userId) {
+        return userMapper.getUserById(userId);
+    }
 }

@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
-
+        $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
+        })
     </script>
 </head>
 <body>
@@ -43,29 +50,31 @@
             <a href="">个人中心</a>
         </div>
         <div id="contenter_admin">
-            <table>
-                <tr>
-                    <td>部门</td>
-                    <td>职位</td>
-                    <td>招聘人数</td>
-                    <td>用户</td>
-                    <td>操作</td>
-                </tr>
-                <c:forEach items="${sessionScope.deliverList}" var="deliver">
+            <div id="seeDeliver">
+                <table>
                     <tr>
-                        <td>${deliver.depart.departName}</td>
-                        <td>${deliver.position.positionName}</td>
-                        <td>${deliver.recruit.number}</td>
-                        <td>${deliver.user.name}</td>
-                        <td>
-                            <form action="seeDeliverInfo" method="post">
-                                <input type="hidden" name="deliverId" value="${deliver.id}">
-                                <input type="submit" value="查看简历">
-                            </form>
-                        </td>
+                        <td>部门</td>
+                        <td>职位</td>
+                        <td>招聘人数</td>
+                        <td>用户</td>
+                        <td>操作</td>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${sessionScope.deliverList}" var="deliver">
+                        <tr>
+                            <td>${deliver.depart.departName}</td>
+                            <td>${deliver.position.positionName}</td>
+                            <td>${deliver.recruit.number}</td>
+                            <td>${deliver.user.name}</td>
+                            <td>
+                                <form action="seeDeliverInfo" method="post">
+                                    <input type="hidden" name="deliverId" value="${deliver.id}">
+                                    <input type="submit" value="查看简历">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </div>
 </div>

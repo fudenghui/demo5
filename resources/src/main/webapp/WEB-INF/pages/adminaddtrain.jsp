@@ -20,6 +20,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
             $("#depart").change(function () {
                 var name=$("#depart option:selected").val();
                 $.ajax({
@@ -99,6 +105,7 @@
             </div>
             <div id="seeTrain">
                 <c:forEach items="${sessionScope.trains}" var="train">
+                    培训对象：
                     ${train}
                 </c:forEach>
             </div>

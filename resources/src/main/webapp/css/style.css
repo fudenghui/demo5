@@ -74,7 +74,7 @@
 #loginArea{
     display: none;
 }
-#menu{
+#menu,#user_menu,#menu_admin{
     width: 100%;
     height:30px;
     background-color: skyblue;
@@ -87,22 +87,35 @@
     height: 30px;
     line-height: 30px;
     text-align: center;
-    color: cornflowerblue;
+    color: #f624ad;
+    float: left;
+}
+#menu_admin a{
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    text-align: center;
+    color: #f624ad;
     float: left;
 }
 #contenter{
     width: 100%;
-    height: 440px;
+    height: 455px;
+    background-color: gainsboro;
 }
 #content_left{
     float: left;
     width:70%;
-    height: 440px;
+    height: 450px;
 }
 #content_right{
     float: left;
     width:28%;
-    height: 440px;
+    height: 450px;
 }
 #content:after{
     content: '';
@@ -110,17 +123,25 @@
     zoom:1;
 }
 #resume_body{
-    width: 800px;
-    height: 600px;
+    width: 1364px;
+    height: 455px;
     border:1px solid darkgray;
-    margin: 0 auto;
+    background-color: gainsboro;
 }
-#middle_position{
-    display:none;
+#resume_body_1,#resume_body_2{
+    width: 1364px;
+    height: 515px;
+    border:1px solid darkgray;
+    background-color: gainsboro;
 }
 #left_depart,#middle_position,#right_staff{
-    width: 400px;
-    height:500px;
+     width: 400px;
+     height:450px;
+     float:left;
+ }
+#right_staff{
+    width: 550px;
+    height:450px;
     float:left;
 }
 #addTrain,#seeTrain{
@@ -146,7 +167,7 @@
 .menu_right{
     display: none;
 }
-#menu:after,#user_menu:after{
+#menu:after,#user_menu:after,#menu_admin:after{
     content: "";
     clear:both;
     zoom:1;
@@ -154,24 +175,21 @@
 #t_body tr{
     cursor: pointer;
 }
-#menu_admin,#user_menu{
-    background-color: azure;
-}
 #content_staff{
     width: 1330px;
-    height: 440px;
+    height: 450px;
     border:1px skyblue solid;
 }
 #content_staff_left{
     width:500px;
-    height: 440px;
+    height: 450px;
     border-right:2px gainsboro solid;
     float: left;
 }
 #content_staff_right{
     float: left;
     width:820px;
-    height: 440px;
+    height: 450px;
     border-right:2px gainsboro solid;
     overflow: hidden;
     float: left;
@@ -182,20 +200,47 @@
     zoom:1;
 }
 #contenter_admin{
-    width: 1330px;
-    height: 440px;
+    width: 1364px;
+    height: 455px;
     border:1px skyblue solid;
+    background-color: gainsboro;
+}
+#ctrl_staff,#addRecruit,#seeDeliver{
+    width: 600px;
+    height: 455px;
+    margin:0 auto;
+}
+#seeDeliver td{
+    width: 120px;
+    height: 30px;
+}
+#ctrl_staff td{
+    border:1px solid gainsboro;
+}
+#seeRecruit,#addInterview{
+     width: 900px;
+     height: 455px;
+     margin:0 auto;
+ }
+#seeInterview{
+    width: 1200px;
+    height: 455px;
+    margin:0 auto;
+}
+#seeRecruit td,#seeInterview td{
+    width: 180px;
+    height: 30px;
 }
 #contenter_admin_left{
     float: left;
     width: 150px;
-    height: 440px;
+    height: 450px;
     border-right:2px gainsboro solid;
 }
 #contenter_admin_right{
     float: left;
     width: 1150px;
-    height: 440px;
+    height: 450px;
     border-right:2px gainsboro solid;
 }
 #contenter_admin:after{
@@ -203,14 +248,46 @@
     clear: both;
     zoom:1;
 }
+#user_content{
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+}
+#user_content_1,#user_content_2{
+    width: 800px;
+    height: 300px;
+    margin: 0 auto;
+}
+#user_content_resume,#contenter_admin_resumeInfo{
+    width: 800px;
+    height: 450px;
+    margin: 0 auto;
+}
+#contenter_admin_resumeInfo form{
+    position: absolute;
+    margin-top:1%;
+    margin-left:50%;
+}
+#deliver_resume{
+    width: 100px;
+    height: 35px;
+}
+#user_content_resume td{
+    width: 120px;
+    height: 30px;
+    border:1px solid black;
+}
 .a{
-    background-color: beige;
+    background-color: #ecf596;
 }
 .tr{
     cursor: pointer;
 }
 .contenter{
     background:url("../images/content.png") no-repeat;
-    background-size: 100% 440px;
+    background-size: 100% 455px;
     position: relative;
+}
+.addPosition{
+    display: none;
 }

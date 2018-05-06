@@ -29,6 +29,11 @@ public class RecruitServiceImpl implements RecruitService {
     public List<Recruit> seeRecruit() {
         return recruitMapper.seeRecruit();
     }
+    //查看发布的招聘信息
+    @Override
+    public List<Recruit> seeRecruitByOn() {
+        return recruitMapper.seeRecruitByOn();
+    }
     //查看招聘信息当前页
     @Override
     public List<Recruit> seeRecruitCur(int curentPage, int PAGESIZE) {
@@ -36,10 +41,17 @@ public class RecruitServiceImpl implements RecruitService {
         int lastRow=curentPage*PAGESIZE;
         return recruitMapper.seeRecruitCur(firstRow,lastRow);
     }
+    //查看发布的招聘信息当前页
+    @Override
+    public List<Recruit> seeRecruitCurByOn(int curentPage, int PAGESIZE) {
+        int firstRow=(curentPage-1)*PAGESIZE+1;
+        int lastRow=curentPage*PAGESIZE;
+        return recruitMapper.seeRecruitCurByOn(firstRow,lastRow);
+    }
     //查看招聘信息
     @Override
-    public List<Recruit> seeRecruitByState() {
-        return recruitMapper.seeRecruitByState();
+    public List<Recruit> seeRecruitByState(int state) {
+        return recruitMapper.seeRecruitByState(state);
     }
     //查看招聘信息当前页
     @Override
@@ -67,7 +79,7 @@ public class RecruitServiceImpl implements RecruitService {
         Position position1=positionMapper.getPositionByName(position);
         recruit.setDepartId(depart1.getId());
         recruit.setPositionId(position1.getId());
-        recruit.setRecruitState(0);
+        recruit.setRecruitState(2);
         return recruitMapper.addRecRuit(recruit);
     }
     //发布
@@ -76,6 +88,14 @@ public class RecruitServiceImpl implements RecruitService {
         Recruit recruit=new Recruit();
         recruit.setId(recruitId);
         recruit.setRecruitState(1);
-        return false;
+        return recruitMapper.updateRecruitState(recruit);
+    }
+    //撤消
+    @Override
+    public boolean updateRecruitStateForBack(int recruitId) {
+        Recruit recruit=new Recruit();
+        recruit.setId(recruitId);
+        recruit.setRecruitState(0);
+        return recruitMapper.updateRecruitState(recruit);
     }
 }

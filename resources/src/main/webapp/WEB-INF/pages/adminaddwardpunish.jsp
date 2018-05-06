@@ -20,6 +20,12 @@
     <script type="text/javascript" src="js/jquery-3.1.0.js"></script>
     <script language="JavaScript">
         $(function () {
+            $("#menu_admin a").mouseover(function () {
+                $(this).toggleClass("a");
+            });
+            $("#menu_admin a").mouseout(function () {
+                $(this).toggleClass("a");
+            });
             $("#depart").change(function () {
                 var name=$("#depart option:selected").val();
                 $.ajax({
@@ -76,9 +82,26 @@
                 </form>
             </div>
             <div id="seeTrain">
-                <c:forEach items="${sessionScope.wpList}" var="wp">
-                    ${wp}
-                </c:forEach>
+                <table>
+                    <tr>
+                        <td>员工姓名</td>
+                        <td>奖励</td>
+                        <td>奖励描述</td>
+                        <td>惩罚</td>
+                        <td>惩罚描述</td>
+                        <td>发布时间</td>
+                    </tr>
+                    <c:forEach items="${sessionScope.wpList}" var="wp">
+                        <tr>
+                            <td>${wp.staff.staffRealName}</td>
+                            <td>${wp.ward}</td>
+                            <td>${wp.wardDes}</td>
+                            <td>${wp.punish}</td>
+                            <td>${wp.punishDes}</td>
+                            <td>${wp.wardPunishTime}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
     </div>

@@ -19,4 +19,6 @@ public interface UserService {
     boolean updateUser(User user);
     //根据账户查用户
     User getUser(User user);
+    //根据Id查用户
+    User getUserById(int userId);
 }
